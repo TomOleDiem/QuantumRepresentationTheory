@@ -7,7 +7,6 @@ name = "Physlib"
 git = "https://github.com/leanprover-community/physlib.git"
 rev = "v4.32.0"
 
-
 [[require]]
 name = "checkdecls"
 git = "https://github.com/PatrickMassot/checkdecls.git"
@@ -15,7 +14,13 @@ git = "https://github.com/PatrickMassot/checkdecls.git"
 [[require]]
 name = "«doc-gen4»"
 git = "https://github.com/leanprover/doc-gen4"
-rev = "main"
+rev = "v4.32.0"
+
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
+rev = "v4.32.0"
+
 [[lean_lib]]
 name = "QuantumRepresentationTheory"
 moreLeanArgs = ["-Dwarn.sorry=false"]

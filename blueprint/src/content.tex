@@ -1,7 +1,800 @@
-% In this file you should put the actual content of the blueprint.
-% It will be used both by the web and the print version.
-% It should *not* include the \begin{document}
-%
-% If you want to split the blueprint content into several files then
-% the current file can be a simple sequence of \input. Otherwise It
-% can start with a \section or \chapter for instance.
+\chapter*{Overview}
+
+This blueprint lays out a roadmap from the bare notion of a Lie algebra
+representation to the energy spectrum of the hydrogen atom, formalized on top
+of Mathlib's existing Lie theory. It is organized as a dependency graph of
+\emph{theorems and constructions}, not of individual small lemmas: each node
+below corresponds to a genuine mathematical statement, and the graph edges
+(via \texttt{uses}) record exactly which results feed into which.
+
+Nodes already available in Mathlib are marked with a dark green border in the
+dependency graph (\mathlibok); nodes already proved in this project are
+green (\leanok); everything else is a target for future formalization work.
+The chapters mirror the source tree:
+\begin{itemize}
+  \item \textbf{Representation theory} ---
+    \texttt{Representation/Basic.lean}, \texttt{Representation/Schur.lean}
+  \item \textbf{The Lie algebra $\sltwo$} ---
+    \texttt{Sl2/Basic.lean}, \texttt{Sl2/Classification.lean},
+    \texttt{Sl2/CommutingActions.lean}, \texttt{Sl2/ClebschGordan.lean}
+  \item \textbf{The Casimir element} ---
+    \texttt{Casimir/Basic.lean}, \texttt{Casimir/Centrality.lean}
+  \item \textbf{Angular momentum} ---
+    \texttt{AngularMomentum/Basic.lean}, \texttt{AngularMomentum/Classification.lean}
+  \item \textbf{The hydrogen atom} ---
+    \texttt{Hydrogen/Basic.lean}, \texttt{Hydrogen/Symmetry.lean},
+    \texttt{Hydrogen/Spectrum.lean}
+\end{itemize}
+
+Throughout, $K$ is a field (eventually specialized to $\mathbb{C}$), $L$ a
+Lie algebra over $K$, and modules are finite-dimensional unless stated
+otherwise.
+
+\paragraph{Scope of Chapters 4--5, and a note on Physlib.} Physlib already
+has a substantial, mostly-proved analytic treatment of this material ---
+\texttt{QuantumMechanics/Hydrogen/Basic.lean} and
+\texttt{.../LaplaceRungeLenzVector.lean} define the (regularized) hydrogen
+Hamiltonian and Runge--Lenz operator on Schwartz space and prove their
+commutation relations and the identity $\mathbf{A}^2 = 2m\mathbf{H}(\mathbf{L}^2 +
+\tfrac14\hbar^2(d-1)^2) + \dots$; \texttt{QuantumMechanics/Operators/AngularMomentum.lean}
+proves the analogous facts for $\mathbf L$. Its own module documentation
+lists the bound-state energy spectrum as an open TODO. Chapters~4--5 below
+are deliberately kept as a \emph{decoupled, finite-dimensional algebraic
+model}: they do not depend on Physlib's Hilbert-space/self-adjoint-operator
+machinery, and in particular do not attempt the analytic work (essential
+self-adjointness, finite-dimensionality of eigenspaces) needed to connect a
+literal Physlib \texttt{HydrogenAtom} to the abstract representation theory
+here. Wiring the two together --- so that this project's classification
+theorems discharge Physlib's open TODO --- is future work, not attempted in
+this pass.
+
+\chapter{Representations of Lie algebras}
+
+\section{The representation object}
+\label{sec:rep-basic}
+
+Mathlib's primitive notion of a representation is not a bundled morphism but
+a pair of type classes making a type $M$ into a Lie module for $L$. The
+explicit homomorphism is \emph{extracted} from this structure, not the other
+way around: there is currently no public constructor turning an arbitrary Lie
+algebra morphism $L \to \End_K(M)$ back into these instances. Consequently
+this project keeps two layers: a generic layer stated directly in terms of
+\texttt{LieRingModule}/\texttt{LieModule} (used from \S\ref{sec:sl2-basic}
+onward), and an explicit-morphism layer used for the physics representations
+in the later chapters, connected by a bridge construction.
+
+\begin{definition}[Lie module structure]
+  \label{def:rep-lie-module}
+  \lean{LieRingModule, LieModule}
+  \mathlibok
+  A Lie module of $L$ on a $K$-vector space $M$ is given by a bracket action
+  $L \times M \to M$, $(x, m) \mapsto \liealg{x}\cdot m$, that is $K$-bilinear
+  and satisfies the Leibniz identity
+  $\liealg{[x,y]}\cdot m = x \cdot (y \cdot m) - y \cdot (x \cdot m)$.
+\end{definition}
+
+\begin{definition}[Representation homomorphism]
+  \label{def:rep-to-end}
+  \lean{LieModule.toEnd, LieModule.toEnd_apply_apply}
+  \mathlibok
+  \uses{def:rep-lie-module}
+  Every Lie module structure on $M$ yields a Lie algebra homomorphism
+  $\rho \colon L \to \End_K(M)$ with $\rho(x)(m) = \liealg{x}\cdot m$, and
+  conversely the bracket action is recovered by evaluating $\rho$.
+\end{definition}
+
+\section{Generic representations as Mathlib objects}
+\label{sec:rep-generic}
+
+Mathlib does not just have the typeclass pair of
+Definition~\ref{def:rep-lie-module}: it has a full bundled API around it ---
+submodules, module homomorphisms, and irreducibility --- that supersedes what
+a naive first pass would build from scratch. Anything stated for a type $M$
+that already carries $\texttt{LieRingModule}$/$\texttt{LieModule}$ instances
+(as is the case throughout Chapters~2--3, where the acting object is always
+an actual Lie algebra with an actual Mathlib representation) should use
+\emph{these} objects, not ad hoc predicates.
+
+\begin{definition}[Lie submodule]
+  \label{def:rep-lie-submodule}
+  \lean{LieSubmodule}
+  \mathlibok
+  \uses{def:rep-lie-module}
+  A \texttt{LieSubmodule} bundles a $K$-submodule $W \le M$ together with a
+  proof that $L \cdot W \subseteq W$; this is the invariant-subspace notion,
+  already packaged rather than expressed as a separate predicate.
+\end{definition}
+
+\begin{definition}[Lie module homomorphism]
+  \label{def:rep-hom}
+  \lean{LieModuleHom, LieModuleHom.id, LieModuleHom.comp}
+  \mathlibok
+  \uses{def:rep-lie-module}
+  A \texttt{LieModuleHom} $M \to_{\!L} N$ (notation $M \xrightarrow{R,L} N$)
+  bundles a $K$-linear map together with a proof that it commutes with the
+  bracket action; it carries an identity, composition, and (since it extends
+  a linear map into an $R$-module of maps) an $R$-module structure, so sums,
+  differences, and scalar multiples of homomorphisms between the same pair
+  of modules are again homomorphisms with no separate lemma required.
+\end{definition}
+
+\begin{theorem}[Kernel and range are Lie submodules]
+  \label{thm:rep-hom-ker-range}
+  \lean{LieModuleHom.ker, LieModuleHom.range}
+  \mathlibok
+  \uses{def:rep-hom, def:rep-lie-submodule}
+  For $f \colon M \to_{\!L} N$, both $\ker f$ and $\operatorname{range} f$ are
+  already \texttt{LieSubmodule}s of $M$ and $N$ respectively --- invariance
+  is part of the construction, not a separate theorem.
+\end{theorem}
+
+\begin{definition}[Irreducibility]
+  \label{def:rep-irreducible-generic}
+  \lean{LieModule.IsIrreducible}
+  \mathlibok
+  \uses{def:rep-lie-submodule}
+  A nontrivial Lie module $M$ is irreducible if its only \texttt{LieSubmodule}s
+  are $\bot$ and $\top$ (Mathlib phrases this as $M$ being a simple order in
+  the lattice of Lie submodules).
+\end{definition}
+
+\begin{definition}[Explicit representation]
+  \label{def:rep-explicit}
+  \lean{QuantumRepresentationTheory.LieRepresentation}
+  \leanok
+  \uses{def:rep-to-end}
+  An explicit representation of $L$ on $V$ is a Lie algebra homomorphism
+  $\rho \colon L \to \End_K(V)$. This is \emph{only} needed for the physics
+  layer (Chapters~4--5), where the same underlying type must carry several
+  differently-sourced actions (e.g.\ two named $\sltwo$-triples on one bound
+  state space) without polluting the global instance cache with competing
+  \texttt{LieModule} instances. It packages the same data as
+  Definition~\ref{def:rep-to-end}, presented explicitly instead of via
+  typeclass search.
+\end{definition}
+
+\begin{definition}[Invariant subspace, intertwiner (explicit form)]
+  \label{def:rep-invariant}
+  \lean{QuantumRepresentationTheory.IsInvariantSubspace,
+        QuantumRepresentationTheory.IsIntertwiner}
+  \leanok
+  \uses{def:rep-explicit}
+  For an explicit representation $\rho$ (Definition~\ref{def:rep-explicit}),
+  a subspace $W \le V$ is invariant if $\rho(x)(W)\subseteq W$ for all
+  $x \in L$, and a linear map $f\colon V\to W$ intertwines $\rho_V,\rho_W$ if
+  $f\circ\rho_V(x) = \rho_W(x)\circ f$ for all $x$. These are the explicit-form
+  counterparts of Definitions~\ref{def:rep-lie-submodule},
+  \ref{def:rep-hom}, needed only because $\rho$ does not come with ambient
+  typeclass instances.
+\end{definition}
+
+\begin{definition}[Irreducibility (explicit form)]
+  \label{def:rep-irreducible}
+  \lean{QuantumRepresentationTheory.IsIrreducible}
+  \leanok
+  \uses{def:rep-invariant}
+  $\rho$ is irreducible if its only invariant subspaces are $0$ and $V$.
+\end{definition}
+
+\begin{definition}[Intertwiner (explicit form)]
+  \label{def:rep-intertwiner}
+  \lean{QuantumRepresentationTheory.IsIntertwiner}
+  \leanok
+  \uses{def:rep-explicit}
+  See Definition~\ref{def:rep-invariant}.
+\end{definition}
+
+\begin{theorem}[Kernel of an intertwiner is invariant (explicit form)]
+  \label{thm:rep-ker-invariant}
+  \lean{QuantumRepresentationTheory.IsIntertwiner.ker_isInvariant}
+  \leanok
+  \uses{def:rep-intertwiner, def:rep-invariant}
+  If $f$ intertwines $\rho_V$ and $\rho_W$, then $\ker f$ is a $\rho_V$-invariant
+  subspace of $V$. (This is exactly Theorem~\ref{thm:rep-hom-ker-range}, restated
+  for the explicit form where $\ker f$ is not automatically bundled as a
+  submodule.)
+\end{theorem}
+
+\begin{theorem}[Range of an intertwiner is invariant (explicit form)]
+  \label{thm:rep-range-invariant}
+  \lean{QuantumRepresentationTheory.IsIntertwiner.range_isInvariant}
+  \leanok
+  \uses{def:rep-intertwiner, def:rep-invariant}
+  If $f$ intertwines $\rho_V$ and $\rho_W$, then $\operatorname{range} f$ is a
+  $\rho_W$-invariant subspace of $W$.
+\end{theorem}
+
+\begin{remark}[Missing bridge: from a morphism to a module instance]
+  \label{def:rep-bridge}
+  \uses{def:rep-explicit, def:rep-to-end}
+  A genuinely missing piece of Mathlib API is a construction turning an
+  explicit $\rho \colon L \to \End_K(V)$ (Definition~\ref{def:rep-explicit})
+  into local \texttt{LieRingModule}/\texttt{LieModule} instances on $V$
+  (Definition~\ref{def:rep-lie-module}), so that the generic machinery of
+  \S\ref{sec:rep-generic}--\S\ref{sec:cas-centrality} can be applied to the
+  explicit physics representations of Chapters~4--5. This should be phrased
+  either as a \texttt{local instance}-producing definition or as a
+  \texttt{LieModule.toEnd}-compatible wrapper type.
+\end{remark}
+
+\section{Schur's lemma}
+\label{sec:rep-schur}
+
+We take the direct eigenvalue route to Schur's lemma rather than routing
+through the universal enveloping algebra: it is shorter, and it isolates
+exactly the facts needed later (\S\ref{sec:cas-centrality}) to show the
+Casimir element acts by a scalar. It is stated generically
+(Definitions~\ref{def:rep-hom}, \ref{def:rep-irreducible-generic}), which is
+the form Chapters~2--3 actually need.
+
+\begin{theorem}[Existence of an eigenvalue]
+  \label{thm:rep-eigenvalue-exists}
+  \lean{Module.End.exists_eigenvalue}
+  \mathlibok
+  If $K$ is algebraically closed, $V$ is finite-dimensional and nonzero, and
+  $f \in \End_K(V)$, then $f$ has an eigenvalue.
+\end{theorem}
+
+\begin{theorem}[Eigenspace of an endomorphism is nonzero]
+  \label{thm:rep-eigenspace-nonzero}
+  \lean{QuantumRepresentationTheory.exists_ker_smul_id_ne_bot}
+  \uses{thm:rep-eigenvalue-exists}
+  Under the hypotheses of Theorem~\ref{thm:rep-eigenvalue-exists}, there is
+  $c \in K$ with $\ker(f - c \cdot \mathrm{id}_V) \neq 0$.
+\end{theorem}
+
+\begin{theorem}[Schur's lemma]
+  \label{thm:rep-schur}
+  \lean{QuantumRepresentationTheory.schur}
+  \uses{def:rep-hom, def:rep-irreducible-generic, thm:rep-hom-ker-range,
+        thm:rep-eigenspace-nonzero}
+  Let $K$ be algebraically closed, let $M$ be a finite-dimensional
+  irreducible Lie module for $L$ (Definition~\ref{def:rep-irreducible-generic}),
+  and let $f \colon M \to_{\!L} M$ be a \texttt{LieModuleHom}
+  (Definition~\ref{def:rep-hom}). Then $f = c \cdot \mathrm{id}_M$ for some
+  $c \in K$: apply Theorem~\ref{thm:rep-eigenspace-nonzero} to the underlying
+  endomorphism to get $c$ with $\ker(f - c\cdot\mathrm{id}) \neq 0$; since
+  $f - c\cdot\mathrm{id}$ is again a \texttt{LieModuleHom}, its kernel is a
+  Lie submodule (Theorem~\ref{thm:rep-hom-ker-range}), hence all of $M$ by
+  irreducibility.
+\end{theorem}
+
+\begin{remark}[Parallel: Schur via simple modules over the enveloping algebra]
+  \label{rem:rep-schur-uea}
+  \uses{thm:rep-schur, def:cas-uea-rep}
+  Mathlib already gives a division-ring structure on $\End_R(M)$ for any
+  simple module $M$ (\lean{Module.End.instDivisionRing}\mathlibok). Once
+  Definition~\ref{def:cas-uea-rep} equips $V$ with a module structure over
+  the universal enveloping algebra $\UEA{L}$, and Lie-irreducibility of $V$
+  is shown equivalent to simplicity as a $\UEA{L}$-module, this instance
+  reproves Theorem~\ref{thm:rep-schur} as a special case. This is recorded as
+  a generalization branch, not a prerequisite for the first proof of Schur's
+  lemma.
+\end{remark}
+
+\chapter{The Lie algebra $\sltwo$ and its representations}
+
+\section{$\sltwo$-triples and primitive vectors}
+\label{sec:sl2-basic}
+
+Mathlib already contains essentially the whole primitive-vector string
+calculus for $\sltwo$-triples; the classification work in
+\S\ref{sec:sl2-classification} only needs to assemble these pieces.
+
+\begin{definition}[$\sltwo$-triple]
+  \label{def:sl2-triple}
+  \lean{IsSl2Triple}
+  \mathlibok
+  \uses{def:rep-lie-module}
+  A triple $(h,e,f)$ of elements of $L$ is an $\sltwo$-triple if $h \neq 0$,
+  $[e,f] = h$, $[h,e] = 2e$, and $[h,f] = -2f$; equivalently, the subalgebra
+  they generate is a copy of $\sltwo$.
+\end{definition}
+
+\begin{definition}[Primitive vector]
+  \label{def:sl2-primitive}
+  \lean{IsSl2Triple.HasPrimitiveVectorWith}
+  \mathlibok
+  \uses{def:sl2-triple}
+  Given an $\sltwo$-triple $t = (h,e,f)$ acting on a module $M$, a nonzero
+  vector $m \in M$ is primitive of weight $\mu \in K$ for $t$ if
+  $h \cdot m = \mu m$ and $e \cdot m = 0$.
+\end{definition}
+
+\begin{theorem}[$h$-eigenvalues along the lowering string]
+  \label{thm:sl2-string-h}
+  \lean{IsSl2Triple.HasPrimitiveVectorWith.lie_h_pow_toEnd_f}
+  \mathlibok
+  \uses{def:sl2-primitive}
+  For a primitive vector $m$ of weight $\mu$, $h \cdot (f^k m) = (\mu - 2k)(f^k m)$
+  for every $k \ge 0$.
+\end{theorem}
+
+\begin{theorem}[Raising along the lowering string]
+  \label{thm:sl2-string-e}
+  \lean{IsSl2Triple.HasPrimitiveVectorWith.lie_e_pow_succ_toEnd_f}
+  \mathlibok
+  \uses{def:sl2-primitive}
+  For a primitive vector $m$ of weight $\mu$,
+  $e \cdot (f^{k+1} m) = (k+1)(\mu - k)(f^k m)$ for every $k \ge 0$.
+\end{theorem}
+
+\begin{theorem}[The string is finite with integral weight]
+  \label{thm:sl2-string-finite}
+  \lean{IsSl2Triple.HasPrimitiveVectorWith.exists_nat,
+        IsSl2Triple.HasPrimitiveVectorWith.pow_toEnd_f_ne_zero_of_eq_nat,
+        IsSl2Triple.HasPrimitiveVectorWith.pow_toEnd_f_eq_zero_of_eq_nat}
+  \mathlibok
+  \uses{thm:sl2-string-h, thm:sl2-string-e}
+  If $M$ is finite-dimensional (Noetherian, torsion-free, over a
+  characteristic-zero domain), the weight $\mu$ of a primitive vector $m$
+  equals some $n \in \mathbb{N}$, $f^k m \neq 0$ for all $k \le n$, and
+  $f^{n+1} m = 0$.
+\end{theorem}
+
+\begin{theorem}[Finite-dimensional modules over an algebraically closed field are triangularizable]
+  \label{thm:sl2-triangularizable}
+  \lean{LieModule.instIsTriangularizableOfIsAlgClosed}
+  \mathlibok
+  \uses{def:rep-lie-module}
+  If $K$ is algebraically closed and $M$ is a finite-dimensional Lie module
+  for $L$, then $M$ is automatically triangularizable: this is an instance in
+  Mathlib and requires no further formalization work for the $K = \mathbb{C}$
+  case used throughout this project.
+\end{theorem}
+
+\begin{theorem}[Existence of a primitive vector]
+  \label{thm:sl2-primitive-exists}
+  \lean{IsSl2Triple.exists_hasPrimitiveVectorWith}
+  \mathlibok
+  \uses{def:sl2-triple, thm:sl2-triangularizable}
+  If $K$ has characteristic zero, $M$ is a nonzero finite-dimensional,
+  torsion-free, triangularizable module for an $\sltwo$-triple $t$, then $M$
+  contains a primitive vector for $t$.
+\end{theorem}
+
+\begin{definition}[Standard module $V(n)$]
+  \label{def:sl2-standard-module}
+  \lean{QuantumRepresentationTheory.StandardSl2Module, QuantumRepresentationTheory.StandardSl2Module.v, QuantumRepresentationTheory.standardSl2ModuleLieRingModule, QuantumRepresentationTheory.standardSl2ModuleLieModule}
+  For $n \in \mathbb{N}$, the standard module $V(n)$ is the
+  $(n+1)$-dimensional $\sltwo$-module with basis $v_0, \dots, v_n$ on which
+  $h \cdot v_k = (n-2k) v_k$, $f \cdot v_k = v_{k+1}$ (and $v_{n+1} := 0$), and
+  $e \cdot v_k = k(n-k+1) v_{k-1}$. This is the explicit model produced by
+  the classification theorem below.
+\end{definition}
+
+\section{Classification of irreducible $\sltwo$-modules}
+\label{sec:sl2-classification}
+
+\begin{theorem}[Linear independence of the primitive-vector string]
+  \label{thm:sl2-string-independent}
+  \lean{QuantumRepresentationTheory.string_linearIndependent}
+  \uses{thm:sl2-string-finite, thm:sl2-string-h}
+  If $m$ is primitive of weight $n \in \mathbb{N}$, the vectors
+  $m, fm, \dots, f^n m$ are linearly independent, since they lie in distinct
+  $h$-eigenspaces (Theorem~\ref{thm:sl2-string-h}) and are all nonzero
+  (Theorem~\ref{thm:sl2-string-finite}).
+\end{theorem}
+
+\begin{theorem}[The string spans a submodule]
+  \label{thm:sl2-string-submodule}
+  \lean{QuantumRepresentationTheory.exists_stringLieSubmodule}
+  \uses{thm:sl2-string-finite, thm:sl2-string-h, thm:sl2-string-e}
+  The span of $m, fm, \dots, f^n m$ is invariant under $h$, $e$, and $f$,
+  hence is a Lie submodule.
+\end{theorem}
+
+\begin{theorem}[Irreducibility forces the string to span]
+  \label{thm:sl2-irreducible-spans}
+  \lean{QuantumRepresentationTheory.stringSpan_eq_top}
+  \uses{def:rep-irreducible-generic, thm:sl2-string-submodule}
+  If $M$ is an irreducible $\sltwo$-module, the submodule of
+  Theorem~\ref{thm:sl2-string-submodule} is nonzero, hence equal to $M$.
+\end{theorem}
+
+\begin{theorem}[Basis theorem]
+  \label{thm:sl2-basis-theorem}
+  \lean{QuantumRepresentationTheory.string_isBasis, QuantumRepresentationTheory.finrank_eq_succ}
+  \uses{thm:sl2-string-independent, thm:sl2-irreducible-spans}
+  If $M$ is a finite-dimensional irreducible $\sltwo$-module with primitive
+  vector $m$ of weight $n$, then $m, fm, \dots, f^n m$ is a basis of $M$; in
+  particular $\dim M = n+1$.
+\end{theorem}
+
+\begin{theorem}[Classification of irreducible $\sltwo$-modules]
+  \label{thm:sl2-classification}
+  \lean{QuantumRepresentationTheory.classification}
+  \uses{thm:sl2-basis-theorem, def:sl2-standard-module,
+        thm:sl2-primitive-exists}
+  Every finite-dimensional irreducible $\sltwo$-module over an algebraically
+  closed field of characteristic zero is isomorphic, as an $\sltwo$-module,
+  to the standard module $V(n)$ (Definition~\ref{def:sl2-standard-module})
+  for a unique $n \in \mathbb{N}$.
+\end{theorem}
+
+\begin{theorem}[Uniqueness of the highest weight]
+  \label{thm:sl2-uniqueness-hw}
+  \lean{QuantumRepresentationTheory.classification_n_eq_finrank_sub_one}
+  \uses{thm:sl2-classification}
+  The integer $n$ in Theorem~\ref{thm:sl2-classification} is an isomorphism
+  invariant of $M$: it equals $\dim M - 1$.
+\end{theorem}
+
+\section{Commuting $\sltwo$-actions and tensor products}
+\label{sec:sl2-commuting}
+
+This is the largest hidden node in the whole roadmap. Without it, knowing
+that two representations of two \emph{commuting} $\sltwo$-triples have equal
+Casimir eigenvalues does not by itself give a dimension formula; it is the
+key input to the hydrogen spectrum in Chapter~5, and is more fundamental to
+that goal than the classical Clebsch--Gordan decomposition of
+\S\ref{sec:sl2-cg}.
+
+\begin{theorem}[Diagonal $\sltwo$-action on a tensor product]
+  \label{thm:sl2-tensor-action}
+  \lean{TensorProduct.LieModule.lieRingModule, TensorProduct.LieModule.lieModule}
+  \mathlibok
+  \uses{def:rep-lie-module}
+  For Lie modules $M$, $N$ of $L$, the tensor product $M \otimes_K N$ carries
+  the Lie module structure $x \cdot (m \otimes n) = (x\cdot m)\otimes n +
+  m \otimes (x \cdot n)$.
+\end{theorem}
+
+\begin{theorem}[Classification of jointly irreducible commuting $\sltwo$-actions]
+  \label{thm:sl2-commuting-classification}
+  \lean{QuantumRepresentationTheory.commuting_classification, QuantumRepresentationTheory.commuting_classification_finrank}
+  \uses{thm:sl2-classification, thm:sl2-tensor-action}
+  Let $\rho_1, \rho_2$ be representations of two $\sltwo$-triples on a
+  finite-dimensional space $V$ over an algebraically closed field of
+  characteristic zero, with $[\rho_1(x), \rho_2(y)] = 0$ for all $x, y$, and
+  suppose $V$ has no proper subspace invariant under both actions
+  simultaneously. Then there exist $m, n \in \mathbb{N}$ and a linear
+  isomorphism
+  \[
+    V \;\cong_K\; V(m) \otimes_K V(n)
+  \]
+  intertwining $(\rho_1, \rho_2)$ with the actions of the two tensor factors
+  of Theorem~\ref{thm:sl2-tensor-action}.
+\end{theorem}
+
+\section{Clebsch--Gordan decomposition}
+\label{sec:sl2-cg}
+
+\begin{theorem}[Clebsch--Gordan decomposition]
+  \label{thm:sl2-clebsch-gordan}
+  \lean{QuantumRepresentationTheory.clebsch_gordan_finrank, QuantumRepresentationTheory.clebsch_gordan}
+  \uses{thm:sl2-classification, thm:sl2-tensor-action}
+  For $m, n \in \mathbb{N}$, the diagonal $\sltwo$-module $V(m) \otimes_K
+  V(n)$ (Theorem~\ref{thm:sl2-tensor-action}) decomposes as
+  \[
+    V(m) \otimes_K V(n) \;\cong_K\; \bigoplus_{k=0}^{\min(m,n)} V(m+n-2k).
+  \]
+\end{theorem}
+
+\chapter{The Casimir element}
+
+\section{Construction}
+\label{sec:cas-basic}
+
+\begin{definition}[Nondegenerate invariant bilinear form]
+  \label{def:cas-invariant-form}
+  \lean{LinearMap.BilinForm.lieInvariant, LinearMap.BilinForm.Nondegenerate}
+  \mathlibok
+  \uses{def:rep-lie-module}
+  A bilinear form $\Phi$ on $L$ is Lie-invariant if $\Phi([x,y],z) +
+  \Phi(y,[x,z]) = 0$ for all $x,y,z \in L$; it is nondegenerate if its
+  radical is trivial. (For $L$ semisimple over $\mathbb{C}$, the Killing form
+  is such a form.)
+\end{definition}
+
+\begin{definition}[Dual basis]
+  \label{def:cas-dual-basis}
+  \lean{LinearMap.BilinForm.dualBasis}
+  \mathlibok
+  \uses{def:cas-invariant-form}
+  Given a basis $x_1, \dots, x_d$ of $L$ and a nondegenerate form $\Phi$, the
+  dual basis $x^1, \dots, x^d$ is the unique basis with
+  $\Phi(x_i, x^j) = \delta_i^j$. (Standard linear-algebra fact about
+  nondegenerate bilinear forms, available generically in Mathlib.)
+\end{definition}
+
+\begin{definition}[Basis-dependent Casimir element]
+  \label{def:cas-basis-dependent}
+  \lean{QuantumRepresentationTheory.casimirBasisDependent}
+  \uses{def:cas-dual-basis, def:rep-to-end}
+  For a representation $\rho$ of $L$ on $V$ and a basis $x_1,\dots,x_d$ of
+  $L$ with $\Phi$-dual basis $x^1,\dots,x^d$, the Casimir operator is
+  \[
+    C_\rho \;=\; \sum_{i=1}^d \rho(x_i)\,\rho(x^i) \;\in\; \End_K(V).
+  \]
+\end{definition}
+
+\begin{theorem}[Change-of-basis invariance]
+  \label{thm:cas-change-of-basis}
+  \lean{QuantumRepresentationTheory.casimirBasisDependent_basis_indep}
+  \uses{def:cas-basis-dependent}
+  $C_\rho$, as defined in Definition~\ref{def:cas-basis-dependent}, does not
+  depend on the choice of basis $x_1,\dots,x_d$ of $L$.
+\end{theorem}
+
+\begin{definition}[The Casimir operator]
+  \label{def:cas-casimir}
+  \lean{QuantumRepresentationTheory.casimir}
+  \uses{thm:cas-change-of-basis}
+  Write $C_\rho \in \End_K(V)$ for the common value of
+  Definition~\ref{def:cas-basis-dependent}, independent of the choice of
+  basis by Theorem~\ref{thm:cas-change-of-basis}.
+\end{definition}
+
+\section{Centrality and the scalar action}
+\label{sec:cas-centrality}
+
+\begin{theorem}[The Casimir element commutes with the generators]
+  \label{thm:cas-commutes-generators}
+  \lean{QuantumRepresentationTheory.casimir_commutes}
+  \uses{def:cas-casimir, def:cas-invariant-form}
+  For every $y \in L$, $[\rho(y), C_\rho] = 0$ in $\End_K(V)$.
+\end{theorem}
+
+\begin{definition}[Universal enveloping algebra representation]
+  \label{def:cas-uea-rep}
+  \lean{UniversalEnvelopingAlgebra.ι, UniversalEnvelopingAlgebra.lift,
+        UniversalEnvelopingAlgebra.lift_unique,
+        UniversalEnvelopingAlgebra.hom_ext}
+  \mathlibok
+  \uses{def:rep-to-end}
+  The universal enveloping algebra $\UEA{L}$, together with
+  $\iota \colon L \to \UEA{L}$, has the universal property that every
+  representation $\rho \colon L \to \End_K(V)$ extends uniquely to an
+  associative-algebra homomorphism $\tilde\rho \colon \UEA{L} \to \End_K(V)$
+  with $\tilde\rho \circ \iota = \rho$.
+\end{definition}
+
+\begin{theorem}[Centrality of the Casimir element]
+  \label{thm:cas-central}
+  \lean{QuantumRepresentationTheory.casimirUEA, QuantumRepresentationTheory.casimirUEA_mem_center}
+  \lean{Subalgebra.center}
+  \uses{thm:cas-commutes-generators, def:cas-uea-rep}
+  The element $C_\rho$, viewed inside $\UEA{L}$ via $\iota$ and
+  Definition~\ref{def:cas-basis-dependent} applied to the adjoint
+  representation, lies in the center \texttt{Subalgebra.center K (UEA K L)}.
+  (Note: the correct ambient object is \texttt{Subalgebra.center}, not
+  \texttt{Subring.center}, since we need $K$-linearity of the centralizing
+  condition.)
+\end{theorem}
+
+\begin{theorem}[A central element gives an intertwiner]
+  \label{thm:cas-central-intertwines}
+  \lean{QuantumRepresentationTheory.central_commutes_toEnd}
+  \uses{thm:cas-central, def:cas-uea-rep, def:rep-hom}
+  If $z \in \UEA{L}$ is central and $\tilde\rho$ is the extension of a
+  representation $\rho$ on $V$ (Definition~\ref{def:cas-uea-rep}), then
+  $\tilde\rho(z) \colon V \to V$, viewed as a self-map of $V$, is a
+  \texttt{LieModuleHom} (Definition~\ref{def:rep-hom}): it commutes with
+  $\rho(x)$ for every $x \in L$ since $z$ commutes with $\iota(x)$ in
+  $\UEA{L}$.
+\end{theorem}
+
+\begin{theorem}[Schur gives a scalar Casimir]
+  \label{thm:cas-scalar}
+  \lean{QuantumRepresentationTheory.casimir_scalar}
+  \uses{thm:rep-schur, thm:cas-central-intertwines, def:cas-casimir}
+  If $\rho$ is a finite-dimensional irreducible representation of $L$ over an
+  algebraically closed field, $C_\rho$ acts on $V$ as multiplication by a
+  scalar $c(\rho) \in K$.
+\end{theorem}
+
+\chapter{Angular momentum}
+
+\section{The algebraic representation}
+\label{sec:am-basic}
+
+\begin{definition}[Angular momentum representation]
+  \label{def:am-representation}
+  \lean{QuantumRepresentationTheory.AngularMomentumRepresentation}
+  \uses{def:rep-explicit}
+  An algebraic angular momentum representation is an explicit representation
+  $\rho$ (Definition~\ref{def:rep-explicit}) of the Lie algebra $\liealg{so}_3
+  \cong \sltwo$ on a state space $V$, presented via self-adjoint operators
+  $J_x, J_y, J_z$ satisfying $[J_x,J_y] = iJ_z$ and cyclic permutations.
+\end{definition}
+
+\begin{definition}[Ladder operators]
+  \label{def:am-ladder}
+  \lean{QuantumRepresentationTheory.AngularMomentumRepresentation.Jp, QuantumRepresentationTheory.AngularMomentumRepresentation.Jm}
+  \uses{def:am-representation}
+  $J_\pm := J_x \pm i J_y$.
+\end{definition}
+
+\begin{theorem}[Commutation relations for the ladder operators]
+  \label{thm:am-commutators}
+  \lean{QuantumRepresentationTheory.AngularMomentumRepresentation.comm_z_p, QuantumRepresentationTheory.AngularMomentumRepresentation.comm_z_m, QuantumRepresentationTheory.AngularMomentumRepresentation.comm_p_m}
+  \uses{def:am-ladder}
+  $[J_z, J_\pm] = \pm J_\pm$ and $[J_+, J_-] = 2J_z$.
+\end{theorem}
+
+\begin{theorem}[Angular momentum generates an $\sltwo$-triple]
+  \label{thm:am-is-sl2-triple}
+  \lean{QuantumRepresentationTheory.AngularMomentumRepresentation.isSl2Triple}
+  \uses{thm:am-commutators, def:sl2-triple, def:rep-bridge}
+  $(J_z, J_+, J_-)$ is an $\sltwo$-triple in the sense of
+  Definition~\ref{def:sl2-triple}, via the bridge construction of
+  Remark~\ref{def:rep-bridge} turning $\rho$ into local Lie-module instances.
+\end{theorem}
+
+\section{Spin classification}
+\label{sec:am-classification}
+
+\begin{theorem}[Irreducibility transfers along the bridge]
+  \label{thm:am-irreducibility-transfer}
+  \lean{QuantumRepresentationTheory.AngularMomentumRepresentation.isIrreducible_iff}
+  \uses{def:rep-irreducible, thm:am-is-sl2-triple}
+  $\rho$ is irreducible as an explicit representation
+  (Definition~\ref{def:rep-irreducible}) iff the induced $\sltwo$-module
+  structure of Theorem~\ref{thm:am-is-sl2-triple} is irreducible.
+\end{theorem}
+
+\begin{theorem}[Spin classification]
+  \label{thm:am-spin-classification}
+  \lean{QuantumRepresentationTheory.AngularMomentumRepresentation.spin_classification}
+  \uses{thm:am-irreducibility-transfer, thm:sl2-classification}
+  Every finite-dimensional irreducible angular momentum representation is
+  isomorphic to $V(2j)$ for a unique half-integer spin
+  $j \in \tfrac12\mathbb{N}$, of dimension $2j+1$.
+\end{theorem}
+
+\begin{theorem}[$J^2$ is the Casimir element]
+  \label{thm:am-j2-casimir}
+  \lean{QuantumRepresentationTheory.AngularMomentumRepresentation.Jsq_eq_smul}
+  \uses{def:cas-casimir, thm:am-is-sl2-triple}
+  $J^2 := J_x^2+J_y^2+J_z^2$ agrees, up to the normalization of
+  Definition~\ref{def:cas-basis-dependent} for $\sltwo$, with the Casimir
+  operator $C_\rho$; on the spin-$j$ representation it acts as $j(j+1)$.
+\end{theorem}
+
+\begin{definition}[Magnetic-weight basis]
+  \label{def:am-magnetic-basis}
+  \lean{QuantumRepresentationTheory.AngularMomentumRepresentation.magneticBasisVec}
+  \uses{thm:sl2-basis-theorem, thm:am-spin-classification}
+  The basis $\ket{j,m}$ for $m = -j,\dots,j$ of the spin-$j$ representation
+  produced by Theorem~\ref{thm:sl2-basis-theorem}, reindexed by the magnetic
+  quantum number $m = j - k$.
+\end{definition}
+
+\chapter{The hydrogen atom}
+
+\section{The Runge--Lenz vector}
+\label{sec:hyd-basic}
+
+\begin{definition}[Levi-Civita symbol]
+  \label{def:hyd-levi-civita}
+  \lean{QuantumRepresentationTheory.leviCivita}
+  $\varepsilon_{ijk}$, the totally antisymmetric symbol on $\{1,2,3\}$ with
+  $\varepsilon_{123}=1$, used to write the cross product and the commutation
+  relations below.
+\end{definition}
+
+\begin{theorem}[Linearity of the cross-product components]
+  \label{thm:hyd-cross-linearity}
+  \lean{QuantumRepresentationTheory.crossComponent, QuantumRepresentationTheory.crossComponent_bilinear}
+  \uses{def:hyd-levi-civita}
+  Each component $(A \times B)_i = \sum_{jk} \varepsilon_{ijk} A_j B_k$ is
+  bilinear in $A, B$; used repeatedly to expand commutators involving the
+  Runge--Lenz vector.
+\end{theorem}
+
+\begin{definition}[Bound-state representation]
+  \label{def:hyd-bound-state}
+  \lean{QuantumRepresentationTheory.BoundStateRepresentation}
+  \uses{def:am-representation}
+  The explicit representation of the hydrogen Hamiltonian's dynamical
+  symmetry algebra on a fixed negative-energy eigenspace $V_E$ of the
+  Hamiltonian $H$, carrying the angular momentum representation
+  $(J_x,J_y,J_z)$ of Definition~\ref{def:am-representation} together with
+  the (unnormalized) Runge--Lenz operator $\vec M$.
+\end{definition}
+
+\begin{theorem}[The rescaling constant is nonzero]
+  \label{thm:hyd-rescaling-nonzero}
+  \lean{QuantumRepresentationTheory.BoundStateRepresentation.rescaling_pos, QuantumRepresentationTheory.BoundStateRepresentation.rescalingConst, QuantumRepresentationTheory.BoundStateRepresentation.rescalingConst_pos}
+  \uses{def:hyd-bound-state}
+  On $V_E$ with $E < 0$, the scalar $-2E/m$ appearing in the normalization of
+  $\vec M$ is strictly positive, so
+  $\vec A := \vec M / \sqrt{-2mE}$ is well defined.
+\end{theorem}
+
+\begin{definition}[Rescaled Runge--Lenz vector]
+  \label{def:hyd-rescaled-rl}
+  \lean{QuantumRepresentationTheory.BoundStateRepresentation.Ax, QuantumRepresentationTheory.BoundStateRepresentation.Ay, QuantumRepresentationTheory.BoundStateRepresentation.Az}
+  \uses{thm:hyd-rescaling-nonzero, thm:hyd-cross-linearity}
+  $\vec A := \vec M/\sqrt{-2mE}$ on $V_E$, chosen so that $\vec J$ and
+  $\vec A$ satisfy the commutation relations of two copies of $\liealg{so}_3$
+  (Theorem~\ref{thm:hyd-two-factors-commute}).
+\end{definition}
+
+\section{The hidden $\sofour$ symmetry}
+\label{sec:hyd-symmetry}
+
+\begin{definition}[Two angular momentum triples]
+  \label{def:hyd-two-triples}
+  \lean{QuantumRepresentationTheory.BoundStateRepresentation.Ix, QuantumRepresentationTheory.BoundStateRepresentation.Iy, QuantumRepresentationTheory.BoundStateRepresentation.Iz, QuantumRepresentationTheory.BoundStateRepresentation.Kx, QuantumRepresentationTheory.BoundStateRepresentation.Ky, QuantumRepresentationTheory.BoundStateRepresentation.Kz}
+  \uses{def:am-ladder, def:hyd-rescaled-rl}
+  On $V_E$, set $\vec I := \tfrac12(\vec J + \vec A)$ and
+  $\vec K := \tfrac12(\vec J - \vec A)$.
+\end{definition}
+
+\begin{theorem}[$I$ and $K$ each satisfy $\liealg{so}_3$ relations and commute with each other]
+  \label{thm:hyd-two-factors-commute}
+  \lean{QuantumRepresentationTheory.BoundStateRepresentation.I_comm_xy, QuantumRepresentationTheory.BoundStateRepresentation.I_comm_yz, QuantumRepresentationTheory.BoundStateRepresentation.I_comm_zx, QuantumRepresentationTheory.BoundStateRepresentation.K_comm_xy, QuantumRepresentationTheory.BoundStateRepresentation.K_comm_yz, QuantumRepresentationTheory.BoundStateRepresentation.K_comm_zx, QuantumRepresentationTheory.BoundStateRepresentation.I_comm_K}
+  \uses{def:hyd-two-triples, thm:am-commutators}
+  $[I_x,I_y]=iI_z$ (and cyclic permutations), likewise for $\vec K$, and
+  $[I_a, K_b] = 0$ for all $a,b \in \{x,y,z\}$.
+\end{theorem}
+
+\begin{theorem}[$\sofour \cong \liealg{so}_3\oplus\liealg{so}_3$ decomposition]
+  \label{thm:hyd-so4-decomposition}
+  \lean{QuantumRepresentationTheory.BoundStateRepresentation.IRep, QuantumRepresentationTheory.BoundStateRepresentation.KRep}
+  \uses{thm:hyd-two-factors-commute, thm:am-is-sl2-triple}
+  $\vec I$ and $\vec K$ each generate an $\sltwo$-triple in the sense of
+  Theorem~\ref{thm:am-is-sl2-triple}, realizing the dynamical symmetry
+  algebra of the bound states as $\liealg{so}_3 \oplus \liealg{so}_3$.
+\end{theorem}
+
+\begin{theorem}[Equality of the two Casimir eigenvalues]
+  \label{thm:hyd-equal-casimirs}
+  \lean{QuantumRepresentationTheory.BoundStateRepresentation.equal_casimirs}
+  \uses{thm:am-j2-casimir, def:hyd-two-triples}
+  On any irreducible summand of $V_E$ under the joint $(\vec I, \vec K)$
+  action, the Casimir eigenvalues of the $\vec I$-triple and the $\vec
+  K$-triple coincide: $i(i+1) = k(k+1)$, forcing $i=k$.
+\end{theorem}
+
+\section{The energy spectrum}
+\label{sec:hyd-spectrum}
+
+\begin{theorem}[Classification of the bound-state representation]
+  \label{thm:hyd-classification}
+  \lean{QuantumRepresentationTheory.BoundStateRepresentation.classification_finrank}
+  \uses{thm:sl2-commuting-classification, thm:hyd-so4-decomposition}
+  Each irreducible summand of $V_E$ under the commuting pair
+  $(\vec I,\vec K)$ is isomorphic to $V(2i)\otimes V(2k)$, by
+  Theorem~\ref{thm:sl2-commuting-classification} applied to the two
+  commuting $\sltwo$-triples of Theorem~\ref{thm:hyd-so4-decomposition}.
+\end{theorem}
+
+\begin{theorem}[Equal Casimirs force equal highest weights]
+  \label{thm:hyd-equal-hw}
+  \lean{QuantumRepresentationTheory.BoundStateRepresentation.dimension_eq_sq}
+  \uses{thm:hyd-equal-casimirs, thm:hyd-classification}
+  In the decomposition of Theorem~\ref{thm:hyd-classification}, the summand
+  occurring in $V_E$ has $i = k$.
+\end{theorem}
+
+\begin{theorem}[Dimension of the bound-state eigenspace]
+  \label{thm:hyd-dimension}
+  \lean{QuantumRepresentationTheory.BoundStateRepresentation.dimension_eq_sq}
+  \uses{thm:hyd-equal-hw, thm:sl2-basis-theorem}
+  With $i=k$, the summand $V(2i)\otimes V(2i)$ has dimension $(2i+1)^2$; the
+  quantity $n := 2i+1$ is a positive integer.
+\end{theorem}
+
+\begin{theorem}[Quadratic energy equation]
+  \label{thm:hyd-quadratic-energy}
+  \lean{QuantumRepresentationTheory.BoundStateRepresentation.quadratic_energy}
+  \uses{thm:hyd-rescaling-nonzero, thm:hyd-dimension}
+  Expressing the original Hamiltonian $H$ in terms of $\vec J^2 + \vec A^2$
+  and the shared Casimir eigenvalue $i(i+1)$ from
+  Theorem~\ref{thm:hyd-equal-hw} yields
+  \[
+    E = -\frac{me^4}{2\hbar^2 n^2}, \qquad n = 2i+1 \in \{1,2,3,\dots\}.
+  \]
+\end{theorem}
+
+\begin{theorem}[Hydrogen energy levels and degeneracy]
+  \label{thm:hyd-energy-degeneracy}
+  \lean{QuantumRepresentationTheory.BoundStateRepresentation.energy_degeneracy}
+  \uses{thm:hyd-quadratic-energy, thm:hyd-dimension}
+  The bound-state energies of the hydrogen atom are
+  $E_n = -me^4/(2\hbar^2 n^2)$ for $n \in \mathbb{Z}_{>0}$, and the
+  eigenspace $V_{E_n}$ has dimension $n^2$.
+\end{theorem}

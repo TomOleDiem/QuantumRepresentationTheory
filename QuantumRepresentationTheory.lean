@@ -4,6 +4,7 @@ import QuantumRepresentationTheory.Casimir.Basic
 import QuantumRepresentationTheory.Casimir.Centrality
 import QuantumRepresentationTheory.Sl2.Basic
 import QuantumRepresentationTheory.Sl2.Classification
+import QuantumRepresentationTheory.Sl2.CommutingActions
 import QuantumRepresentationTheory.Sl2.ClebschGordan
 import QuantumRepresentationTheory.AngularMomentum.Basic
 import QuantumRepresentationTheory.AngularMomentum.Classification
