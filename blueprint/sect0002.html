@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+  MathJax = { 
+    tex: {
+		    inlineMath: [['$','$'], ['\\(','\\)']]
+	} }
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<meta name="generator" content="plasTeX" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Representations of Lie algebras</title>
+<link rel="next" href="sect0003.html" title="The Lie algebra sl2 and its representations" />
+<link rel="prev" href="sect0001.html" title="Overview" />
+<link rel="up" href="index.html" title="QuantumRepresentationTheory" />
+<link rel="stylesheet" href="styles/theme-white.css" />
+<link rel="stylesheet" href="styles/amsthm.css" />
+<link rel="stylesheet" href="styles/showmore.css" />
+<link rel="stylesheet" href="styles/blueprint.css" />
+<link rel="stylesheet" href="styles/extra_styles.css" />
+</head>
+
+<body>
+<header>
+<svg  id="toc-toggle" class="icon icon-list-numbered "><use xlink:href="symbol-defs.svg#icon-list-numbered"></use></svg>
+<h1 id="doc_title"><a href="index.html">QuantumRepresentationTheory</a></h1>
+</header>
+
+<div class="wrapper">
+<nav class="toc">
+<ul class="sub-toc-0">
+<li class="">
+  <a href="sect0001.html"><span class="toc_ref"></span> <span class="toc_entry">Overview</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0001.html#a0000000008"><span class="toc_ref"></span> <span class="toc_entry">Scope of Chapters 4–5, and a note on Physlib.</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class=" active current">
+  <a href="sect0002.html"><span class="toc_ref">1</span> <span class="toc_entry">Representations of Lie algebras</span></a>
+  <span class="expand-toc">▼</span>
+  <ul class="sub-toc-1 active">
+     <li class="">
+  <a href="sect0002.html#sec:rep-basic"><span class="toc_ref">1.1</span> <span class="toc_entry">The representation object</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#sec:rep-generic"><span class="toc_ref">1.2</span> <span class="toc_entry">Generic representations as Mathlib objects</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#sec:rep-schur"><span class="toc_ref">1.3</span> <span class="toc_entry">Schur’s lemma</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0003.html"><span class="toc_ref">2</span> <span class="toc_entry">The Lie algebra \(\mathfrak {sl}_2\) and its representations</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0003.html#sec:sl2-basic"><span class="toc_ref">2.1</span> <span class="toc_entry">\(\mathfrak {sl}_2\)-triples and primitive vectors</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#sec:sl2-classification"><span class="toc_ref">2.2</span> <span class="toc_entry">Classification of irreducible \(\mathfrak {sl}_2\)-modules</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#sec:sl2-commuting"><span class="toc_ref">2.3</span> <span class="toc_entry">Commuting \(\mathfrak {sl}_2\)-actions and tensor products</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#sec:sl2-cg"><span class="toc_ref">2.4</span> <span class="toc_entry">Clebsch–Gordan decomposition</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0004.html"><span class="toc_ref">3</span> <span class="toc_entry">The Casimir element</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0004.html#sec:cas-basic"><span class="toc_ref">3.1</span> <span class="toc_entry">Construction</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#sec:cas-centrality"><span class="toc_ref">3.2</span> <span class="toc_entry">Centrality and the scalar action</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0005.html"><span class="toc_ref">4</span> <span class="toc_entry">Angular momentum</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0005.html#sec:am-basic"><span class="toc_ref">4.1</span> <span class="toc_entry">The algebraic representation</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#sec:am-classification"><span class="toc_ref">4.2</span> <span class="toc_entry">Spin classification</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0006.html"><span class="toc_ref">5</span> <span class="toc_entry">The hydrogen atom</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0006.html#sec:hyd-basic"><span class="toc_ref">5.1</span> <span class="toc_entry">The Runge–Lenz vector</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#sec:hyd-symmetry"><span class="toc_ref">5.2</span> <span class="toc_entry">The hidden \(\mathfrak {so}_4\) symmetry</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#sec:hyd-spectrum"><span class="toc_ref">5.3</span> <span class="toc_entry">The energy spectrum</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li ><a href="dep_graph_document.html">Dependency graph</a></li>
+</ul>
+</nav>
+
+<div class="content">
+<div class="content-wrapper">
+
+
+<div class="main-text">
+<h1 id="a0000000003">1 Representations of Lie algebras</h1>
+<h1 id="sec:rep-basic">1.1 The representation object</h1>
+
+<p>Mathlib’s primitive notion of a representation is not a bundled morphism but a pair of type classes making a type \(M\) into a Lie module for \(L\). The explicit homomorphism is <em>extracted</em> from this structure, not the other way around: there is currently no public constructor turning an arbitrary Lie algebra morphism \(L \to \operatorname {End}_K(M)\) back into these instances. Consequently this project keeps two layers: a generic layer stated directly in terms of <span class="ttfamily">LieRingModule</span>/<span class="ttfamily">LieModule</span> (used from §<a href="sect0003.html#sec:sl2-basic">2.1</a> onward), and an explicit-morphism layer used for the physics representations in the later chapters, connected by a bridge construction. </p>
+<div class="definition_thmwrapper theorem-style-definition" id="def:rep-lie-module">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">1</span>
+    <span class="definition_thmtitle">Lie module structure</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#def:rep-lie-module">#</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/LieRingModule" class="lean_decl">LieRingModule</a></li>
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/LieModule" class="lean_decl">LieModule</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>   A Lie module of \(L\) on a \(K\)-vector space \(M\) is given by a bracket action \(L \times M \to M\), \((x, m) \mapsto \mathfrak {x}\cdot m\), that is \(K\)-bilinear and satisfies the Leibniz identity \(\mathfrak {[x,y]}\cdot m = x \cdot (y \cdot m) - y \cdot (x \cdot m)\). </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="def:rep-to-end">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">2</span>
+    <span class="definition_thmtitle">Representation homomorphism</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#def:rep-to-end">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#def:rep-lie-module">Definition 1</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/LieModule.toEnd" class="lean_decl">LieModule.toEnd</a></li>
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/LieModule.toEnd_apply_apply" class="lean_decl">LieModule.toEnd_apply_apply</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>    Every Lie module structure on \(M\) yields a Lie algebra homomorphism \(\rho \colon L \to \operatorname {End}_K(M)\) with \(\rho (x)(m) = \mathfrak {x}\cdot m\), and conversely the bracket action is recovered by evaluating \(\rho \). </p>
+
+  </div>
+</div>
+<h1 id="sec:rep-generic">1.2 Generic representations as Mathlib objects</h1>
+
+<p>Mathlib does not just have the typeclass pair of Definition&#160;<a href="sect0002.html#def:rep-lie-module">1</a>: it has a full bundled API around it — submodules, module homomorphisms, and irreducibility — that supersedes what a naive first pass would build from scratch. Anything stated for a type \(M\) that already carries \(\texttt{LieRingModule}\)/\(\texttt{LieModule}\) instances (as is the case throughout Chapters&#160;2–3, where the acting object is always an actual Lie algebra with an actual Mathlib representation) should use <em>these</em> objects, not ad hoc predicates. </p>
+<div class="definition_thmwrapper theorem-style-definition" id="def:rep-lie-submodule">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">3</span>
+    <span class="definition_thmtitle">Lie submodule</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#def:rep-lie-submodule">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#def:rep-lie-module">Definition 1</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/LieSubmodule" class="lean_decl">LieSubmodule</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>    A <span class="ttfamily">LieSubmodule</span> bundles a \(K\)-submodule \(W \le M\) together with a proof that \(L \cdot W \subseteq W\); this is the invariant-subspace notion, already packaged rather than expressed as a separate predicate. </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="def:rep-hom">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">4</span>
+    <span class="definition_thmtitle">Lie module homomorphism</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#def:rep-hom">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#def:rep-lie-module">Definition 1</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/LieModuleHom" class="lean_decl">LieModuleHom</a></li>
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/LieModuleHom.id" class="lean_decl">LieModuleHom.id</a></li>
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/LieModuleHom.comp" class="lean_decl">LieModuleHom.comp</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>    A <span class="ttfamily">LieModuleHom</span> \(M \to _{\! L} N\) (notation \(M \xrightarrow {R,L} N\)) bundles a \(K\)-linear map together with a proof that it commutes with the bracket action; it carries an identity, composition, and (since it extends a linear map into an \(R\)-module of maps) an \(R\)-module structure, so sums, differences, and scalar multiples of homomorphisms between the same pair of modules are again homomorphisms with no separate lemma required. </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:rep-hom-ker-range">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">5</span>
+    <span class="theorem_thmtitle">Kernel and range are Lie submodules</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#thm:rep-hom-ker-range">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#def:rep-hom">Definition 4</a></li>
+          
+          <li><a href="sect0002.html#def:rep-lie-submodule">Definition 3</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/LieModuleHom.ker" class="lean_decl">LieModuleHom.ker</a></li>
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/LieModuleHom.range" class="lean_decl">LieModuleHom.range</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>    For \(f \colon M \to _{\! L} N\), both \(\ker f\) and \(\operatorname {range} f\) are already <span class="ttfamily">LieSubmodule</span>s of \(M\) and \(N\) respectively — invariance is part of the construction, not a separate theorem. </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="def:rep-irreducible-generic">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">6</span>
+    <span class="definition_thmtitle">Irreducibility</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#def:rep-irreducible-generic">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#def:rep-lie-submodule">Definition 3</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/LieModule.IsIrreducible" class="lean_decl">LieModule.IsIrreducible</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>    A nontrivial Lie module \(M\) is irreducible if its only <span class="ttfamily">LieSubmodule</span>s are \(\bot \) and \(\top \) (Mathlib phrases this as \(M\) being a simple order in the lattice of Lie submodules). </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="def:rep-explicit">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">7</span>
+    <span class="definition_thmtitle">Explicit representation</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#def:rep-explicit">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#def:rep-to-end">Definition 2</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.LieRepresentation" class="lean_decl">QuantumRepresentationTheory.LieRepresentation</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>    An explicit representation of \(L\) on \(V\) is a Lie algebra homomorphism \(\rho \colon L \to \operatorname {End}_K(V)\). This is <em>only</em> needed for the physics layer (Chapters&#160;4–5), where the same underlying type must carry several differently-sourced actions (e.g. two named \(\mathfrak {sl}_2\)-triples on one bound state space) without polluting the global instance cache with competing <span class="ttfamily">LieModule</span> instances. It packages the same data as Definition&#160;<a href="sect0002.html#def:rep-to-end">2</a>, presented explicitly instead of via typeclass search. </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="def:rep-invariant">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">8</span>
+    <span class="definition_thmtitle">Invariant subspace, intertwiner (explicit form)</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#def:rep-invariant">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#def:rep-explicit">Definition 7</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.IsInvariantSubspace" class="lean_decl">QuantumRepresentationTheory.IsInvariantSubspace</a></li>
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.IsIntertwiner" class="lean_decl">QuantumRepresentationTheory.IsIntertwiner</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>    For an explicit representation \(\rho \) (Definition&#160;<a href="sect0002.html#def:rep-explicit">7</a>), a subspace \(W \le V\) is invariant if \(\rho (x)(W)\subseteq W\) for all \(x \in L\), and a linear map \(f\colon V\to W\) intertwines \(\rho _V,\rho _W\) if \(f\circ \rho _V(x) = \rho _W(x)\circ f\) for all \(x\). These are the explicit-form counterparts of Definitions&#160;<a href="sect0002.html#def:rep-lie-submodule">3</a>, <a href="sect0002.html#def:rep-hom">4</a>, needed only because \(\rho \) does not come with ambient typeclass instances. </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="def:rep-irreducible">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">9</span>
+    <span class="definition_thmtitle">Irreducibility (explicit form)</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#def:rep-irreducible">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#def:rep-invariant">Definition 8</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.IsIrreducible" class="lean_decl">QuantumRepresentationTheory.IsIrreducible</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>    \(\rho \) is irreducible if its only invariant subspaces are \(0\) and \(V\). </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="def:rep-intertwiner">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">10</span>
+    <span class="definition_thmtitle">Intertwiner (explicit form)</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#def:rep-intertwiner">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#def:rep-explicit">Definition 7</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.IsIntertwiner" class="lean_decl">QuantumRepresentationTheory.IsIntertwiner</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>    See Definition&#160;<a href="sect0002.html#def:rep-invariant">8</a>. </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:rep-ker-invariant">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">11</span>
+    <span class="theorem_thmtitle">Kernel of an intertwiner is invariant (explicit form)</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#thm:rep-ker-invariant">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#def:rep-intertwiner">Definition 10</a></li>
+          
+          <li><a href="sect0002.html#def:rep-invariant">Definition 8</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.IsIntertwiner.ker_isInvariant" class="lean_decl">QuantumRepresentationTheory.IsIntertwiner.ker_isInvariant</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>    If \(f\) intertwines \(\rho _V\) and \(\rho _W\), then \(\ker f\) is a \(\rho _V\)-invariant subspace of \(V\). (This is exactly Theorem&#160;<a href="sect0002.html#thm:rep-hom-ker-range">5</a>, restated for the explicit form where \(\ker f\) is not automatically bundled as a submodule.) </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:rep-range-invariant">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">12</span>
+    <span class="theorem_thmtitle">Range of an intertwiner is invariant (explicit form)</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#thm:rep-range-invariant">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#def:rep-intertwiner">Definition 10</a></li>
+          
+          <li><a href="sect0002.html#def:rep-invariant">Definition 8</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.IsIntertwiner.range_isInvariant" class="lean_decl">QuantumRepresentationTheory.IsIntertwiner.range_isInvariant</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>    If \(f\) intertwines \(\rho _V\) and \(\rho _W\), then \(\operatorname {range} f\) is a \(\rho _W\)-invariant subspace of \(W\). </p>
+
+  </div>
+</div>
+<div class="remark_thmwrapper theorem-style-remark" id="def:rep-bridge">
+  <div class="remark_thmheading">
+    <span class="remark_thmcaption">
+    Remark
+    </span>
+    <span class="remark_thmlabel">13</span>
+    <span class="remark_thmtitle">Missing bridge: from a morphism to a module instance</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#def:rep-bridge">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#def:rep-explicit">Definition 7</a></li>
+          
+          <li><a href="sect0002.html#def:rep-to-end">Definition 2</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+        </div>
+  </div>
+  <div class="remark_thmcontent">
+  <p>   A genuinely missing piece of Mathlib API is a construction turning an explicit \(\rho \colon L \to \operatorname {End}_K(V)\) (Definition&#160;<a href="sect0002.html#def:rep-explicit">7</a>) into local <span class="ttfamily">LieRingModule</span>/<span class="ttfamily">LieModule</span> instances on \(V\) (Definition&#160;<a href="sect0002.html#def:rep-lie-module">1</a>), so that the generic machinery of §<a href="sect0002.html#sec:rep-generic">1.2</a>–§<a href="sect0004.html#sec:cas-centrality">3.2</a> can be applied to the explicit physics representations of Chapters&#160;4–5. This should be phrased either as a <span class="ttfamily">local instance</span>-producing definition or as a <span class="ttfamily">LieModule.toEnd</span>-compatible wrapper type. </p>
+
+  </div>
+</div>
+<h1 id="sec:rep-schur">1.3 Schur’s lemma</h1>
+
+<p>We take the direct eigenvalue route to Schur’s lemma rather than routing through the universal enveloping algebra: it is shorter, and it isolates exactly the facts needed later (§<a href="sect0004.html#sec:cas-centrality">3.2</a>) to show the Casimir element acts by a scalar. It is stated generically (Definitions&#160;<a href="sect0002.html#def:rep-hom">4</a>, <a href="sect0002.html#def:rep-irreducible-generic">6</a>), which is the form Chapters&#160;2–3 actually need. </p>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:rep-eigenvalue-exists">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">14</span>
+    <span class="theorem_thmtitle">Existence of an eigenvalue</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#thm:rep-eigenvalue-exists">#</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/Module.End.exists_eigenvalue" class="lean_decl">Module.End.exists_eigenvalue</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>   If \(K\) is algebraically closed, \(V\) is finite-dimensional and nonzero, and \(f \in \operatorname {End}_K(V)\), then \(f\) has an eigenvalue. </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:rep-eigenspace-nonzero">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">15</span>
+    <span class="theorem_thmtitle">Eigenspace of an endomorphism is nonzero</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#thm:rep-eigenspace-nonzero">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#thm:rep-eigenvalue-exists">Theorem 14</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.exists_ker_smul_id_ne_bot" class="lean_decl">QuantumRepresentationTheory.exists_ker_smul_id_ne_bot</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>    Under the hypotheses of Theorem&#160;<a href="sect0002.html#thm:rep-eigenvalue-exists">14</a>, there is \(c \in K\) with \(\ker (f - c \cdot \mathrm{id}_V) \neq 0\). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:rep-schur">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">16</span>
+    <span class="theorem_thmtitle">Schur’s lemma</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#thm:rep-schur">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#def:rep-hom">Definition 4</a></li>
+          
+          <li><a href="sect0002.html#def:rep-irreducible-generic">Definition 6</a></li>
+          
+          <li><a href="sect0002.html#thm:rep-hom-ker-range">Theorem 5</a></li>
+          
+          <li><a href="sect0002.html#thm:rep-eigenspace-nonzero">Theorem 15</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.schur" class="lean_decl">QuantumRepresentationTheory.schur</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>    Let \(K\) be algebraically closed, let \(M\) be a finite-dimensional irreducible Lie module for \(L\) (Definition&#160;<a href="sect0002.html#def:rep-irreducible-generic">6</a>), and let \(f \colon M \to _{\! L} M\) be a <span class="ttfamily">LieModuleHom</span> (Definition&#160;<a href="sect0002.html#def:rep-hom">4</a>). Then \(f = c \cdot \mathrm{id}_M\) for some \(c \in K\): apply Theorem&#160;<a href="sect0002.html#thm:rep-eigenspace-nonzero">15</a> to the underlying endomorphism to get \(c\) with \(\ker (f - c\cdot \mathrm{id}) \neq 0\); since \(f - c\cdot \mathrm{id}\) is again a <span class="ttfamily">LieModuleHom</span>, its kernel is a Lie submodule (Theorem&#160;<a href="sect0002.html#thm:rep-hom-ker-range">5</a>), hence all of \(M\) by irreducibility. </p>
+
+  </div>
+</div>
+<div class="remark_thmwrapper theorem-style-remark" id="rem:rep-schur-uea">
+  <div class="remark_thmheading">
+    <span class="remark_thmcaption">
+    Remark
+    </span>
+    <span class="remark_thmlabel">17</span>
+    <span class="remark_thmtitle">Parallel: Schur via simple modules over the enveloping algebra</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0002.html#rem:rep-schur-uea">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#thm:rep-schur">Theorem 16</a></li>
+          
+          <li><a href="sect0004.html#def:cas-uea-rep">Definition 41</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="remark_thmcontent">
+  <p>   Mathlib already gives a division-ring structure on \(\operatorname {End}_R(M)\) for any simple module \(M\) (). Once Definition&#160;<a href="sect0004.html#def:cas-uea-rep">41</a> equips \(V\) with a module structure over the universal enveloping algebra \(U(L)\), and Lie-irreducibility of \(V\) is shown equivalent to simplicity as a \(U(L)\)-module, this instance reproves Theorem&#160;<a href="sect0002.html#thm:rep-schur">16</a> as a special case. This is recorded as a generalization branch, not a prerequisite for the first proof of Schur’s lemma. </p>
+
+  </div>
+</div>
+
+</div> <!--main-text -->
+</div> <!-- content-wrapper -->
+</div> <!-- content -->
+</div> <!-- wrapper -->
+
+<nav class="prev_up_next">
+  <svg  id="showmore-minus" class="icon icon-eye-minus showmore"><use xlink:href="symbol-defs.svg#icon-eye-minus"></use></svg>
+
+  <svg  id="showmore-plus" class="icon icon-eye-plus showmore"><use xlink:href="symbol-defs.svg#icon-eye-plus"></use></svg>
+
+  <a href="sect0001.html" title="Overview"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
+</a>
+  <a href="index.html" title="QuantumRepresentationTheory"><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
+</a>
+  <a href="sect0003.html" title="The Lie algebra \(\mathfrak {sl}_2\) and its representations"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
+</a>
+</nav>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/plastex.js"></script>
+<script type="text/javascript" src="js/svgxuse.js"></script>
+<script type="text/javascript" src="js/js.cookie.min.js"></script>
+<script type="text/javascript" src="js/showmore.js"></script>
+</body>
+</html>

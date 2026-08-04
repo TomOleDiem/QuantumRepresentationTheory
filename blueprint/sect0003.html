@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+  MathJax = { 
+    tex: {
+		    inlineMath: [['$','$'], ['\\(','\\)']]
+	} }
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<meta name="generator" content="plasTeX" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The Lie algebra \(\mathfrak {sl}_2\) and its representations</title>
+<link rel="next" href="sect0004.html" title="The Casimir element" />
+<link rel="prev" href="sect0002.html" title="Representations of Lie algebras" />
+<link rel="up" href="index.html" title="QuantumRepresentationTheory" />
+<link rel="stylesheet" href="styles/theme-white.css" />
+<link rel="stylesheet" href="styles/amsthm.css" />
+<link rel="stylesheet" href="styles/showmore.css" />
+<link rel="stylesheet" href="styles/blueprint.css" />
+<link rel="stylesheet" href="styles/extra_styles.css" />
+</head>
+
+<body>
+<header>
+<svg  id="toc-toggle" class="icon icon-list-numbered "><use xlink:href="symbol-defs.svg#icon-list-numbered"></use></svg>
+<h1 id="doc_title"><a href="index.html">QuantumRepresentationTheory</a></h1>
+</header>
+
+<div class="wrapper">
+<nav class="toc">
+<ul class="sub-toc-0">
+<li class="">
+  <a href="sect0001.html"><span class="toc_ref"></span> <span class="toc_entry">Overview</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0001.html#a0000000008"><span class="toc_ref"></span> <span class="toc_entry">Scope of Chapters 4–5, and a note on Physlib.</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0002.html"><span class="toc_ref">1</span> <span class="toc_entry">Representations of Lie algebras</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0002.html#sec:rep-basic"><span class="toc_ref">1.1</span> <span class="toc_entry">The representation object</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#sec:rep-generic"><span class="toc_ref">1.2</span> <span class="toc_entry">Generic representations as Mathlib objects</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#sec:rep-schur"><span class="toc_ref">1.3</span> <span class="toc_entry">Schur’s lemma</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class=" active current">
+  <a href="sect0003.html"><span class="toc_ref">2</span> <span class="toc_entry">The Lie algebra \(\mathfrak {sl}_2\) and its representations</span></a>
+  <span class="expand-toc">▼</span>
+  <ul class="sub-toc-1 active">
+     <li class="">
+  <a href="sect0003.html#sec:sl2-basic"><span class="toc_ref">2.1</span> <span class="toc_entry">\(\mathfrak {sl}_2\)-triples and primitive vectors</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#sec:sl2-classification"><span class="toc_ref">2.2</span> <span class="toc_entry">Classification of irreducible \(\mathfrak {sl}_2\)-modules</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#sec:sl2-commuting"><span class="toc_ref">2.3</span> <span class="toc_entry">Commuting \(\mathfrak {sl}_2\)-actions and tensor products</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#sec:sl2-cg"><span class="toc_ref">2.4</span> <span class="toc_entry">Clebsch–Gordan decomposition</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0004.html"><span class="toc_ref">3</span> <span class="toc_entry">The Casimir element</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0004.html#sec:cas-basic"><span class="toc_ref">3.1</span> <span class="toc_entry">Construction</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#sec:cas-centrality"><span class="toc_ref">3.2</span> <span class="toc_entry">Centrality and the scalar action</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0005.html"><span class="toc_ref">4</span> <span class="toc_entry">Angular momentum</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0005.html#sec:am-basic"><span class="toc_ref">4.1</span> <span class="toc_entry">The algebraic representation</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#sec:am-classification"><span class="toc_ref">4.2</span> <span class="toc_entry">Spin classification</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0006.html"><span class="toc_ref">5</span> <span class="toc_entry">The hydrogen atom</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0006.html#sec:hyd-basic"><span class="toc_ref">5.1</span> <span class="toc_entry">The Runge–Lenz vector</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#sec:hyd-symmetry"><span class="toc_ref">5.2</span> <span class="toc_entry">The hidden \(\mathfrak {so}_4\) symmetry</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#sec:hyd-spectrum"><span class="toc_ref">5.3</span> <span class="toc_entry">The energy spectrum</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li ><a href="dep_graph_document.html">Dependency graph</a></li>
+</ul>
+</nav>
+
+<div class="content">
+<div class="content-wrapper">
+
+
+<div class="main-text">
+<h1 id="a0000000004">2 The Lie algebra \(\mathfrak {sl}_2\) and its representations</h1>
+<h1 id="sec:sl2-basic">2.1 \(\mathfrak {sl}_2\)-triples and primitive vectors</h1>
+
+<p>Mathlib already contains essentially the whole primitive-vector string calculus for \(\mathfrak {sl}_2\)-triples; the classification work in §<a href="sect0003.html#sec:sl2-classification">2.2</a> only needs to assemble these pieces. </p>
+<div class="definition_thmwrapper theorem-style-definition" id="def:sl2-triple">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">18</span>
+    <span class="definition_thmtitle">\(\mathfrak {sl}_2\)-triple</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0003.html#def:sl2-triple">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#def:rep-lie-module">Definition 1</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/IsSl2Triple" class="lean_decl">IsSl2Triple</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>    A triple \((h,e,f)\) of elements of \(L\) is an \(\mathfrak {sl}_2\)-triple if \(h \neq 0\), \([e,f] = h\), \([h,e] = 2e\), and \([h,f] = -2f\); equivalently, the subalgebra they generate is a copy of \(\mathfrak {sl}_2\). </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="def:sl2-primitive">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">19</span>
+    <span class="definition_thmtitle">Primitive vector</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0003.html#def:sl2-primitive">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0003.html#def:sl2-triple">Definition 18</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/IsSl2Triple.HasPrimitiveVectorWith" class="lean_decl">IsSl2Triple.HasPrimitiveVectorWith</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>    Given an \(\mathfrak {sl}_2\)-triple \(t = (h,e,f)\) acting on a module \(M\), a nonzero vector \(m \in M\) is primitive of weight \(\mu \in K\) for \(t\) if \(h \cdot m = \mu m\) and \(e \cdot m = 0\). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:sl2-string-h">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">20</span>
+    <span class="theorem_thmtitle">\(h\)-eigenvalues along the lowering string</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0003.html#thm:sl2-string-h">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0003.html#def:sl2-primitive">Definition 19</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/IsSl2Triple.HasPrimitiveVectorWith.lie_h_pow_toEnd_f" class="lean_decl">IsSl2Triple.HasPrimitiveVectorWith.lie_h_pow_toEnd_f</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>    For a primitive vector \(m\) of weight \(\mu \), \(h \cdot (f^k m) = (\mu - 2k)(f^k m)\) for every \(k \ge 0\). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:sl2-string-e">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">21</span>
+    <span class="theorem_thmtitle">Raising along the lowering string</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0003.html#thm:sl2-string-e">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0003.html#def:sl2-primitive">Definition 19</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/IsSl2Triple.HasPrimitiveVectorWith.lie_e_pow_succ_toEnd_f" class="lean_decl">IsSl2Triple.HasPrimitiveVectorWith.lie_e_pow_succ_toEnd_f</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>    For a primitive vector \(m\) of weight \(\mu \), \(e \cdot (f^{k+1} m) = (k+1)(\mu - k)(f^k m)\) for every \(k \ge 0\). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:sl2-string-finite">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">22</span>
+    <span class="theorem_thmtitle">The string is finite with integral weight</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0003.html#thm:sl2-string-finite">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0003.html#thm:sl2-string-h">Theorem 20</a></li>
+          
+          <li><a href="sect0003.html#thm:sl2-string-e">Theorem 21</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/IsSl2Triple.HasPrimitiveVectorWith.exists_nat" class="lean_decl">IsSl2Triple.HasPrimitiveVectorWith.exists_nat</a></li>
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/IsSl2Triple.HasPrimitiveVectorWith.pow_toEnd_f_ne_zero_of_eq_nat" class="lean_decl">IsSl2Triple.HasPrimitiveVectorWith.pow_toEnd_f_ne_zero_of_eq_nat</a></li>
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/IsSl2Triple.HasPrimitiveVectorWith.pow_toEnd_f_eq_zero_of_eq_nat" class="lean_decl">IsSl2Triple.HasPrimitiveVectorWith.pow_toEnd_f_eq_zero_of_eq_nat</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>    If \(M\) is finite-dimensional (Noetherian, torsion-free, over a characteristic-zero domain), the weight \(\mu \) of a primitive vector \(m\) equals some \(n \in \mathbb {N}\), \(f^k m \neq 0\) for all \(k \le n\), and \(f^{n+1} m = 0\). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:sl2-triangularizable">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">23</span>
+    <span class="theorem_thmtitle">Finite-dimensional modules over an algebraically closed field are triangularizable</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0003.html#thm:sl2-triangularizable">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#def:rep-lie-module">Definition 1</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/LieModule.instIsTriangularizableOfIsAlgClosed" class="lean_decl">LieModule.instIsTriangularizableOfIsAlgClosed</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>    If \(K\) is algebraically closed and \(M\) is a finite-dimensional Lie module for \(L\), then \(M\) is automatically triangularizable: this is an instance in Mathlib and requires no further formalization work for the \(K = \mathbb {C}\) case used throughout this project. </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:sl2-primitive-exists">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">24</span>
+    <span class="theorem_thmtitle">Existence of a primitive vector</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0003.html#thm:sl2-primitive-exists">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0003.html#def:sl2-triple">Definition 18</a></li>
+          
+          <li><a href="sect0003.html#thm:sl2-triangularizable">Theorem 23</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/IsSl2Triple.exists_hasPrimitiveVectorWith" class="lean_decl">IsSl2Triple.exists_hasPrimitiveVectorWith</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>    If \(K\) has characteristic zero, \(M\) is a nonzero finite-dimensional, torsion-free, triangularizable module for an \(\mathfrak {sl}_2\)-triple \(t\), then \(M\) contains a primitive vector for \(t\). </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="def:sl2-standard-module">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">25</span>
+    <span class="definition_thmtitle">Standard module \(V(n)\)</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0003.html#def:sl2-standard-module">#</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.StandardSl2Module" class="lean_decl">QuantumRepresentationTheory.StandardSl2Module</a></li>
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.StandardSl2Module.v" class="lean_decl">QuantumRepresentationTheory.StandardSl2Module.v</a></li>
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.standardSl2ModuleLieRingModule" class="lean_decl">QuantumRepresentationTheory.standardSl2ModuleLieRingModule</a></li>
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.standardSl2ModuleLieModule" class="lean_decl">QuantumRepresentationTheory.standardSl2ModuleLieModule</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>   For \(n \in \mathbb {N}\), the standard module \(V(n)\) is the \((n+1)\)-dimensional \(\mathfrak {sl}_2\)-module with basis \(v_0, \dots , v_n\) on which \(h \cdot v_k = (n-2k) v_k\), \(f \cdot v_k = v_{k+1}\) (and \(v_{n+1} := 0\)), and \(e \cdot v_k = k(n-k+1) v_{k-1}\). This is the explicit model produced by the classification theorem below. </p>
+
+  </div>
+</div>
+<h1 id="sec:sl2-classification">2.2 Classification of irreducible \(\mathfrak {sl}_2\)-modules</h1>
+
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:sl2-string-independent">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">26</span>
+    <span class="theorem_thmtitle">Linear independence of the primitive-vector string</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0003.html#thm:sl2-string-independent">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0003.html#thm:sl2-string-finite">Theorem 22</a></li>
+          
+          <li><a href="sect0003.html#thm:sl2-string-h">Theorem 20</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.string_linearIndependent" class="lean_decl">QuantumRepresentationTheory.string_linearIndependent</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>    If \(m\) is primitive of weight \(n \in \mathbb {N}\), the vectors \(m, fm, \dots , f^n m\) are linearly independent, since they lie in distinct \(h\)-eigenspaces (Theorem&#160;<a href="sect0003.html#thm:sl2-string-h">20</a>) and are all nonzero (Theorem&#160;<a href="sect0003.html#thm:sl2-string-finite">22</a>). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:sl2-string-submodule">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">27</span>
+    <span class="theorem_thmtitle">The string spans a submodule</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0003.html#thm:sl2-string-submodule">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0003.html#thm:sl2-string-finite">Theorem 22</a></li>
+          
+          <li><a href="sect0003.html#thm:sl2-string-h">Theorem 20</a></li>
+          
+          <li><a href="sect0003.html#thm:sl2-string-e">Theorem 21</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.exists_stringLieSubmodule" class="lean_decl">QuantumRepresentationTheory.exists_stringLieSubmodule</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>    The span of \(m, fm, \dots , f^n m\) is invariant under \(h\), \(e\), and \(f\), hence is a Lie submodule. </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:sl2-irreducible-spans">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">28</span>
+    <span class="theorem_thmtitle">Irreducibility forces the string to span</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0003.html#thm:sl2-irreducible-spans">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#def:rep-irreducible-generic">Definition 6</a></li>
+          
+          <li><a href="sect0003.html#thm:sl2-string-submodule">Theorem 27</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.stringSpan_eq_top" class="lean_decl">QuantumRepresentationTheory.stringSpan_eq_top</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>    If \(M\) is an irreducible \(\mathfrak {sl}_2\)-module, the submodule of Theorem&#160;<a href="sect0003.html#thm:sl2-string-submodule">27</a> is nonzero, hence equal to \(M\). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:sl2-basis-theorem">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">29</span>
+    <span class="theorem_thmtitle">Basis theorem</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0003.html#thm:sl2-basis-theorem">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0003.html#thm:sl2-string-independent">Theorem 26</a></li>
+          
+          <li><a href="sect0003.html#thm:sl2-irreducible-spans">Theorem 28</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.string_isBasis" class="lean_decl">QuantumRepresentationTheory.string_isBasis</a></li>
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.finrank_eq_succ" class="lean_decl">QuantumRepresentationTheory.finrank_eq_succ</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>    If \(M\) is a finite-dimensional irreducible \(\mathfrak {sl}_2\)-module with primitive vector \(m\) of weight \(n\), then \(m, fm, \dots , f^n m\) is a basis of \(M\); in particular \(\dim M = n+1\). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:sl2-classification">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">30</span>
+    <span class="theorem_thmtitle">Classification of irreducible \(\mathfrak {sl}_2\)-modules</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0003.html#thm:sl2-classification">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0003.html#thm:sl2-basis-theorem">Theorem 29</a></li>
+          
+          <li><a href="sect0003.html#def:sl2-standard-module">Definition 25</a></li>
+          
+          <li><a href="sect0003.html#thm:sl2-primitive-exists">Theorem 24</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.classification" class="lean_decl">QuantumRepresentationTheory.classification</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>    Every finite-dimensional irreducible \(\mathfrak {sl}_2\)-module over an algebraically closed field of characteristic zero is isomorphic, as an \(\mathfrak {sl}_2\)-module, to the standard module \(V(n)\) (Definition&#160;<a href="sect0003.html#def:sl2-standard-module">25</a>) for a unique \(n \in \mathbb {N}\). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:sl2-uniqueness-hw">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">31</span>
+    <span class="theorem_thmtitle">Uniqueness of the highest weight</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0003.html#thm:sl2-uniqueness-hw">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0003.html#thm:sl2-classification">Theorem 30</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.classification_n_eq_finrank_sub_one" class="lean_decl">QuantumRepresentationTheory.classification_n_eq_finrank_sub_one</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>    The integer \(n\) in Theorem&#160;<a href="sect0003.html#thm:sl2-classification">30</a> is an isomorphism invariant of \(M\): it equals \(\dim M - 1\). </p>
+
+  </div>
+</div>
+<h1 id="sec:sl2-commuting">2.3 Commuting \(\mathfrak {sl}_2\)-actions and tensor products</h1>
+
+<p>This is the largest hidden node in the whole roadmap. Without it, knowing that two representations of two <em>commuting</em> \(\mathfrak {sl}_2\)-triples have equal Casimir eigenvalues does not by itself give a dimension formula; it is the key input to the hydrogen spectrum in Chapter&#160;5, and is more fundamental to that goal than the classical Clebsch–Gordan decomposition of §<a href="sect0003.html#sec:sl2-cg">2.4</a>. </p>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:sl2-tensor-action">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">32</span>
+    <span class="theorem_thmtitle">Diagonal \(\mathfrak {sl}_2\)-action on a tensor product</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0003.html#thm:sl2-tensor-action">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#def:rep-lie-module">Definition 1</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/TensorProduct.LieModule.lieRingModule" class="lean_decl">TensorProduct.LieModule.lieRingModule</a></li>
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/TensorProduct.LieModule.lieModule" class="lean_decl">TensorProduct.LieModule.lieModule</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>    For Lie modules \(M\), \(N\) of \(L\), the tensor product \(M \otimes _K N\) carries the Lie module structure \(x \cdot (m \otimes n) = (x\cdot m)\otimes n + m \otimes (x \cdot n)\). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:sl2-commuting-classification">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">33</span>
+    <span class="theorem_thmtitle">Classification of jointly irreducible commuting \(\mathfrak {sl}_2\)-actions</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0003.html#thm:sl2-commuting-classification">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0003.html#thm:sl2-classification">Theorem 30</a></li>
+          
+          <li><a href="sect0003.html#thm:sl2-tensor-action">Theorem 32</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.commuting_classification" class="lean_decl">QuantumRepresentationTheory.commuting_classification</a></li>
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.commuting_classification_finrank" class="lean_decl">QuantumRepresentationTheory.commuting_classification_finrank</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>    Let \(\rho _1, \rho _2\) be representations of two \(\mathfrak {sl}_2\)-triples on a finite-dimensional space \(V\) over an algebraically closed field of characteristic zero, with \([\rho _1(x), \rho _2(y)] = 0\) for all \(x, y\), and suppose \(V\) has no proper subspace invariant under both actions simultaneously. Then there exist \(m, n \in \mathbb {N}\) and a linear isomorphism </p>
+<div class="displaymath" id="a0000000009">
+  \[  V \; \cong _K\;  V(m) \otimes _K V(n)  \]
+</div>
+<p> intertwining \((\rho _1, \rho _2)\) with the actions of the two tensor factors of Theorem&#160;<a href="sect0003.html#thm:sl2-tensor-action">32</a>. </p>
+
+  </div>
+</div>
+<h1 id="sec:sl2-cg">2.4 Clebsch–Gordan decomposition</h1>
+
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:sl2-clebsch-gordan">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">34</span>
+    <span class="theorem_thmtitle">Clebsch–Gordan decomposition</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0003.html#thm:sl2-clebsch-gordan">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0003.html#thm:sl2-classification">Theorem 30</a></li>
+          
+          <li><a href="sect0003.html#thm:sl2-tensor-action">Theorem 32</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.clebsch_gordan_finrank" class="lean_decl">QuantumRepresentationTheory.clebsch_gordan_finrank</a></li>
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.clebsch_gordan" class="lean_decl">QuantumRepresentationTheory.clebsch_gordan</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>    For \(m, n \in \mathbb {N}\), the diagonal \(\mathfrak {sl}_2\)-module \(V(m) \otimes _K V(n)\) (Theorem&#160;<a href="sect0003.html#thm:sl2-tensor-action">32</a>) decomposes as </p>
+<div class="displaymath" id="a0000000010">
+  \[  V(m) \otimes _K V(n) \; \cong _K\;  \bigoplus _{k=0}^{\min (m,n)} V(m+n-2k).  \]
+</div>
+
+  </div>
+</div>
+
+</div> <!--main-text -->
+</div> <!-- content-wrapper -->
+</div> <!-- content -->
+</div> <!-- wrapper -->
+
+<nav class="prev_up_next">
+  <svg  id="showmore-minus" class="icon icon-eye-minus showmore"><use xlink:href="symbol-defs.svg#icon-eye-minus"></use></svg>
+
+  <svg  id="showmore-plus" class="icon icon-eye-plus showmore"><use xlink:href="symbol-defs.svg#icon-eye-plus"></use></svg>
+
+  <a href="sect0002.html" title="Representations of Lie algebras"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
+</a>
+  <a href="index.html" title="QuantumRepresentationTheory"><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
+</a>
+  <a href="sect0004.html" title="The Casimir element"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
+</a>
+</nav>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/plastex.js"></script>
+<script type="text/javascript" src="js/svgxuse.js"></script>
+<script type="text/javascript" src="js/js.cookie.min.js"></script>
+<script type="text/javascript" src="js/showmore.js"></script>
+</body>
+</html>

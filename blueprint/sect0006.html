@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+  MathJax = { 
+    tex: {
+		    inlineMath: [['$','$'], ['\\(','\\)']]
+	} }
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<meta name="generator" content="plasTeX" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The hydrogen atom</title>
+<link rel="prev" href="sect0005.html" title="Angular momentum" />
+<link rel="up" href="index.html" title="QuantumRepresentationTheory" />
+<link rel="stylesheet" href="styles/theme-white.css" />
+<link rel="stylesheet" href="styles/amsthm.css" />
+<link rel="stylesheet" href="styles/showmore.css" />
+<link rel="stylesheet" href="styles/blueprint.css" />
+<link rel="stylesheet" href="styles/extra_styles.css" />
+</head>
+
+<body>
+<header>
+<svg  id="toc-toggle" class="icon icon-list-numbered "><use xlink:href="symbol-defs.svg#icon-list-numbered"></use></svg>
+<h1 id="doc_title"><a href="index.html">QuantumRepresentationTheory</a></h1>
+</header>
+
+<div class="wrapper">
+<nav class="toc">
+<ul class="sub-toc-0">
+<li class="">
+  <a href="sect0001.html"><span class="toc_ref"></span> <span class="toc_entry">Overview</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0001.html#a0000000008"><span class="toc_ref"></span> <span class="toc_entry">Scope of Chapters 4–5, and a note on Physlib.</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0002.html"><span class="toc_ref">1</span> <span class="toc_entry">Representations of Lie algebras</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0002.html#sec:rep-basic"><span class="toc_ref">1.1</span> <span class="toc_entry">The representation object</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#sec:rep-generic"><span class="toc_ref">1.2</span> <span class="toc_entry">Generic representations as Mathlib objects</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#sec:rep-schur"><span class="toc_ref">1.3</span> <span class="toc_entry">Schur’s lemma</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0003.html"><span class="toc_ref">2</span> <span class="toc_entry">The Lie algebra \(\mathfrak {sl}_2\) and its representations</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0003.html#sec:sl2-basic"><span class="toc_ref">2.1</span> <span class="toc_entry">\(\mathfrak {sl}_2\)-triples and primitive vectors</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#sec:sl2-classification"><span class="toc_ref">2.2</span> <span class="toc_entry">Classification of irreducible \(\mathfrak {sl}_2\)-modules</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#sec:sl2-commuting"><span class="toc_ref">2.3</span> <span class="toc_entry">Commuting \(\mathfrak {sl}_2\)-actions and tensor products</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#sec:sl2-cg"><span class="toc_ref">2.4</span> <span class="toc_entry">Clebsch–Gordan decomposition</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0004.html"><span class="toc_ref">3</span> <span class="toc_entry">The Casimir element</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0004.html#sec:cas-basic"><span class="toc_ref">3.1</span> <span class="toc_entry">Construction</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#sec:cas-centrality"><span class="toc_ref">3.2</span> <span class="toc_entry">Centrality and the scalar action</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0005.html"><span class="toc_ref">4</span> <span class="toc_entry">Angular momentum</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0005.html#sec:am-basic"><span class="toc_ref">4.1</span> <span class="toc_entry">The algebraic representation</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#sec:am-classification"><span class="toc_ref">4.2</span> <span class="toc_entry">Spin classification</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class=" active current">
+  <a href="sect0006.html"><span class="toc_ref">5</span> <span class="toc_entry">The hydrogen atom</span></a>
+  <span class="expand-toc">▼</span>
+  <ul class="sub-toc-1 active">
+     <li class="">
+  <a href="sect0006.html#sec:hyd-basic"><span class="toc_ref">5.1</span> <span class="toc_entry">The Runge–Lenz vector</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#sec:hyd-symmetry"><span class="toc_ref">5.2</span> <span class="toc_entry">The hidden \(\mathfrak {so}_4\) symmetry</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#sec:hyd-spectrum"><span class="toc_ref">5.3</span> <span class="toc_entry">The energy spectrum</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li ><a href="dep_graph_document.html">Dependency graph</a></li>
+</ul>
+</nav>
+
+<div class="content">
+<div class="content-wrapper">
+
+
+<div class="main-text">
+<h1 id="a0000000007">5 The hydrogen atom</h1>
+<h1 id="sec:hyd-basic">5.1 The Runge–Lenz vector</h1>
+
+<div class="definition_thmwrapper theorem-style-definition" id="def:hyd-levi-civita">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">53</span>
+    <span class="definition_thmtitle">Levi-Civita symbol</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0006.html#def:hyd-levi-civita">#</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.leviCivita" class="lean_decl">QuantumRepresentationTheory.leviCivita</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>   \(\varepsilon _{ijk}\), the totally antisymmetric symbol on \(\{ 1,2,3\} \) with \(\varepsilon _{123}=1\), used to write the cross product and the commutation relations below. </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:hyd-cross-linearity">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">54</span>
+    <span class="theorem_thmtitle">Linearity of the cross-product components</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0006.html#thm:hyd-cross-linearity">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0006.html#def:hyd-levi-civita">Definition 53</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.crossComponent" class="lean_decl">QuantumRepresentationTheory.crossComponent</a></li>
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.crossComponent_bilinear" class="lean_decl">QuantumRepresentationTheory.crossComponent_bilinear</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>    Each component \((A \times B)_i = \sum _{jk} \varepsilon _{ijk} A_j B_k\) is bilinear in \(A, B\); used repeatedly to expand commutators involving the Runge–Lenz vector. </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="def:hyd-bound-state">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">55</span>
+    <span class="definition_thmtitle">Bound-state representation</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0006.html#def:hyd-bound-state">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0005.html#def:am-representation">Definition 45</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.BoundStateRepresentation" class="lean_decl">QuantumRepresentationTheory.BoundStateRepresentation</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>    The explicit representation of the hydrogen Hamiltonian’s dynamical symmetry algebra on a fixed negative-energy eigenspace \(V_E\) of the Hamiltonian \(H\), carrying the angular momentum representation \((J_x,J_y,J_z)\) of Definition&#160;<a href="sect0005.html#def:am-representation">45</a> together with the (unnormalized) Runge–Lenz operator \(\vec M\). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:hyd-rescaling-nonzero">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">56</span>
+    <span class="theorem_thmtitle">The rescaling constant is nonzero</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0006.html#thm:hyd-rescaling-nonzero">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0006.html#def:hyd-bound-state">Definition 55</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.BoundStateRepresentation.rescaling_pos" class="lean_decl">QuantumRepresentationTheory.BoundStateRepresentation.rescaling_pos</a></li>
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.BoundStateRepresentation.rescalingConst" class="lean_decl">QuantumRepresentationTheory.BoundStateRepresentation.rescalingConst</a></li>
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.BoundStateRepresentation.rescalingConst_pos" class="lean_decl">QuantumRepresentationTheory.BoundStateRepresentation.rescalingConst_pos</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>    On \(V_E\) with \(E {\lt} 0\), the scalar \(-2E/m\) appearing in the normalization of \(\vec M\) is strictly positive, so \(\vec A := \vec M / \sqrt{-2mE}\) is well defined. </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="def:hyd-rescaled-rl">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">57</span>
+    <span class="definition_thmtitle">Rescaled Runge–Lenz vector</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0006.html#def:hyd-rescaled-rl">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0006.html#thm:hyd-rescaling-nonzero">Theorem 56</a></li>
+          
+          <li><a href="sect0006.html#thm:hyd-cross-linearity">Theorem 54</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.BoundStateRepresentation.Ax" class="lean_decl">QuantumRepresentationTheory.BoundStateRepresentation.Ax</a></li>
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.BoundStateRepresentation.Ay" class="lean_decl">QuantumRepresentationTheory.BoundStateRepresentation.Ay</a></li>
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.BoundStateRepresentation.Az" class="lean_decl">QuantumRepresentationTheory.BoundStateRepresentation.Az</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>    \(\vec A := \vec M/\sqrt{-2mE}\) on \(V_E\), chosen so that \(\vec J\) and \(\vec A\) satisfy the commutation relations of two copies of \(\mathfrak {so}_3\) (Theorem&#160;<a href="sect0006.html#thm:hyd-two-factors-commute">59</a>). </p>
+
+  </div>
+</div>
+<h1 id="sec:hyd-symmetry">5.2 The hidden \(\mathfrak {so}_4\) symmetry</h1>
+
+<div class="definition_thmwrapper theorem-style-definition" id="def:hyd-two-triples">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">58</span>
+    <span class="definition_thmtitle">Two angular momentum triples</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0006.html#def:hyd-two-triples">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0005.html#def:am-ladder">Definition 46</a></li>
+          
+          <li><a href="sect0006.html#def:hyd-rescaled-rl">Definition 57</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.BoundStateRepresentation.Ix" class="lean_decl">QuantumRepresentationTheory.BoundStateRepresentation.Ix</a></li>
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.BoundStateRepresentation.Iy" class="lean_decl">QuantumRepresentationTheory.BoundStateRepresentation.Iy</a></li>
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.BoundStateRepresentation.Iz" class="lean_decl">QuantumRepresentationTheory.BoundStateRepresentation.Iz</a></li>
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.BoundStateRepresentation.Kx" class="lean_decl">QuantumRepresentationTheory.BoundStateRepresentation.Kx</a></li>
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.BoundStateRepresentation.Ky" class="lean_decl">QuantumRepresentationTheory.BoundStateRepresentation.Ky</a></li>
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.BoundStateRepresentation.Kz" class="lean_decl">QuantumRepresentationTheory.BoundStateRepresentation.Kz</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>    On \(V_E\), set \(\vec I := \tfrac 12(\vec J + \vec A)\) and \(\vec K := \tfrac 12(\vec J - \vec A)\). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:hyd-two-factors-commute">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">59</span>
+    <span class="theorem_thmtitle">\(I\) and \(K\) each satisfy \(\mathfrak {so}_3\) relations and commute with each other</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0006.html#thm:hyd-two-factors-commute">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0006.html#def:hyd-two-triples">Definition 58</a></li>
+          
+          <li><a href="sect0005.html#thm:am-commutators">Theorem 47</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.BoundStateRepresentation.I_comm_xy" class="lean_decl">QuantumRepresentationTheory.BoundStateRepresentation.I_comm_xy</a></li>
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.BoundStateRepresentation.I_comm_yz" class="lean_decl">QuantumRepresentationTheory.BoundStateRepresentation.I_comm_yz</a></li>
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.BoundStateRepresentation.I_comm_zx" class="lean_decl">QuantumRepresentationTheory.BoundStateRepresentation.I_comm_zx</a></li>
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.BoundStateRepresentation.K_comm_xy" class="lean_decl">QuantumRepresentationTheory.BoundStateRepresentation.K_comm_xy</a></li>
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.BoundStateRepresentation.K_comm_yz" class="lean_decl">QuantumRepresentationTheory.BoundStateRepresentation.K_comm_yz</a></li>
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.BoundStateRepresentation.K_comm_zx" class="lean_decl">QuantumRepresentationTheory.BoundStateRepresentation.K_comm_zx</a></li>
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.BoundStateRepresentation.I_comm_K" class="lean_decl">QuantumRepresentationTheory.BoundStateRepresentation.I_comm_K</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>    \([I_x,I_y]=iI_z\) (and cyclic permutations), likewise for \(\vec K\), and \([I_a, K_b] = 0\) for all \(a,b \in \{ x,y,z\} \). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:hyd-so4-decomposition">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">60</span>
+    <span class="theorem_thmtitle">\(\mathfrak {so}_4\cong \mathfrak {so}_3\oplus \mathfrak {so}_3\) decomposition</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0006.html#thm:hyd-so4-decomposition">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0006.html#thm:hyd-two-factors-commute">Theorem 59</a></li>
+          
+          <li><a href="sect0005.html#thm:am-is-sl2-triple">Theorem 48</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.BoundStateRepresentation.IRep" class="lean_decl">QuantumRepresentationTheory.BoundStateRepresentation.IRep</a></li>
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.BoundStateRepresentation.KRep" class="lean_decl">QuantumRepresentationTheory.BoundStateRepresentation.KRep</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>    \(\vec I\) and \(\vec K\) each generate an \(\mathfrak {sl}_2\)-triple in the sense of Theorem&#160;<a href="sect0005.html#thm:am-is-sl2-triple">48</a>, realizing the dynamical symmetry algebra of the bound states as \(\mathfrak {so}_3 \oplus \mathfrak {so}_3\). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:hyd-equal-casimirs">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">61</span>
+    <span class="theorem_thmtitle">Equality of the two Casimir eigenvalues</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0006.html#thm:hyd-equal-casimirs">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0005.html#thm:am-j2-casimir">Theorem 51</a></li>
+          
+          <li><a href="sect0006.html#def:hyd-two-triples">Definition 58</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.BoundStateRepresentation.equal_casimirs" class="lean_decl">QuantumRepresentationTheory.BoundStateRepresentation.equal_casimirs</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>    On any irreducible summand of \(V_E\) under the joint \((\vec I, \vec K)\) action, the Casimir eigenvalues of the \(\vec I\)-triple and the \(\vec K\)-triple coincide: \(i(i+1) = k(k+1)\), forcing \(i=k\). </p>
+
+  </div>
+</div>
+<h1 id="sec:hyd-spectrum">5.3 The energy spectrum</h1>
+
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:hyd-classification">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">62</span>
+    <span class="theorem_thmtitle">Classification of the bound-state representation</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0006.html#thm:hyd-classification">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0003.html#thm:sl2-commuting-classification">Theorem 33</a></li>
+          
+          <li><a href="sect0006.html#thm:hyd-so4-decomposition">Theorem 60</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.BoundStateRepresentation.classification_finrank" class="lean_decl">QuantumRepresentationTheory.BoundStateRepresentation.classification_finrank</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>    Each irreducible summand of \(V_E\) under the commuting pair \((\vec I,\vec K)\) is isomorphic to \(V(2i)\otimes V(2k)\), by Theorem&#160;<a href="sect0003.html#thm:sl2-commuting-classification">33</a> applied to the two commuting \(\mathfrak {sl}_2\)-triples of Theorem&#160;<a href="sect0006.html#thm:hyd-so4-decomposition">60</a>. </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:hyd-equal-hw">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">63</span>
+    <span class="theorem_thmtitle">Equal Casimirs force equal highest weights</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0006.html#thm:hyd-equal-hw">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0006.html#thm:hyd-equal-casimirs">Theorem 61</a></li>
+          
+          <li><a href="sect0006.html#thm:hyd-classification">Theorem 62</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.BoundStateRepresentation.dimension_eq_sq" class="lean_decl">QuantumRepresentationTheory.BoundStateRepresentation.dimension_eq_sq</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>    In the decomposition of Theorem&#160;<a href="sect0006.html#thm:hyd-classification">62</a>, the summand occurring in \(V_E\) has \(i = k\). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:hyd-dimension">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">64</span>
+    <span class="theorem_thmtitle">Dimension of the bound-state eigenspace</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0006.html#thm:hyd-dimension">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0006.html#thm:hyd-equal-hw">Theorem 63</a></li>
+          
+          <li><a href="sect0003.html#thm:sl2-basis-theorem">Theorem 29</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.BoundStateRepresentation.dimension_eq_sq" class="lean_decl">QuantumRepresentationTheory.BoundStateRepresentation.dimension_eq_sq</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>    With \(i=k\), the summand \(V(2i)\otimes V(2i)\) has dimension \((2i+1)^2\); the quantity \(n := 2i+1\) is a positive integer. </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:hyd-quadratic-energy">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">65</span>
+    <span class="theorem_thmtitle">Quadratic energy equation</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0006.html#thm:hyd-quadratic-energy">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0006.html#thm:hyd-rescaling-nonzero">Theorem 56</a></li>
+          
+          <li><a href="sect0006.html#thm:hyd-dimension">Theorem 64</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.BoundStateRepresentation.quadratic_energy" class="lean_decl">QuantumRepresentationTheory.BoundStateRepresentation.quadratic_energy</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>    Expressing the original Hamiltonian \(H\) in terms of \(\vec J^2 + \vec A^2\) and the shared Casimir eigenvalue \(i(i+1)\) from Theorem&#160;<a href="sect0006.html#thm:hyd-equal-hw">63</a> yields </p>
+<div class="displaymath" id="a0000000012">
+  \[  E = -\frac{me^4}{2\hbar ^2 n^2}, \qquad n = 2i+1 \in \{ 1,2,3,\dots \} .  \]
+</div>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:hyd-energy-degeneracy">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">66</span>
+    <span class="theorem_thmtitle">Hydrogen energy levels and degeneracy</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0006.html#thm:hyd-energy-degeneracy">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0006.html#thm:hyd-quadratic-energy">Theorem 65</a></li>
+          
+          <li><a href="sect0006.html#thm:hyd-dimension">Theorem 64</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.BoundStateRepresentation.energy_degeneracy" class="lean_decl">QuantumRepresentationTheory.BoundStateRepresentation.energy_degeneracy</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>    The bound-state energies of the hydrogen atom are \(E_n = -me^4/(2\hbar ^2 n^2)\) for \(n \in \mathbb {Z}_{{\gt}0}\), and the eigenspace \(V_{E_n}\) has dimension \(n^2\). </p>
+
+  </div>
+</div>
+
+</div> <!--main-text -->
+</div> <!-- content-wrapper -->
+</div> <!-- content -->
+</div> <!-- wrapper -->
+
+<nav class="prev_up_next">
+  <svg  id="showmore-minus" class="icon icon-eye-minus showmore"><use xlink:href="symbol-defs.svg#icon-eye-minus"></use></svg>
+
+  <svg  id="showmore-plus" class="icon icon-eye-plus showmore"><use xlink:href="symbol-defs.svg#icon-eye-plus"></use></svg>
+
+  <a href="sect0005.html" title="Angular momentum"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
+</a>
+  <a href="index.html" title="QuantumRepresentationTheory"><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
+</a>
+</nav>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/plastex.js"></script>
+<script type="text/javascript" src="js/svgxuse.js"></script>
+<script type="text/javascript" src="js/js.cookie.min.js"></script>
+<script type="text/javascript" src="js/showmore.js"></script>
+</body>
+</html>

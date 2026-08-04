@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+  MathJax = { 
+    tex: {
+		    inlineMath: [['$','$'], ['\\(','\\)']]
+	} }
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<meta name="generator" content="plasTeX" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Angular momentum</title>
+<link rel="next" href="sect0006.html" title="The hydrogen atom" />
+<link rel="prev" href="sect0004.html" title="The Casimir element" />
+<link rel="up" href="index.html" title="QuantumRepresentationTheory" />
+<link rel="stylesheet" href="styles/theme-white.css" />
+<link rel="stylesheet" href="styles/amsthm.css" />
+<link rel="stylesheet" href="styles/showmore.css" />
+<link rel="stylesheet" href="styles/blueprint.css" />
+<link rel="stylesheet" href="styles/extra_styles.css" />
+</head>
+
+<body>
+<header>
+<svg  id="toc-toggle" class="icon icon-list-numbered "><use xlink:href="symbol-defs.svg#icon-list-numbered"></use></svg>
+<h1 id="doc_title"><a href="index.html">QuantumRepresentationTheory</a></h1>
+</header>
+
+<div class="wrapper">
+<nav class="toc">
+<ul class="sub-toc-0">
+<li class="">
+  <a href="sect0001.html"><span class="toc_ref"></span> <span class="toc_entry">Overview</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0001.html#a0000000008"><span class="toc_ref"></span> <span class="toc_entry">Scope of Chapters 4–5, and a note on Physlib.</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0002.html"><span class="toc_ref">1</span> <span class="toc_entry">Representations of Lie algebras</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0002.html#sec:rep-basic"><span class="toc_ref">1.1</span> <span class="toc_entry">The representation object</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#sec:rep-generic"><span class="toc_ref">1.2</span> <span class="toc_entry">Generic representations as Mathlib objects</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#sec:rep-schur"><span class="toc_ref">1.3</span> <span class="toc_entry">Schur’s lemma</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0003.html"><span class="toc_ref">2</span> <span class="toc_entry">The Lie algebra \(\mathfrak {sl}_2\) and its representations</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0003.html#sec:sl2-basic"><span class="toc_ref">2.1</span> <span class="toc_entry">\(\mathfrak {sl}_2\)-triples and primitive vectors</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#sec:sl2-classification"><span class="toc_ref">2.2</span> <span class="toc_entry">Classification of irreducible \(\mathfrak {sl}_2\)-modules</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#sec:sl2-commuting"><span class="toc_ref">2.3</span> <span class="toc_entry">Commuting \(\mathfrak {sl}_2\)-actions and tensor products</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#sec:sl2-cg"><span class="toc_ref">2.4</span> <span class="toc_entry">Clebsch–Gordan decomposition</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0004.html"><span class="toc_ref">3</span> <span class="toc_entry">The Casimir element</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0004.html#sec:cas-basic"><span class="toc_ref">3.1</span> <span class="toc_entry">Construction</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#sec:cas-centrality"><span class="toc_ref">3.2</span> <span class="toc_entry">Centrality and the scalar action</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class=" active current">
+  <a href="sect0005.html"><span class="toc_ref">4</span> <span class="toc_entry">Angular momentum</span></a>
+  <span class="expand-toc">▼</span>
+  <ul class="sub-toc-1 active">
+     <li class="">
+  <a href="sect0005.html#sec:am-basic"><span class="toc_ref">4.1</span> <span class="toc_entry">The algebraic representation</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#sec:am-classification"><span class="toc_ref">4.2</span> <span class="toc_entry">Spin classification</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0006.html"><span class="toc_ref">5</span> <span class="toc_entry">The hydrogen atom</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0006.html#sec:hyd-basic"><span class="toc_ref">5.1</span> <span class="toc_entry">The Runge–Lenz vector</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#sec:hyd-symmetry"><span class="toc_ref">5.2</span> <span class="toc_entry">The hidden \(\mathfrak {so}_4\) symmetry</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#sec:hyd-spectrum"><span class="toc_ref">5.3</span> <span class="toc_entry">The energy spectrum</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li ><a href="dep_graph_document.html">Dependency graph</a></li>
+</ul>
+</nav>
+
+<div class="content">
+<div class="content-wrapper">
+
+
+<div class="main-text">
+<h1 id="a0000000006">4 Angular momentum</h1>
+<h1 id="sec:am-basic">4.1 The algebraic representation</h1>
+
+<div class="definition_thmwrapper theorem-style-definition" id="def:am-representation">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">45</span>
+    <span class="definition_thmtitle">Angular momentum representation</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#def:am-representation">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#def:rep-explicit">Definition 7</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.AngularMomentumRepresentation" class="lean_decl">QuantumRepresentationTheory.AngularMomentumRepresentation</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>    An algebraic angular momentum representation is an explicit representation \(\rho \) (Definition&#160;<a href="sect0002.html#def:rep-explicit">7</a>) of the Lie algebra \(\mathfrak {so}_3 \cong \mathfrak {sl}_2\) on a state space \(V\), presented via self-adjoint operators \(J_x, J_y, J_z\) satisfying \([J_x,J_y] = iJ_z\) and cyclic permutations. </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="def:am-ladder">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">46</span>
+    <span class="definition_thmtitle">Ladder operators</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#def:am-ladder">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0005.html#def:am-representation">Definition 45</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.AngularMomentumRepresentation.Jp" class="lean_decl">QuantumRepresentationTheory.AngularMomentumRepresentation.Jp</a></li>
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.AngularMomentumRepresentation.Jm" class="lean_decl">QuantumRepresentationTheory.AngularMomentumRepresentation.Jm</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>    \(J_\pm := J_x \pm i J_y\). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:am-commutators">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">47</span>
+    <span class="theorem_thmtitle">Commutation relations for the ladder operators</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#thm:am-commutators">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0005.html#def:am-ladder">Definition 46</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.AngularMomentumRepresentation.comm_z_p" class="lean_decl">QuantumRepresentationTheory.AngularMomentumRepresentation.comm_z_p</a></li>
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.AngularMomentumRepresentation.comm_z_m" class="lean_decl">QuantumRepresentationTheory.AngularMomentumRepresentation.comm_z_m</a></li>
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.AngularMomentumRepresentation.comm_p_m" class="lean_decl">QuantumRepresentationTheory.AngularMomentumRepresentation.comm_p_m</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>    \([J_z, J_\pm ] = \pm J_\pm \) and \([J_+, J_-] = 2J_z\). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:am-is-sl2-triple">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">48</span>
+    <span class="theorem_thmtitle">Angular momentum generates an \(\mathfrak {sl}_2\)-triple</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#thm:am-is-sl2-triple">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0005.html#thm:am-commutators">Theorem 47</a></li>
+          
+          <li><a href="sect0003.html#def:sl2-triple">Definition 18</a></li>
+          
+          <li><a href="sect0002.html#def:rep-bridge">Remark 13</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.AngularMomentumRepresentation.isSl2Triple" class="lean_decl">QuantumRepresentationTheory.AngularMomentumRepresentation.isSl2Triple</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>    \((J_z, J_+, J_-)\) is an \(\mathfrak {sl}_2\)-triple in the sense of Definition&#160;<a href="sect0003.html#def:sl2-triple">18</a>, via the bridge construction of Remark&#160;<a href="sect0002.html#def:rep-bridge">13</a> turning \(\rho \) into local Lie-module instances. </p>
+
+  </div>
+</div>
+<h1 id="sec:am-classification">4.2 Spin classification</h1>
+
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:am-irreducibility-transfer">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">49</span>
+    <span class="theorem_thmtitle">Irreducibility transfers along the bridge</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#thm:am-irreducibility-transfer">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#def:rep-irreducible">Definition 9</a></li>
+          
+          <li><a href="sect0005.html#thm:am-is-sl2-triple">Theorem 48</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.AngularMomentumRepresentation.isIrreducible_iff" class="lean_decl">QuantumRepresentationTheory.AngularMomentumRepresentation.isIrreducible_iff</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>    \(\rho \) is irreducible as an explicit representation (Definition&#160;<a href="sect0002.html#def:rep-irreducible">9</a>) iff the induced \(\mathfrak {sl}_2\)-module structure of Theorem&#160;<a href="sect0005.html#thm:am-is-sl2-triple">48</a> is irreducible. </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:am-spin-classification">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">50</span>
+    <span class="theorem_thmtitle">Spin classification</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#thm:am-spin-classification">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0005.html#thm:am-irreducibility-transfer">Theorem 49</a></li>
+          
+          <li><a href="sect0003.html#thm:sl2-classification">Theorem 30</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.AngularMomentumRepresentation.spin_classification" class="lean_decl">QuantumRepresentationTheory.AngularMomentumRepresentation.spin_classification</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>    Every finite-dimensional irreducible angular momentum representation is isomorphic to \(V(2j)\) for a unique half-integer spin \(j \in \tfrac 12\mathbb {N}\), of dimension \(2j+1\). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:am-j2-casimir">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">51</span>
+    <span class="theorem_thmtitle">\(J^2\) is the Casimir element</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#thm:am-j2-casimir">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0004.html#def:cas-casimir">Definition 39</a></li>
+          
+          <li><a href="sect0005.html#thm:am-is-sl2-triple">Theorem 48</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.AngularMomentumRepresentation.Jsq_eq_smul" class="lean_decl">QuantumRepresentationTheory.AngularMomentumRepresentation.Jsq_eq_smul</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>    \(J^2 := J_x^2+J_y^2+J_z^2\) agrees, up to the normalization of Definition&#160;<a href="sect0004.html#def:cas-basis-dependent">37</a> for \(\mathfrak {sl}_2\), with the Casimir operator \(C_\rho \); on the spin-\(j\) representation it acts as \(j(j+1)\). </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="def:am-magnetic-basis">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">52</span>
+    <span class="definition_thmtitle">Magnetic-weight basis</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#def:am-magnetic-basis">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0003.html#thm:sl2-basis-theorem">Theorem 29</a></li>
+          
+          <li><a href="sect0005.html#thm:am-spin-classification">Theorem 50</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.AngularMomentumRepresentation.magneticBasisVec" class="lean_decl">QuantumRepresentationTheory.AngularMomentumRepresentation.magneticBasisVec</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>    The basis \(\lvert j,m \rangle \) for \(m = -j,\dots ,j\) of the spin-\(j\) representation produced by Theorem&#160;<a href="sect0003.html#thm:sl2-basis-theorem">29</a>, reindexed by the magnetic quantum number \(m = j - k\). </p>
+
+  </div>
+</div>
+
+</div> <!--main-text -->
+</div> <!-- content-wrapper -->
+</div> <!-- content -->
+</div> <!-- wrapper -->
+
+<nav class="prev_up_next">
+  <svg  id="showmore-minus" class="icon icon-eye-minus showmore"><use xlink:href="symbol-defs.svg#icon-eye-minus"></use></svg>
+
+  <svg  id="showmore-plus" class="icon icon-eye-plus showmore"><use xlink:href="symbol-defs.svg#icon-eye-plus"></use></svg>
+
+  <a href="sect0004.html" title="The Casimir element"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
+</a>
+  <a href="index.html" title="QuantumRepresentationTheory"><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
+</a>
+  <a href="sect0006.html" title="The hydrogen atom"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
+</a>
+</nav>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/plastex.js"></script>
+<script type="text/javascript" src="js/svgxuse.js"></script>
+<script type="text/javascript" src="js/js.cookie.min.js"></script>
+<script type="text/javascript" src="js/showmore.js"></script>
+</body>
+</html>
