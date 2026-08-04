@@ -955,10 +955,10 @@ Physlib in the Overview).
 
 \chapter*{Caveats}
 
-This chapter is not part of the theorem dependency graph above; it collects
-things found while auditing this blueprint against the current state of
-Mathlib, before making it public. Some are corrections already applied
-above; others are open opportunities for whoever picks this up next.
+This chapter is not part of the theorem dependency graph above. It collects
+things worth knowing about the current state of Mathlib relevant to this
+blueprint: gaps this project fills, gaps it doesn't, and available
+infrastructure it doesn't yet use.
 
 \paragraph{The Casimir element does not exist in Mathlib.} Checked with a
 case-insensitive search of the entire Mathlib tree for ``Casimir'': zero
@@ -1028,25 +1028,6 @@ $\sltwo$ or semisimple Lie algebra representations (searching for
 ``ClebschGordan'', and for weight-space/tensor-product combinations in
 \texttt{Mathlib.Algebra.Lie.Weights}): nothing found. Everything in
 \S\ref{sec:sl2-commuting}--\S\ref{sec:sl2-cg} is new.
-
-\paragraph{The Killing form claim was wrong in an earlier draft, now fixed.}
-An earlier version of Definition~\ref{def:cas-invariant-form}'s parenthetical
-about the Killing form asserted a fact about Mathlib without checking it
-closely enough, then a hasty correction asserted the opposite, also without
-checking closely enough. The actual state, now reflected there: Mathlib has
-both Cartan criteria in \texttt{Mathlib.Algebra.Lie.CartanCriterion}, and
-\texttt{LieAlgebra.hasTrivialRadical\_iff\_isKilling} does give the full
-equivalence between trivial radical (which coincides with semisimplicity in
-characteristic zero) and a nondegenerate Killing form. Flagged here as a
-reminder that citations in this blueprint should be checked against the
-actual Mathlib source, not assumed from familiarity with the mathematics.
-
-\paragraph{``Self-adjoint'' was removed from Definition~\ref{def:am-representation}.}
-An earlier draft described the angular momentum operators as self-adjoint,
-which does not match the actual Lean definition (deliberately: physical
-self-adjointness is exactly the kind of fact that belongs to a future
-Physlib bridge, not to this algebraic model). The blueprint text is now
-corrected to match the Lean code.
 
 \paragraph{The explicit-representation bridge (\S\ref{sec:rep-basic},
 Remark~\ref{def:rep-bridge}) remains unbuilt.} This is the one gap flagged
