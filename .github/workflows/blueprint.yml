@@ -52,3 +52,7 @@ jobs:
         with:
           blueprint: true
           homepage: home_page
+          # Skip doc-gen4 API docs over the whole Mathlib closure: not needed
+          # just to publish the blueprint, and it's what was blowing the build
+          # up to ~17.5k jobs.
+          api-docs: false
