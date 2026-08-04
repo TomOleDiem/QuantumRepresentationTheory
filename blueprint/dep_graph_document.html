@@ -78,7 +78,7 @@
     <div class="thm_thmcontent"><p>    \(J_\pm := J_x \pm i J_y\). </p>
 </div>
 
-    <a class="latex_link" href="sect0005.html#def:am-ladder">LaTeX</a>
+    <a class="latex_link" href="ch-am.html#def:am-ladder">LaTeX</a>
     
     
   <div class="tooltip">
@@ -114,10 +114,10 @@
       Definition
       </span>
       <span class="definition_thmlabel">52</span><span class="definition_thmtitle">Magnetic-weight basis</span></div>
-    <div class="thm_thmcontent"><p>    The basis \(\lvert j,m \rangle \) for \(m = -j,\dots ,j\) of the spin-\(j\) representation produced by Theorem&#160;<a href="sect0003.html#thm:sl2-basis-theorem">29</a>, reindexed by the magnetic quantum number \(m = j - k\). </p>
+    <div class="thm_thmcontent"><p>    The basis \(\lvert j,m \rangle \) for \(m = -j,\dots ,j\) of the spin-\(j\) representation produced by Theorem&#160;<a href="ch-sl2.html#thm:sl2-basis-theorem">29</a>, reindexed by the magnetic quantum number \(m = j - k\). </p>
 </div>
 
-    <a class="latex_link" href="sect0005.html#def:am-magnetic-basis">LaTeX</a>
+    <a class="latex_link" href="ch-am.html#def:am-magnetic-basis">LaTeX</a>
     
     
   <a class="lean_link lean_decl" href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.AngularMomentumRepresentation.magneticBasisVec">Lean</a>
@@ -147,7 +147,7 @@
     <div class="thm_thmcontent"><p>    An algebraic angular momentum representation is an explicit representation \(\rho \) (Definition&#160;<a href="sect0002.html#def:rep-explicit">7</a>) of the Lie algebra \(\mathfrak {so}_3 \cong \mathfrak {sl}_2\) on a state space \(V\), presented via self-adjoint operators \(J_x, J_y, J_z\) satisfying \([J_x,J_y] = iJ_z\) and cyclic permutations. </p>
 </div>
 
-    <a class="latex_link" href="sect0005.html#def:am-representation">LaTeX</a>
+    <a class="latex_link" href="ch-am.html#def:am-representation">LaTeX</a>
     
     
   <a class="lean_link lean_decl" href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.AngularMomentumRepresentation">Lean</a>
@@ -175,12 +175,12 @@
       </span>
       <span class="definition_thmlabel">37</span><span class="definition_thmtitle">Basis-dependent Casimir element</span></div>
     <div class="thm_thmcontent"><p>    For a representation \(\rho \) of \(L\) on \(V\) and a basis \(x_1,\dots ,x_d\) of \(L\) with \(\Phi \)-dual basis \(x^1,\dots ,x^d\), the Casimir operator is </p>
-<div class="displaymath" id="a0000000011">
+<div class="displaymath" id="a0000000008">
   \[  C_\rho \; =\;  \sum _{i=1}^d \rho (x_i)\, \rho (x^i) \; \in \;  \operatorname {End}_K(V).  \]
 </div>
 </div>
 
-    <a class="latex_link" href="sect0004.html#def:cas-basis-dependent">LaTeX</a>
+    <a class="latex_link" href="ch-casimir.html#def:cas-basis-dependent">LaTeX</a>
     
     
   <a class="lean_link lean_decl" href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.casimirBasisDependent">Lean</a>
@@ -207,10 +207,10 @@
       Definition
       </span>
       <span class="definition_thmlabel">39</span><span class="definition_thmtitle">The Casimir operator</span></div>
-    <div class="thm_thmcontent"><p>    Write \(C_\rho \in \operatorname {End}_K(V)\) for the common value of Definition&#160;<a href="sect0004.html#def:cas-basis-dependent">37</a>, independent of the choice of basis by Theorem&#160;<a href="sect0004.html#thm:cas-change-of-basis">38</a>. </p>
+    <div class="thm_thmcontent"><p>    Write \(C_\rho \in \operatorname {End}_K(V)\) for the common value of Definition&#160;<a href="ch-casimir.html#def:cas-basis-dependent">37</a>, independent of the choice of basis by Theorem&#160;<a href="ch-casimir.html#thm:cas-change-of-basis">38</a>. </p>
 </div>
 
-    <a class="latex_link" href="sect0004.html#def:cas-casimir">LaTeX</a>
+    <a class="latex_link" href="ch-casimir.html#def:cas-casimir">LaTeX</a>
     
     
   <a class="lean_link lean_decl" href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.casimir">Lean</a>
@@ -240,7 +240,7 @@
     <div class="thm_thmcontent"><p>    Given a basis \(x_1, \dots , x_d\) of \(L\) and a nondegenerate form \(\Phi \), the dual basis \(x^1, \dots , x^d\) is the unique basis with \(\Phi (x_i, x^j) = \delta _i^j\). (Standard linear-algebra fact about nondegenerate bilinear forms, available generically in Mathlib.) </p>
 </div>
 
-    <a class="latex_link" href="sect0004.html#def:cas-dual-basis">LaTeX</a>
+    <a class="latex_link" href="ch-casimir.html#def:cas-dual-basis">LaTeX</a>
     
     
   <a class="lean_link lean_decl" href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/LinearMap.BilinForm.dualBasis">Lean</a>
@@ -270,7 +270,7 @@
     <div class="thm_thmcontent"><p>    A bilinear form \(\Phi \) on \(L\) is Lie-invariant if \(\Phi ([x,y],z) + \Phi (y,[x,z]) = 0\) for all \(x,y,z \in L\); it is nondegenerate if its radical is trivial. (For \(L\) semisimple over \(\mathbb {C}\), the Killing form is such a form.) </p>
 </div>
 
-    <a class="latex_link" href="sect0004.html#def:cas-invariant-form">LaTeX</a>
+    <a class="latex_link" href="ch-casimir.html#def:cas-invariant-form">LaTeX</a>
     
     
   <div class="tooltip">
@@ -309,7 +309,7 @@
     <div class="thm_thmcontent"><p>    The universal enveloping algebra \(U(L)\), together with \(\iota \colon L \to U(L)\), has the universal property that every representation \(\rho \colon L \to \operatorname {End}_K(V)\) extends uniquely to an associative-algebra homomorphism \(\tilde\rho \colon U(L) \to \operatorname {End}_K(V)\) with \(\tilde\rho \circ \iota = \rho \). </p>
 </div>
 
-    <a class="latex_link" href="sect0004.html#def:cas-uea-rep">LaTeX</a>
+    <a class="latex_link" href="ch-casimir.html#def:cas-uea-rep">LaTeX</a>
     
     
   <div class="tooltip">
@@ -349,10 +349,10 @@
       Definition
       </span>
       <span class="definition_thmlabel">55</span><span class="definition_thmtitle">Bound-state representation</span></div>
-    <div class="thm_thmcontent"><p>    The explicit representation of the hydrogen Hamiltonian’s dynamical symmetry algebra on a fixed negative-energy eigenspace \(V_E\) of the Hamiltonian \(H\), carrying the angular momentum representation \((J_x,J_y,J_z)\) of Definition&#160;<a href="sect0005.html#def:am-representation">45</a> together with the (unnormalized) Runge–Lenz operator \(\vec M\). </p>
+    <div class="thm_thmcontent"><p>    The explicit representation of the hydrogen Hamiltonian’s dynamical symmetry algebra on a fixed negative-energy eigenspace \(V_E\) of the Hamiltonian \(H\), carrying the angular momentum representation \((J_x,J_y,J_z)\) of Definition&#160;<a href="ch-am.html#def:am-representation">45</a> together with the (unnormalized) Runge–Lenz operator \(\vec M\). </p>
 </div>
 
-    <a class="latex_link" href="sect0006.html#def:hyd-bound-state">LaTeX</a>
+    <a class="latex_link" href="ch-hydrogen.html#def:hyd-bound-state">LaTeX</a>
     
     
   <a class="lean_link lean_decl" href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.BoundStateRepresentation">Lean</a>
@@ -382,7 +382,7 @@
     <div class="thm_thmcontent"><p>   \(\varepsilon _{ijk}\), the totally antisymmetric symbol on \(\{ 1,2,3\} \) with \(\varepsilon _{123}=1\), used to write the cross product and the commutation relations below. </p>
 </div>
 
-    <a class="latex_link" href="sect0006.html#def:hyd-levi-civita">LaTeX</a>
+    <a class="latex_link" href="ch-hydrogen.html#def:hyd-levi-civita">LaTeX</a>
     
     
   <a class="lean_link lean_decl" href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.leviCivita">Lean</a>
@@ -409,10 +409,10 @@
       Definition
       </span>
       <span class="definition_thmlabel">57</span><span class="definition_thmtitle">Rescaled Runge–Lenz vector</span></div>
-    <div class="thm_thmcontent"><p>    \(\vec A := \vec M/\sqrt{-2mE}\) on \(V_E\), chosen so that \(\vec J\) and \(\vec A\) satisfy the commutation relations of two copies of \(\mathfrak {so}_3\) (Theorem&#160;<a href="sect0006.html#thm:hyd-two-factors-commute">59</a>). </p>
+    <div class="thm_thmcontent"><p>    \(\vec A := \vec M/\sqrt{-2mE}\) on \(V_E\), chosen so that \(\vec J\) and \(\vec A\) satisfy the commutation relations of two copies of \(\mathfrak {so}_3\) (Theorem&#160;<a href="ch-hydrogen.html#thm:hyd-two-factors-commute">59</a>). </p>
 </div>
 
-    <a class="latex_link" href="sect0006.html#def:hyd-rescaled-rl">LaTeX</a>
+    <a class="latex_link" href="ch-hydrogen.html#def:hyd-rescaled-rl">LaTeX</a>
     
     
   <div class="tooltip">
@@ -453,7 +453,7 @@
     <div class="thm_thmcontent"><p>    On \(V_E\), set \(\vec I := \tfrac 12(\vec J + \vec A)\) and \(\vec K := \tfrac 12(\vec J - \vec A)\). </p>
 </div>
 
-    <a class="latex_link" href="sect0006.html#def:hyd-two-triples">LaTeX</a>
+    <a class="latex_link" href="ch-hydrogen.html#def:hyd-two-triples">LaTeX</a>
     
     
   <div class="tooltip">
@@ -808,7 +808,7 @@
     <div class="thm_thmcontent"><p>    Given an \(\mathfrak {sl}_2\)-triple \(t = (h,e,f)\) acting on a module \(M\), a nonzero vector \(m \in M\) is primitive of weight \(\mu \in K\) for \(t\) if \(h \cdot m = \mu m\) and \(e \cdot m = 0\). </p>
 </div>
 
-    <a class="latex_link" href="sect0003.html#def:sl2-primitive">LaTeX</a>
+    <a class="latex_link" href="ch-sl2.html#def:sl2-primitive">LaTeX</a>
     
     
   <a class="lean_link lean_decl" href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/IsSl2Triple.HasPrimitiveVectorWith">Lean</a>
@@ -838,7 +838,7 @@
     <div class="thm_thmcontent"><p>   For \(n \in \mathbb {N}\), the standard module \(V(n)\) is the \((n+1)\)-dimensional \(\mathfrak {sl}_2\)-module with basis \(v_0, \dots , v_n\) on which \(h \cdot v_k = (n-2k) v_k\), \(f \cdot v_k = v_{k+1}\) (and \(v_{n+1} := 0\)), and \(e \cdot v_k = k(n-k+1) v_{k-1}\). This is the explicit model produced by the classification theorem below. </p>
 </div>
 
-    <a class="latex_link" href="sect0003.html#def:sl2-standard-module">LaTeX</a>
+    <a class="latex_link" href="ch-sl2.html#def:sl2-standard-module">LaTeX</a>
     
     
   <div class="tooltip">
@@ -881,7 +881,7 @@
     <div class="thm_thmcontent"><p>    A triple \((h,e,f)\) of elements of \(L\) is an \(\mathfrak {sl}_2\)-triple if \(h \neq 0\), \([e,f] = h\), \([h,e] = 2e\), and \([h,f] = -2f\); equivalently, the subalgebra they generate is a copy of \(\mathfrak {sl}_2\). </p>
 </div>
 
-    <a class="latex_link" href="sect0003.html#def:sl2-triple">LaTeX</a>
+    <a class="latex_link" href="ch-sl2.html#def:sl2-triple">LaTeX</a>
     
     
   <a class="lean_link lean_decl" href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/IsSl2Triple">Lean</a>
@@ -911,7 +911,7 @@
     <div class="thm_thmcontent"><p>    \([J_z, J_\pm ] = \pm J_\pm \) and \([J_+, J_-] = 2J_z\). </p>
 </div>
 
-    <a class="latex_link" href="sect0005.html#thm:am-commutators">LaTeX</a>
+    <a class="latex_link" href="ch-am.html#thm:am-commutators">LaTeX</a>
     
     
   <div class="tooltip">
@@ -949,10 +949,10 @@
       Theorem
       </span>
       <span class="theorem_thmlabel">49</span><span class="theorem_thmtitle">Irreducibility transfers along the bridge</span></div>
-    <div class="thm_thmcontent"><p>    \(\rho \) is irreducible as an explicit representation (Definition&#160;<a href="sect0002.html#def:rep-irreducible">9</a>) iff the induced \(\mathfrak {sl}_2\)-module structure of Theorem&#160;<a href="sect0005.html#thm:am-is-sl2-triple">48</a> is irreducible. </p>
+    <div class="thm_thmcontent"><p>    \(\rho \) is irreducible as an explicit representation (Definition&#160;<a href="sect0002.html#def:rep-irreducible">9</a>) iff the induced \(\mathfrak {sl}_2\)-module structure of Theorem&#160;<a href="ch-am.html#thm:am-is-sl2-triple">48</a> is irreducible. </p>
 </div>
 
-    <a class="latex_link" href="sect0005.html#thm:am-irreducibility-transfer">LaTeX</a>
+    <a class="latex_link" href="ch-am.html#thm:am-irreducibility-transfer">LaTeX</a>
     
     
   <a class="lean_link lean_decl" href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.AngularMomentumRepresentation.isIrreducible_iff">Lean</a>
@@ -979,10 +979,10 @@
       Theorem
       </span>
       <span class="theorem_thmlabel">48</span><span class="theorem_thmtitle">Angular momentum generates an \(\mathfrak {sl}_2\)-triple</span></div>
-    <div class="thm_thmcontent"><p>    \((J_z, J_+, J_-)\) is an \(\mathfrak {sl}_2\)-triple in the sense of Definition&#160;<a href="sect0003.html#def:sl2-triple">18</a>, via the bridge construction of Remark&#160;<a href="sect0002.html#def:rep-bridge">13</a> turning \(\rho \) into local Lie-module instances. </p>
+    <div class="thm_thmcontent"><p>    \((J_z, J_+, J_-)\) is an \(\mathfrak {sl}_2\)-triple in the sense of Definition&#160;<a href="ch-sl2.html#def:sl2-triple">18</a>, via the bridge construction of Remark&#160;<a href="sect0002.html#def:rep-bridge">13</a> turning \(\rho \) into local Lie-module instances. </p>
 </div>
 
-    <a class="latex_link" href="sect0005.html#thm:am-is-sl2-triple">LaTeX</a>
+    <a class="latex_link" href="ch-am.html#thm:am-is-sl2-triple">LaTeX</a>
     
     
   <a class="lean_link lean_decl" href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.AngularMomentumRepresentation.isSl2Triple">Lean</a>
@@ -1009,10 +1009,10 @@
       Theorem
       </span>
       <span class="theorem_thmlabel">51</span><span class="theorem_thmtitle">\(J^2\) is the Casimir element</span></div>
-    <div class="thm_thmcontent"><p>    \(J^2 := J_x^2+J_y^2+J_z^2\) agrees, up to the normalization of Definition&#160;<a href="sect0004.html#def:cas-basis-dependent">37</a> for \(\mathfrak {sl}_2\), with the Casimir operator \(C_\rho \); on the spin-\(j\) representation it acts as \(j(j+1)\). </p>
+    <div class="thm_thmcontent"><p>    \(J^2 := J_x^2+J_y^2+J_z^2\) agrees, up to the normalization of Definition&#160;<a href="ch-casimir.html#def:cas-basis-dependent">37</a> for \(\mathfrak {sl}_2\), with the Casimir operator \(C_\rho \); on the spin-\(j\) representation it acts as \(j(j+1)\). </p>
 </div>
 
-    <a class="latex_link" href="sect0005.html#thm:am-j2-casimir">LaTeX</a>
+    <a class="latex_link" href="ch-am.html#thm:am-j2-casimir">LaTeX</a>
     
     
   <a class="lean_link lean_decl" href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.AngularMomentumRepresentation.Jsq_eq_smul">Lean</a>
@@ -1042,7 +1042,7 @@
     <div class="thm_thmcontent"><p>    Every finite-dimensional irreducible angular momentum representation is isomorphic to \(V(2j)\) for a unique half-integer spin \(j \in \tfrac 12\mathbb {N}\), of dimension \(2j+1\). </p>
 </div>
 
-    <a class="latex_link" href="sect0005.html#thm:am-spin-classification">LaTeX</a>
+    <a class="latex_link" href="ch-am.html#thm:am-spin-classification">LaTeX</a>
     
     
   <a class="lean_link lean_decl" href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.AngularMomentumRepresentation.spin_classification">Lean</a>
@@ -1069,10 +1069,10 @@
       Theorem
       </span>
       <span class="theorem_thmlabel">42</span><span class="theorem_thmtitle">Centrality of the Casimir element</span></div>
-    <div class="thm_thmcontent"><p>     The element \(C_\rho \), viewed inside \(U(L)\) via \(\iota \) and Definition&#160;<a href="sect0004.html#def:cas-basis-dependent">37</a> applied to the adjoint representation, lies in the center <span class="ttfamily">Subalgebra.center K (UEA K L)</span>. (Note: the correct ambient object is <span class="ttfamily">Subalgebra.center</span>, not <span class="ttfamily">Subring.center</span>, since we need \(K\)-linearity of the centralizing condition.) </p>
+    <div class="thm_thmcontent"><p>     The element \(C_\rho \), viewed inside \(U(L)\) via \(\iota \) and Definition&#160;<a href="ch-casimir.html#def:cas-basis-dependent">37</a> applied to the adjoint representation, lies in the center <span class="ttfamily">Subalgebra.center K (UEA K L)</span>. (Note: the correct ambient object is <span class="ttfamily">Subalgebra.center</span>, not <span class="ttfamily">Subring.center</span>, since we need \(K\)-linearity of the centralizing condition.) </p>
 </div>
 
-    <a class="latex_link" href="sect0004.html#thm:cas-central">LaTeX</a>
+    <a class="latex_link" href="ch-casimir.html#thm:cas-central">LaTeX</a>
     
     
   <a class="lean_link lean_decl" href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/Subalgebra.center">Lean</a>
@@ -1099,10 +1099,10 @@
       Theorem
       </span>
       <span class="theorem_thmlabel">43</span><span class="theorem_thmtitle">A central element gives an intertwiner</span></div>
-    <div class="thm_thmcontent"><p>    If \(z \in U(L)\) is central and \(\tilde\rho \) is the extension of a representation \(\rho \) on \(V\) (Definition&#160;<a href="sect0004.html#def:cas-uea-rep">41</a>), then \(\tilde\rho (z) \colon V \to V\), viewed as a self-map of \(V\), is a <span class="ttfamily">LieModuleHom</span> (Definition&#160;<a href="sect0002.html#def:rep-hom">4</a>): it commutes with \(\rho (x)\) for every \(x \in L\) since \(z\) commutes with \(\iota (x)\) in \(U(L)\). </p>
+    <div class="thm_thmcontent"><p>    If \(z \in U(L)\) is central and \(\tilde\rho \) is the extension of a representation \(\rho \) on \(V\) (Definition&#160;<a href="ch-casimir.html#def:cas-uea-rep">41</a>), then \(\tilde\rho (z) \colon V \to V\), viewed as a self-map of \(V\), is a <span class="ttfamily">LieModuleHom</span> (Definition&#160;<a href="sect0002.html#def:rep-hom">4</a>): it commutes with \(\rho (x)\) for every \(x \in L\) since \(z\) commutes with \(\iota (x)\) in \(U(L)\). </p>
 </div>
 
-    <a class="latex_link" href="sect0004.html#thm:cas-central-intertwines">LaTeX</a>
+    <a class="latex_link" href="ch-casimir.html#thm:cas-central-intertwines">LaTeX</a>
     
     
   <a class="lean_link lean_decl" href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.central_commutes_toEnd">Lean</a>
@@ -1129,10 +1129,10 @@
       Theorem
       </span>
       <span class="theorem_thmlabel">38</span><span class="theorem_thmtitle">Change-of-basis invariance</span></div>
-    <div class="thm_thmcontent"><p>    \(C_\rho \), as defined in Definition&#160;<a href="sect0004.html#def:cas-basis-dependent">37</a>, does not depend on the choice of basis \(x_1,\dots ,x_d\) of \(L\). </p>
+    <div class="thm_thmcontent"><p>    \(C_\rho \), as defined in Definition&#160;<a href="ch-casimir.html#def:cas-basis-dependent">37</a>, does not depend on the choice of basis \(x_1,\dots ,x_d\) of \(L\). </p>
 </div>
 
-    <a class="latex_link" href="sect0004.html#thm:cas-change-of-basis">LaTeX</a>
+    <a class="latex_link" href="ch-casimir.html#thm:cas-change-of-basis">LaTeX</a>
     
     
   <a class="lean_link lean_decl" href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.casimirBasisDependent_basis_indep">Lean</a>
@@ -1162,7 +1162,7 @@
     <div class="thm_thmcontent"><p>    For every \(y \in L\), \([\rho (y), C_\rho ] = 0\) in \(\operatorname {End}_K(V)\). </p>
 </div>
 
-    <a class="latex_link" href="sect0004.html#thm:cas-commutes-generators">LaTeX</a>
+    <a class="latex_link" href="ch-casimir.html#thm:cas-commutes-generators">LaTeX</a>
     
     
   <a class="lean_link lean_decl" href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.casimir_commutes">Lean</a>
@@ -1192,7 +1192,7 @@
     <div class="thm_thmcontent"><p>    If \(\rho \) is a finite-dimensional irreducible representation of \(L\) over an algebraically closed field, \(C_\rho \) acts on \(V\) as multiplication by a scalar \(c(\rho ) \in K\). </p>
 </div>
 
-    <a class="latex_link" href="sect0004.html#thm:cas-scalar">LaTeX</a>
+    <a class="latex_link" href="ch-casimir.html#thm:cas-scalar">LaTeX</a>
     
     
   <a class="lean_link lean_decl" href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.casimir_scalar">Lean</a>
@@ -1219,10 +1219,10 @@
       Theorem
       </span>
       <span class="theorem_thmlabel">62</span><span class="theorem_thmtitle">Classification of the bound-state representation</span></div>
-    <div class="thm_thmcontent"><p>    Each irreducible summand of \(V_E\) under the commuting pair \((\vec I,\vec K)\) is isomorphic to \(V(2i)\otimes V(2k)\), by Theorem&#160;<a href="sect0003.html#thm:sl2-commuting-classification">33</a> applied to the two commuting \(\mathfrak {sl}_2\)-triples of Theorem&#160;<a href="sect0006.html#thm:hyd-so4-decomposition">60</a>. </p>
+    <div class="thm_thmcontent"><p>    Each irreducible summand of \(V_E\) under the commuting pair \((\vec I,\vec K)\) is isomorphic to \(V(2i)\otimes V(2k)\), by Theorem&#160;<a href="ch-sl2.html#thm:sl2-commuting-classification">33</a> applied to the two commuting \(\mathfrak {sl}_2\)-triples of Theorem&#160;<a href="ch-hydrogen.html#thm:hyd-so4-decomposition">60</a>. </p>
 </div>
 
-    <a class="latex_link" href="sect0006.html#thm:hyd-classification">LaTeX</a>
+    <a class="latex_link" href="ch-hydrogen.html#thm:hyd-classification">LaTeX</a>
     
     
   <a class="lean_link lean_decl" href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.BoundStateRepresentation.classification_finrank">Lean</a>
@@ -1252,7 +1252,7 @@
     <div class="thm_thmcontent"><p>    Each component \((A \times B)_i = \sum _{jk} \varepsilon _{ijk} A_j B_k\) is bilinear in \(A, B\); used repeatedly to expand commutators involving the Runge–Lenz vector. </p>
 </div>
 
-    <a class="latex_link" href="sect0006.html#thm:hyd-cross-linearity">LaTeX</a>
+    <a class="latex_link" href="ch-hydrogen.html#thm:hyd-cross-linearity">LaTeX</a>
     
     
   <div class="tooltip">
@@ -1291,7 +1291,7 @@
     <div class="thm_thmcontent"><p>    With \(i=k\), the summand \(V(2i)\otimes V(2i)\) has dimension \((2i+1)^2\); the quantity \(n := 2i+1\) is a positive integer. </p>
 </div>
 
-    <a class="latex_link" href="sect0006.html#thm:hyd-dimension">LaTeX</a>
+    <a class="latex_link" href="ch-hydrogen.html#thm:hyd-dimension">LaTeX</a>
     
     
   <a class="lean_link lean_decl" href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.BoundStateRepresentation.dimension_eq_sq">Lean</a>
@@ -1321,7 +1321,7 @@
     <div class="thm_thmcontent"><p>    The bound-state energies of the hydrogen atom are \(E_n = -me^4/(2\hbar ^2 n^2)\) for \(n \in \mathbb {Z}_{{\gt}0}\), and the eigenspace \(V_{E_n}\) has dimension \(n^2\). </p>
 </div>
 
-    <a class="latex_link" href="sect0006.html#thm:hyd-energy-degeneracy">LaTeX</a>
+    <a class="latex_link" href="ch-hydrogen.html#thm:hyd-energy-degeneracy">LaTeX</a>
     
     
   <a class="lean_link lean_decl" href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.BoundStateRepresentation.energy_degeneracy">Lean</a>
@@ -1351,7 +1351,7 @@
     <div class="thm_thmcontent"><p>    On any irreducible summand of \(V_E\) under the joint \((\vec I, \vec K)\) action, the Casimir eigenvalues of the \(\vec I\)-triple and the \(\vec K\)-triple coincide: \(i(i+1) = k(k+1)\), forcing \(i=k\). </p>
 </div>
 
-    <a class="latex_link" href="sect0006.html#thm:hyd-equal-casimirs">LaTeX</a>
+    <a class="latex_link" href="ch-hydrogen.html#thm:hyd-equal-casimirs">LaTeX</a>
     
     
   <a class="lean_link lean_decl" href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.BoundStateRepresentation.equal_casimirs">Lean</a>
@@ -1378,10 +1378,10 @@
       Theorem
       </span>
       <span class="theorem_thmlabel">63</span><span class="theorem_thmtitle">Equal Casimirs force equal highest weights</span></div>
-    <div class="thm_thmcontent"><p>    In the decomposition of Theorem&#160;<a href="sect0006.html#thm:hyd-classification">62</a>, the summand occurring in \(V_E\) has \(i = k\). </p>
+    <div class="thm_thmcontent"><p>    In the decomposition of Theorem&#160;<a href="ch-hydrogen.html#thm:hyd-classification">62</a>, the summand occurring in \(V_E\) has \(i = k\). </p>
 </div>
 
-    <a class="latex_link" href="sect0006.html#thm:hyd-equal-hw">LaTeX</a>
+    <a class="latex_link" href="ch-hydrogen.html#thm:hyd-equal-hw">LaTeX</a>
     
     
   <a class="lean_link lean_decl" href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.BoundStateRepresentation.dimension_eq_sq">Lean</a>
@@ -1408,13 +1408,13 @@
       Theorem
       </span>
       <span class="theorem_thmlabel">65</span><span class="theorem_thmtitle">Quadratic energy equation</span></div>
-    <div class="thm_thmcontent"><p>    Expressing the original Hamiltonian \(H\) in terms of \(\vec J^2 + \vec A^2\) and the shared Casimir eigenvalue \(i(i+1)\) from Theorem&#160;<a href="sect0006.html#thm:hyd-equal-hw">63</a> yields </p>
-<div class="displaymath" id="a0000000012">
+    <div class="thm_thmcontent"><p>    Expressing the original Hamiltonian \(H\) in terms of \(\vec J^2 + \vec A^2\) and the shared Casimir eigenvalue \(i(i+1)\) from Theorem&#160;<a href="ch-hydrogen.html#thm:hyd-equal-hw">63</a> yields </p>
+<div class="displaymath" id="a0000000009">
   \[  E = -\frac{me^4}{2\hbar ^2 n^2}, \qquad n = 2i+1 \in \{ 1,2,3,\dots \} .  \]
 </div>
 </div>
 
-    <a class="latex_link" href="sect0006.html#thm:hyd-quadratic-energy">LaTeX</a>
+    <a class="latex_link" href="ch-hydrogen.html#thm:hyd-quadratic-energy">LaTeX</a>
     
     
   <a class="lean_link lean_decl" href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.BoundStateRepresentation.quadratic_energy">Lean</a>
@@ -1444,7 +1444,7 @@
     <div class="thm_thmcontent"><p>    On \(V_E\) with \(E {\lt} 0\), the scalar \(-2E/m\) appearing in the normalization of \(\vec M\) is strictly positive, so \(\vec A := \vec M / \sqrt{-2mE}\) is well defined. </p>
 </div>
 
-    <a class="latex_link" href="sect0006.html#thm:hyd-rescaling-nonzero">LaTeX</a>
+    <a class="latex_link" href="ch-hydrogen.html#thm:hyd-rescaling-nonzero">LaTeX</a>
     
     
   <div class="tooltip">
@@ -1482,10 +1482,10 @@
       Theorem
       </span>
       <span class="theorem_thmlabel">60</span><span class="theorem_thmtitle">\(\mathfrak {so}_4\cong \mathfrak {so}_3\oplus \mathfrak {so}_3\) decomposition</span></div>
-    <div class="thm_thmcontent"><p>    \(\vec I\) and \(\vec K\) each generate an \(\mathfrak {sl}_2\)-triple in the sense of Theorem&#160;<a href="sect0005.html#thm:am-is-sl2-triple">48</a>, realizing the dynamical symmetry algebra of the bound states as \(\mathfrak {so}_3 \oplus \mathfrak {so}_3\). </p>
+    <div class="thm_thmcontent"><p>    \(\vec I\) and \(\vec K\) each generate an \(\mathfrak {sl}_2\)-triple in the sense of Theorem&#160;<a href="ch-am.html#thm:am-is-sl2-triple">48</a>, realizing the dynamical symmetry algebra of the bound states as \(\mathfrak {so}_3 \oplus \mathfrak {so}_3\). </p>
 </div>
 
-    <a class="latex_link" href="sect0006.html#thm:hyd-so4-decomposition">LaTeX</a>
+    <a class="latex_link" href="ch-hydrogen.html#thm:hyd-so4-decomposition">LaTeX</a>
     
     
   <div class="tooltip">
@@ -1524,7 +1524,7 @@
     <div class="thm_thmcontent"><p>    \([I_x,I_y]=iI_z\) (and cyclic permutations), likewise for \(\vec K\), and \([I_a, K_b] = 0\) for all \(a,b \in \{ x,y,z\} \). </p>
 </div>
 
-    <a class="latex_link" href="sect0006.html#thm:hyd-two-factors-commute">LaTeX</a>
+    <a class="latex_link" href="ch-hydrogen.html#thm:hyd-two-factors-commute">LaTeX</a>
     
     
   <div class="tooltip">
@@ -1762,7 +1762,7 @@
     <div class="thm_thmcontent"><p>    If \(M\) is a finite-dimensional irreducible \(\mathfrak {sl}_2\)-module with primitive vector \(m\) of weight \(n\), then \(m, fm, \dots , f^n m\) is a basis of \(M\); in particular \(\dim M = n+1\). </p>
 </div>
 
-    <a class="latex_link" href="sect0003.html#thm:sl2-basis-theorem">LaTeX</a>
+    <a class="latex_link" href="ch-sl2.html#thm:sl2-basis-theorem">LaTeX</a>
     
     
   <div class="tooltip">
@@ -1798,10 +1798,10 @@
       Theorem
       </span>
       <span class="theorem_thmlabel">30</span><span class="theorem_thmtitle">Classification of irreducible \(\mathfrak {sl}_2\)-modules</span></div>
-    <div class="thm_thmcontent"><p>    Every finite-dimensional irreducible \(\mathfrak {sl}_2\)-module over an algebraically closed field of characteristic zero is isomorphic, as an \(\mathfrak {sl}_2\)-module, to the standard module \(V(n)\) (Definition&#160;<a href="sect0003.html#def:sl2-standard-module">25</a>) for a unique \(n \in \mathbb {N}\). </p>
+    <div class="thm_thmcontent"><p>    Every finite-dimensional irreducible \(\mathfrak {sl}_2\)-module over an algebraically closed field of characteristic zero is isomorphic, as an \(\mathfrak {sl}_2\)-module, to the standard module \(V(n)\) (Definition&#160;<a href="ch-sl2.html#def:sl2-standard-module">25</a>) for a unique \(n \in \mathbb {N}\). </p>
 </div>
 
-    <a class="latex_link" href="sect0003.html#thm:sl2-classification">LaTeX</a>
+    <a class="latex_link" href="ch-sl2.html#thm:sl2-classification">LaTeX</a>
     
     
   <a class="lean_link lean_decl" href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.classification">Lean</a>
@@ -1828,13 +1828,13 @@
       Theorem
       </span>
       <span class="theorem_thmlabel">34</span><span class="theorem_thmtitle">Clebsch–Gordan decomposition</span></div>
-    <div class="thm_thmcontent"><p>    For \(m, n \in \mathbb {N}\), the diagonal \(\mathfrak {sl}_2\)-module \(V(m) \otimes _K V(n)\) (Theorem&#160;<a href="sect0003.html#thm:sl2-tensor-action">32</a>) decomposes as </p>
-<div class="displaymath" id="a0000000010">
+    <div class="thm_thmcontent"><p>    For \(m, n \in \mathbb {N}\), the diagonal \(\mathfrak {sl}_2\)-module \(V(m) \otimes _K V(n)\) (Theorem&#160;<a href="ch-sl2.html#thm:sl2-tensor-action">32</a>) decomposes as </p>
+<div class="displaymath" id="a0000000007">
   \[  V(m) \otimes _K V(n) \; \cong _K\;  \bigoplus _{k=0}^{\min (m,n)} V(m+n-2k).  \]
 </div>
 </div>
 
-    <a class="latex_link" href="sect0003.html#thm:sl2-clebsch-gordan">LaTeX</a>
+    <a class="latex_link" href="ch-sl2.html#thm:sl2-clebsch-gordan">LaTeX</a>
     
     
   <div class="tooltip">
@@ -1871,13 +1871,13 @@
       </span>
       <span class="theorem_thmlabel">33</span><span class="theorem_thmtitle">Classification of jointly irreducible commuting \(\mathfrak {sl}_2\)-actions</span></div>
     <div class="thm_thmcontent"><p>    Let \(\rho _1, \rho _2\) be representations of two \(\mathfrak {sl}_2\)-triples on a finite-dimensional space \(V\) over an algebraically closed field of characteristic zero, with \([\rho _1(x), \rho _2(y)] = 0\) for all \(x, y\), and suppose \(V\) has no proper subspace invariant under both actions simultaneously. Then there exist \(m, n \in \mathbb {N}\) and a linear isomorphism </p>
-<div class="displaymath" id="a0000000009">
+<div class="displaymath" id="a0000000006">
   \[  V \; \cong _K\;  V(m) \otimes _K V(n)  \]
 </div>
-<p> intertwining \((\rho _1, \rho _2)\) with the actions of the two tensor factors of Theorem&#160;<a href="sect0003.html#thm:sl2-tensor-action">32</a>. </p>
+<p> intertwining \((\rho _1, \rho _2)\) with the actions of the two tensor factors of Theorem&#160;<a href="ch-sl2.html#thm:sl2-tensor-action">32</a>. </p>
 </div>
 
-    <a class="latex_link" href="sect0003.html#thm:sl2-commuting-classification">LaTeX</a>
+    <a class="latex_link" href="ch-sl2.html#thm:sl2-commuting-classification">LaTeX</a>
     
     
   <div class="tooltip">
@@ -1913,10 +1913,10 @@
       Theorem
       </span>
       <span class="theorem_thmlabel">28</span><span class="theorem_thmtitle">Irreducibility forces the string to span</span></div>
-    <div class="thm_thmcontent"><p>    If \(M\) is an irreducible \(\mathfrak {sl}_2\)-module, the submodule of Theorem&#160;<a href="sect0003.html#thm:sl2-string-submodule">27</a> is nonzero, hence equal to \(M\). </p>
+    <div class="thm_thmcontent"><p>    If \(M\) is an irreducible \(\mathfrak {sl}_2\)-module, the submodule of Theorem&#160;<a href="ch-sl2.html#thm:sl2-string-submodule">27</a> is nonzero, hence equal to \(M\). </p>
 </div>
 
-    <a class="latex_link" href="sect0003.html#thm:sl2-irreducible-spans">LaTeX</a>
+    <a class="latex_link" href="ch-sl2.html#thm:sl2-irreducible-spans">LaTeX</a>
     
     
   <a class="lean_link lean_decl" href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.stringSpan_eq_top">Lean</a>
@@ -1946,7 +1946,7 @@
     <div class="thm_thmcontent"><p>    If \(K\) has characteristic zero, \(M\) is a nonzero finite-dimensional, torsion-free, triangularizable module for an \(\mathfrak {sl}_2\)-triple \(t\), then \(M\) contains a primitive vector for \(t\). </p>
 </div>
 
-    <a class="latex_link" href="sect0003.html#thm:sl2-primitive-exists">LaTeX</a>
+    <a class="latex_link" href="ch-sl2.html#thm:sl2-primitive-exists">LaTeX</a>
     
     
   <a class="lean_link lean_decl" href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/IsSl2Triple.exists_hasPrimitiveVectorWith">Lean</a>
@@ -1976,7 +1976,7 @@
     <div class="thm_thmcontent"><p>    For a primitive vector \(m\) of weight \(\mu \), \(e \cdot (f^{k+1} m) = (k+1)(\mu - k)(f^k m)\) for every \(k \ge 0\). </p>
 </div>
 
-    <a class="latex_link" href="sect0003.html#thm:sl2-string-e">LaTeX</a>
+    <a class="latex_link" href="ch-sl2.html#thm:sl2-string-e">LaTeX</a>
     
     
   <a class="lean_link lean_decl" href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/IsSl2Triple.HasPrimitiveVectorWith.lie_e_pow_succ_toEnd_f">Lean</a>
@@ -2006,7 +2006,7 @@
     <div class="thm_thmcontent"><p>    If \(M\) is finite-dimensional (Noetherian, torsion-free, over a characteristic-zero domain), the weight \(\mu \) of a primitive vector \(m\) equals some \(n \in \mathbb {N}\), \(f^k m \neq 0\) for all \(k \le n\), and \(f^{n+1} m = 0\). </p>
 </div>
 
-    <a class="latex_link" href="sect0003.html#thm:sl2-string-finite">LaTeX</a>
+    <a class="latex_link" href="ch-sl2.html#thm:sl2-string-finite">LaTeX</a>
     
     
   <div class="tooltip">
@@ -2047,7 +2047,7 @@
     <div class="thm_thmcontent"><p>    For a primitive vector \(m\) of weight \(\mu \), \(h \cdot (f^k m) = (\mu - 2k)(f^k m)\) for every \(k \ge 0\). </p>
 </div>
 
-    <a class="latex_link" href="sect0003.html#thm:sl2-string-h">LaTeX</a>
+    <a class="latex_link" href="ch-sl2.html#thm:sl2-string-h">LaTeX</a>
     
     
   <a class="lean_link lean_decl" href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/IsSl2Triple.HasPrimitiveVectorWith.lie_h_pow_toEnd_f">Lean</a>
@@ -2074,10 +2074,10 @@
       Theorem
       </span>
       <span class="theorem_thmlabel">26</span><span class="theorem_thmtitle">Linear independence of the primitive-vector string</span></div>
-    <div class="thm_thmcontent"><p>    If \(m\) is primitive of weight \(n \in \mathbb {N}\), the vectors \(m, fm, \dots , f^n m\) are linearly independent, since they lie in distinct \(h\)-eigenspaces (Theorem&#160;<a href="sect0003.html#thm:sl2-string-h">20</a>) and are all nonzero (Theorem&#160;<a href="sect0003.html#thm:sl2-string-finite">22</a>). </p>
+    <div class="thm_thmcontent"><p>    If \(m\) is primitive of weight \(n \in \mathbb {N}\), the vectors \(m, fm, \dots , f^n m\) are linearly independent, since they lie in distinct \(h\)-eigenspaces (Theorem&#160;<a href="ch-sl2.html#thm:sl2-string-h">20</a>) and are all nonzero (Theorem&#160;<a href="ch-sl2.html#thm:sl2-string-finite">22</a>). </p>
 </div>
 
-    <a class="latex_link" href="sect0003.html#thm:sl2-string-independent">LaTeX</a>
+    <a class="latex_link" href="ch-sl2.html#thm:sl2-string-independent">LaTeX</a>
     
     
   <a class="lean_link lean_decl" href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.string_linearIndependent">Lean</a>
@@ -2107,7 +2107,7 @@
     <div class="thm_thmcontent"><p>    The span of \(m, fm, \dots , f^n m\) is invariant under \(h\), \(e\), and \(f\), hence is a Lie submodule. </p>
 </div>
 
-    <a class="latex_link" href="sect0003.html#thm:sl2-string-submodule">LaTeX</a>
+    <a class="latex_link" href="ch-sl2.html#thm:sl2-string-submodule">LaTeX</a>
     
     
   <a class="lean_link lean_decl" href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.exists_stringLieSubmodule">Lean</a>
@@ -2137,7 +2137,7 @@
     <div class="thm_thmcontent"><p>    For Lie modules \(M\), \(N\) of \(L\), the tensor product \(M \otimes _K N\) carries the Lie module structure \(x \cdot (m \otimes n) = (x\cdot m)\otimes n + m \otimes (x \cdot n)\). </p>
 </div>
 
-    <a class="latex_link" href="sect0003.html#thm:sl2-tensor-action">LaTeX</a>
+    <a class="latex_link" href="ch-sl2.html#thm:sl2-tensor-action">LaTeX</a>
     
     
   <div class="tooltip">
@@ -2176,7 +2176,7 @@
     <div class="thm_thmcontent"><p>    If \(K\) is algebraically closed and \(M\) is a finite-dimensional Lie module for \(L\), then \(M\) is automatically triangularizable: this is an instance in Mathlib and requires no further formalization work for the \(K = \mathbb {C}\) case used throughout this project. </p>
 </div>
 
-    <a class="latex_link" href="sect0003.html#thm:sl2-triangularizable">LaTeX</a>
+    <a class="latex_link" href="ch-sl2.html#thm:sl2-triangularizable">LaTeX</a>
     
     
   <a class="lean_link lean_decl" href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/LieModule.instIsTriangularizableOfIsAlgClosed">Lean</a>
@@ -2203,10 +2203,10 @@
       Theorem
       </span>
       <span class="theorem_thmlabel">31</span><span class="theorem_thmtitle">Uniqueness of the highest weight</span></div>
-    <div class="thm_thmcontent"><p>    The integer \(n\) in Theorem&#160;<a href="sect0003.html#thm:sl2-classification">30</a> is an isomorphism invariant of \(M\): it equals \(\dim M - 1\). </p>
+    <div class="thm_thmcontent"><p>    The integer \(n\) in Theorem&#160;<a href="ch-sl2.html#thm:sl2-classification">30</a> is an isomorphism invariant of \(M\): it equals \(\dim M - 1\). </p>
 </div>
 
-    <a class="latex_link" href="sect0003.html#thm:sl2-uniqueness-hw">LaTeX</a>
+    <a class="latex_link" href="ch-sl2.html#thm:sl2-uniqueness-hw">LaTeX</a>
     
     
   <a class="lean_link lean_decl" href="https://TomOleDiem.github.io/QuantumRepresentationTheory/docs/find/#doc/QuantumRepresentationTheory.classification_n_eq_finrank_sub_one">Lean</a>
@@ -2237,7 +2237,7 @@ graphContainer.graphviz({useWorker: true})
     .width(width)
     .height(height)
     .fit(true)
-    .renderDot(`strict digraph "" {	graph [bgcolor=transparent];	node [label="\N",		penwidth=1.8	];	edge [arrowhead=vee];	"def:rep-lie-module"	[color=darkgreen,		fillcolor="#B0ECA3",		label="rep-lie-module",		shape=box,		style=filled];	"def:cas-invariant-form"	[color=darkgreen,		fillcolor="#B0ECA3",		label="cas-invariant-form",		shape=box,		style=filled];	"def:rep-lie-module" -> "def:cas-invariant-form"	[style=dashed];	"def:rep-hom"	[color=darkgreen,		fillcolor="#B0ECA3",		label="rep-hom",		shape=box,		style=filled];	"def:rep-lie-module" -> "def:rep-hom"	[style=dashed];	"def:sl2-triple"	[color=darkgreen,		fillcolor="#B0ECA3",		label="sl2-triple",		shape=box,		style=filled];	"def:rep-lie-module" -> "def:sl2-triple"	[style=dashed];	"def:rep-lie-submodule"	[color=darkgreen,		fillcolor="#B0ECA3",		label="rep-lie-submodule",		shape=box,		style=filled];	"def:rep-lie-module" -> "def:rep-lie-submodule"	[style=dashed];	"def:rep-to-end"	[color=darkgreen,		fillcolor="#B0ECA3",		label="rep-to-end",		shape=box,		style=filled];	"def:rep-lie-module" -> "def:rep-to-end"	[style=dashed];	"thm:sl2-triangularizable"	[color=darkgreen,		label="sl2-triangularizable",		shape=ellipse];	"def:rep-lie-module" -> "thm:sl2-triangularizable"	[style=dashed];	"thm:sl2-tensor-action"	[color=darkgreen,		label="sl2-tensor-action",		shape=ellipse];	"def:rep-lie-module" -> "thm:sl2-tensor-action"	[style=dashed];	"def:cas-dual-basis"	[color=darkgreen,		fillcolor="#B0ECA3",		label="cas-dual-basis",		shape=box,		style=filled];	"def:cas-invariant-form" -> "def:cas-dual-basis"	[style=dashed];	"thm:rep-hom-ker-range"	[color=darkgreen,		label="rep-hom-ker-range",		shape=ellipse];	"def:rep-hom" -> "thm:rep-hom-ker-range"	[style=dashed];	"thm:cas-central-intertwines"	[label="cas-central-intertwines",		shape=ellipse];	"def:rep-hom" -> "thm:cas-central-intertwines"	[style=dashed];	"thm:am-is-sl2-triple"	[label="am-is-sl2-triple",		shape=ellipse];	"def:sl2-triple" -> "thm:am-is-sl2-triple"	[style=dashed];	"def:sl2-primitive"	[color=darkgreen,		fillcolor="#B0ECA3",		label="sl2-primitive",		shape=box,		style=filled];	"def:sl2-triple" -> "def:sl2-primitive"	[style=dashed];	"thm:sl2-primitive-exists"	[color=darkgreen,		label="sl2-primitive-exists",		shape=ellipse];	"def:sl2-triple" -> "thm:sl2-primitive-exists"	[style=dashed];	"def:rep-lie-submodule" -> "thm:rep-hom-ker-range"	[style=dashed];	"def:rep-irreducible-generic"	[color=darkgreen,		fillcolor="#B0ECA3",		label="rep-irreducible-generic",		shape=box,		style=filled];	"def:rep-lie-submodule" -> "def:rep-irreducible-generic"	[style=dashed];	"def:cas-basis-dependent"	[color=blue,		fillcolor="#A3D6FF",		label="cas-basis-dependent",		shape=box,		style=filled];	"def:rep-to-end" -> "def:cas-basis-dependent"	[style=dashed];	"def:rep-explicit"	[color=green,		fillcolor="#B0ECA3",		label="rep-explicit",		shape=box,		style=filled];	"def:rep-to-end" -> "def:rep-explicit"	[style=dashed];	"def:cas-uea-rep"	[color=darkgreen,		fillcolor="#B0ECA3",		label="cas-uea-rep",		shape=box,		style=filled];	"def:rep-to-end" -> "def:cas-uea-rep"	[style=dashed];	"thm:sl2-triangularizable" -> "thm:sl2-primitive-exists"	[style=dashed];	"thm:sl2-commuting-classification"	[label="sl2-commuting-classification",		shape=ellipse];	"thm:sl2-tensor-action" -> "thm:sl2-commuting-classification"	[style=dashed];	"thm:sl2-clebsch-gordan"	[label="sl2-clebsch-gordan",		shape=ellipse];	"thm:sl2-tensor-action" -> "thm:sl2-clebsch-gordan"	[style=dashed];	"def:cas-dual-basis" -> "def:cas-basis-dependent"	[style=dashed];	"thm:rep-schur"	[label="rep-schur",		shape=ellipse];	"thm:rep-hom-ker-range" -> "thm:rep-schur"	[style=dashed];	"thm:cas-scalar"	[label="cas-scalar",		shape=ellipse];	"thm:cas-central-intertwines" -> "thm:cas-scalar"	[style=dashed];	"thm:am-j2-casimir"	[label="am-j2-casimir",		shape=ellipse];	"thm:am-is-sl2-triple" -> "thm:am-j2-casimir"	[style=dashed];	"thm:hyd-so4-decomposition"	[label="hyd-so4-decomposition",		shape=ellipse];	"thm:am-is-sl2-triple" -> "thm:hyd-so4-decomposition"	[style=dashed];	"thm:am-irreducibility-transfer"	[label="am-irreducibility-transfer",		shape=ellipse];	"thm:am-is-sl2-triple" -> "thm:am-irreducibility-transfer"	[style=dashed];	"thm:sl2-string-e"	[color=darkgreen,		label="sl2-string-e",		shape=ellipse];	"def:sl2-primitive" -> "thm:sl2-string-e"	[style=dashed];	"thm:sl2-string-h"	[color=darkgreen,		label="sl2-string-h",		shape=ellipse];	"def:sl2-primitive" -> "thm:sl2-string-h"	[style=dashed];	"thm:sl2-classification"	[label="sl2-classification",		shape=ellipse];	"thm:sl2-primitive-exists" -> "thm:sl2-classification"	[style=dashed];	"thm:sl2-irreducible-spans"	[label="sl2-irreducible-spans",		shape=ellipse];	"def:rep-irreducible-generic" -> "thm:sl2-irreducible-spans"	[style=dashed];	"def:rep-irreducible-generic" -> "thm:rep-schur"	[style=dashed];	"thm:cas-change-of-basis"	[label="cas-change-of-basis",		shape=ellipse];	"def:cas-basis-dependent" -> "thm:cas-change-of-basis"	[style=dashed];	"def:rep-intertwiner"	[color=green,		fillcolor="#B0ECA3",		label="rep-intertwiner",		shape=box,		style=filled];	"def:rep-explicit" -> "def:rep-intertwiner"	[style=dashed];	"def:am-representation"	[color=blue,		fillcolor="#A3D6FF",		label="am-representation",		shape=box,		style=filled];	"def:rep-explicit" -> "def:am-representation"	[style=dashed];	"def:rep-invariant"	[color=green,		fillcolor="#B0ECA3",		label="rep-invariant",		shape=box,		style=filled];	"def:rep-explicit" -> "def:rep-invariant"	[style=dashed];	"thm:cas-central"	[label="cas-central",		shape=ellipse];	"def:cas-uea-rep" -> "thm:cas-central"	[style=dashed];	"thm:hyd-classification"	[label="hyd-classification",		shape=ellipse];	"thm:sl2-commuting-classification" -> "thm:hyd-classification"	[style=dashed];	"def:cas-casimir"	[label="cas-casimir",		shape=box];	"def:cas-casimir" -> "thm:am-j2-casimir"	[style=dashed];	"thm:cas-commutes-generators"	[label="cas-commutes-generators",		shape=ellipse];	"def:cas-casimir" -> "thm:cas-commutes-generators"	[style=dashed];	"thm:hyd-equal-casimirs"	[label="hyd-equal-casimirs",		shape=ellipse];	"thm:am-j2-casimir" -> "thm:hyd-equal-casimirs"	[style=dashed];	"thm:cas-commutes-generators" -> "thm:cas-central"	[style=dashed];	"thm:hyd-equal-hw"	[label="hyd-equal-hw",		shape=ellipse];	"thm:hyd-equal-casimirs" -> "thm:hyd-equal-hw"	[style=dashed];	"thm:cas-central" -> "thm:cas-central-intertwines"	[style=dashed];	"thm:hyd-classification" -> "thm:hyd-equal-hw"	[style=dashed];	"thm:hyd-dimension"	[label="hyd-dimension",		shape=ellipse];	"thm:hyd-equal-hw" -> "thm:hyd-dimension"	[style=dashed];	"thm:hyd-energy-degeneracy"	[label="hyd-energy-degeneracy",		shape=ellipse];	"thm:rep-ker-invariant"	[color=green,		label="rep-ker-invariant",		shape=ellipse];	"def:rep-intertwiner" -> "thm:rep-ker-invariant"	[style=dashed];	"thm:rep-range-invariant"	[color=green,		label="rep-range-invariant",		shape=ellipse];	"def:rep-intertwiner" -> "thm:rep-range-invariant"	[style=dashed];	"def:hyd-two-triples"	[label="hyd-two-triples",		shape=box];	"def:hyd-two-triples" -> "thm:hyd-equal-casimirs"	[style=dashed];	"thm:hyd-two-factors-commute"	[label="hyd-two-factors-commute",		shape=ellipse];	"def:hyd-two-triples" -> "thm:hyd-two-factors-commute"	[style=dashed];	"thm:hyd-two-factors-commute" -> "thm:hyd-so4-decomposition"	[style=dashed];	"thm:hyd-so4-decomposition" -> "thm:hyd-classification"	[style=dashed];	"thm:sl2-string-finite"	[color=darkgreen,		label="sl2-string-finite",		shape=ellipse];	"thm:sl2-string-e" -> "thm:sl2-string-finite"	[style=dashed];	"thm:sl2-string-submodule"	[color=blue,		label="sl2-string-submodule",		shape=ellipse];	"thm:sl2-string-finite" -> "thm:sl2-string-submodule"	[style=dashed];	"thm:sl2-string-independent"	[color=blue,		label="sl2-string-independent",		shape=ellipse];	"thm:sl2-string-finite" -> "thm:sl2-string-independent"	[style=dashed];	"thm:sl2-string-submodule" -> "thm:sl2-irreducible-spans"	[style=dashed];	"thm:sl2-basis-theorem"	[label="sl2-basis-theorem",		shape=ellipse];	"thm:sl2-string-independent" -> "thm:sl2-basis-theorem"	[style=dashed];	"thm:sl2-irreducible-spans" -> "thm:sl2-basis-theorem"	[style=dashed];	"thm:sl2-basis-theorem" -> "thm:sl2-classification"	[style=dashed];	"thm:sl2-classification" -> "thm:sl2-commuting-classification"	[style=dashed];	"thm:sl2-classification" -> "thm:sl2-clebsch-gordan"	[style=dashed];	"thm:sl2-uniqueness-hw"	[label="sl2-uniqueness-hw",		shape=ellipse];	"thm:sl2-classification" -> "thm:sl2-uniqueness-hw"	[style=dashed];	"thm:am-spin-classification"	[label="am-spin-classification",		shape=ellipse];	"thm:sl2-classification" -> "thm:am-spin-classification"	[style=dashed];	"thm:hyd-quadratic-energy"	[label="hyd-quadratic-energy",		shape=ellipse];	"thm:hyd-dimension" -> "thm:hyd-quadratic-energy"	[style=dashed];	"thm:hyd-quadratic-energy" -> "thm:hyd-energy-degeneracy"	[style=dashed];	"thm:rep-schur" -> "thm:cas-scalar"	[style=dashed];	"thm:cas-change-of-basis" -> "def:cas-casimir"	[style=dashed];	"def:hyd-bound-state"	[label="hyd-bound-state",		shape=box];	"def:am-representation" -> "def:hyd-bound-state"	[style=dashed];	"def:am-ladder"	[label="am-ladder",		shape=box];	"def:am-representation" -> "def:am-ladder"	[style=dashed];	"thm:hyd-rescaling-nonzero"	[label="hyd-rescaling-nonzero",		shape=ellipse];	"def:hyd-bound-state" -> "thm:hyd-rescaling-nonzero"	[style=dashed];	"def:am-ladder" -> "def:hyd-two-triples"	[style=dashed];	"thm:am-commutators"	[label="am-commutators",		shape=ellipse];	"def:am-ladder" -> "thm:am-commutators"	[style=dashed];	"def:hyd-rescaled-rl"	[label="hyd-rescaled-rl",		shape=box];	"thm:hyd-rescaling-nonzero" -> "def:hyd-rescaled-rl"	[style=dashed];	"thm:am-commutators" -> "thm:am-is-sl2-triple"	[style=dashed];	"thm:am-commutators" -> "thm:hyd-two-factors-commute"	[style=dashed];	"def:hyd-rescaled-rl" -> "def:hyd-two-triples"	[style=dashed];	"def:am-magnetic-basis"	[label="am-magnetic-basis",		shape=box];	"thm:am-spin-classification" -> "def:am-magnetic-basis"	[style=dashed];	"thm:am-irreducibility-transfer" -> "thm:am-spin-classification"	[style=dashed];	"thm:rep-eigenvalue-exists"	[color=darkgreen,		label="rep-eigenvalue-exists",		shape=ellipse];	"thm:rep-eigenspace-nonzero"	[color=blue,		label="rep-eigenspace-nonzero",		shape=ellipse];	"thm:rep-eigenvalue-exists" -> "thm:rep-eigenspace-nonzero"	[style=dashed];	"thm:rep-eigenspace-nonzero" -> "thm:rep-schur"	[style=dashed];	"def:rep-invariant" -> "thm:rep-ker-invariant"	[style=dashed];	"def:rep-invariant" -> "thm:rep-range-invariant"	[style=dashed];	"def:rep-irreducible"	[color=green,		fillcolor="#B0ECA3",		label="rep-irreducible",		shape=box,		style=filled];	"def:rep-invariant" -> "def:rep-irreducible"	[style=dashed];	"def:rep-irreducible" -> "thm:am-irreducibility-transfer"	[style=dashed];	"thm:sl2-string-h" -> "thm:sl2-string-finite"	[style=dashed];	"thm:hyd-cross-linearity"	[label="hyd-cross-linearity",		shape=ellipse];	"thm:hyd-cross-linearity" -> "def:hyd-rescaled-rl"	[style=dashed];	"def:sl2-standard-module"	[color=blue,		fillcolor="#A3D6FF",		label="sl2-standard-module",		shape=box,		style=filled];	"def:sl2-standard-module" -> "thm:sl2-classification"	[style=dashed];	"def:hyd-levi-civita"	[color=blue,		fillcolor="#A3D6FF",		label="hyd-levi-civita",		shape=box,		style=filled];	"def:hyd-levi-civita" -> "thm:hyd-cross-linearity"	[style=dashed];}`)
+    .renderDot(`strict digraph "" {	graph [bgcolor=transparent];	node [label="\N",		penwidth=1.8	];	edge [arrowhead=vee];	"def:rep-lie-module"	[color=darkgreen,		fillcolor="#B0ECA3",		label="rep-lie-module",		shape=box,		style=filled];	"def:rep-hom"	[color=darkgreen,		fillcolor="#B0ECA3",		label="rep-hom",		shape=box,		style=filled];	"def:rep-lie-module" -> "def:rep-hom"	[style=dashed];	"def:sl2-triple"	[color=darkgreen,		fillcolor="#B0ECA3",		label="sl2-triple",		shape=box,		style=filled];	"def:rep-lie-module" -> "def:sl2-triple"	[style=dashed];	"thm:sl2-triangularizable"	[color=darkgreen,		label="sl2-triangularizable",		shape=ellipse];	"def:rep-lie-module" -> "thm:sl2-triangularizable"	[style=dashed];	"def:rep-lie-submodule"	[color=darkgreen,		fillcolor="#B0ECA3",		label="rep-lie-submodule",		shape=box,		style=filled];	"def:rep-lie-module" -> "def:rep-lie-submodule"	[style=dashed];	"thm:sl2-tensor-action"	[color=darkgreen,		label="sl2-tensor-action",		shape=ellipse];	"def:rep-lie-module" -> "thm:sl2-tensor-action"	[style=dashed];	"def:rep-to-end"	[color=darkgreen,		fillcolor="#B0ECA3",		label="rep-to-end",		shape=box,		style=filled];	"def:rep-lie-module" -> "def:rep-to-end"	[style=dashed];	"def:cas-invariant-form"	[color=darkgreen,		fillcolor="#B0ECA3",		label="cas-invariant-form",		shape=box,		style=filled];	"def:rep-lie-module" -> "def:cas-invariant-form"	[style=dashed];	"thm:rep-hom-ker-range"	[color=darkgreen,		label="rep-hom-ker-range",		shape=ellipse];	"def:rep-hom" -> "thm:rep-hom-ker-range"	[style=dashed];	"thm:cas-central-intertwines"	[label="cas-central-intertwines",		shape=ellipse];	"def:rep-hom" -> "thm:cas-central-intertwines"	[style=dashed];	"thm:sl2-primitive-exists"	[color=darkgreen,		label="sl2-primitive-exists",		shape=ellipse];	"def:sl2-triple" -> "thm:sl2-primitive-exists"	[style=dashed];	"def:sl2-primitive"	[color=darkgreen,		fillcolor="#B0ECA3",		label="sl2-primitive",		shape=box,		style=filled];	"def:sl2-triple" -> "def:sl2-primitive"	[style=dashed];	"thm:am-is-sl2-triple"	[label="am-is-sl2-triple",		shape=ellipse];	"def:sl2-triple" -> "thm:am-is-sl2-triple"	[style=dashed];	"thm:sl2-triangularizable" -> "thm:sl2-primitive-exists"	[style=dashed];	"def:rep-lie-submodule" -> "thm:rep-hom-ker-range"	[style=dashed];	"def:rep-irreducible-generic"	[color=darkgreen,		fillcolor="#B0ECA3",		label="rep-irreducible-generic",		shape=box,		style=filled];	"def:rep-lie-submodule" -> "def:rep-irreducible-generic"	[style=dashed];	"thm:sl2-commuting-classification"	[label="sl2-commuting-classification",		shape=ellipse];	"thm:sl2-tensor-action" -> "thm:sl2-commuting-classification"	[style=dashed];	"thm:sl2-clebsch-gordan"	[label="sl2-clebsch-gordan",		shape=ellipse];	"thm:sl2-tensor-action" -> "thm:sl2-clebsch-gordan"	[style=dashed];	"def:cas-uea-rep"	[color=darkgreen,		fillcolor="#B0ECA3",		label="cas-uea-rep",		shape=box,		style=filled];	"def:rep-to-end" -> "def:cas-uea-rep"	[style=dashed];	"def:cas-basis-dependent"	[color=blue,		fillcolor="#A3D6FF",		label="cas-basis-dependent",		shape=box,		style=filled];	"def:rep-to-end" -> "def:cas-basis-dependent"	[style=dashed];	"def:rep-explicit"	[color=green,		fillcolor="#B0ECA3",		label="rep-explicit",		shape=box,		style=filled];	"def:rep-to-end" -> "def:rep-explicit"	[style=dashed];	"def:cas-dual-basis"	[color=darkgreen,		fillcolor="#B0ECA3",		label="cas-dual-basis",		shape=box,		style=filled];	"def:cas-invariant-form" -> "def:cas-dual-basis"	[style=dashed];	"thm:rep-schur"	[label="rep-schur",		shape=ellipse];	"thm:rep-hom-ker-range" -> "thm:rep-schur"	[style=dashed];	"thm:cas-scalar"	[label="cas-scalar",		shape=ellipse];	"thm:cas-central-intertwines" -> "thm:cas-scalar"	[style=dashed];	"thm:sl2-classification"	[label="sl2-classification",		shape=ellipse];	"thm:sl2-primitive-exists" -> "thm:sl2-classification"	[style=dashed];	"thm:sl2-string-h"	[color=darkgreen,		label="sl2-string-h",		shape=ellipse];	"def:sl2-primitive" -> "thm:sl2-string-h"	[style=dashed];	"thm:sl2-string-e"	[color=darkgreen,		label="sl2-string-e",		shape=ellipse];	"def:sl2-primitive" -> "thm:sl2-string-e"	[style=dashed];	"thm:am-irreducibility-transfer"	[label="am-irreducibility-transfer",		shape=ellipse];	"thm:am-is-sl2-triple" -> "thm:am-irreducibility-transfer"	[style=dashed];	"thm:hyd-so4-decomposition"	[label="hyd-so4-decomposition",		shape=ellipse];	"thm:am-is-sl2-triple" -> "thm:hyd-so4-decomposition"	[style=dashed];	"thm:am-j2-casimir"	[label="am-j2-casimir",		shape=ellipse];	"thm:am-is-sl2-triple" -> "thm:am-j2-casimir"	[style=dashed];	"def:rep-irreducible-generic" -> "thm:rep-schur"	[style=dashed];	"thm:sl2-irreducible-spans"	[label="sl2-irreducible-spans",		shape=ellipse];	"def:rep-irreducible-generic" -> "thm:sl2-irreducible-spans"	[style=dashed];	"thm:hyd-classification"	[label="hyd-classification",		shape=ellipse];	"thm:sl2-commuting-classification" -> "thm:hyd-classification"	[style=dashed];	"thm:cas-central"	[label="cas-central",		shape=ellipse];	"def:cas-uea-rep" -> "thm:cas-central"	[style=dashed];	"thm:cas-change-of-basis"	[label="cas-change-of-basis",		shape=ellipse];	"def:cas-basis-dependent" -> "thm:cas-change-of-basis"	[style=dashed];	"def:rep-invariant"	[color=green,		fillcolor="#B0ECA3",		label="rep-invariant",		shape=box,		style=filled];	"def:rep-explicit" -> "def:rep-invariant"	[style=dashed];	"def:rep-intertwiner"	[color=green,		fillcolor="#B0ECA3",		label="rep-intertwiner",		shape=box,		style=filled];	"def:rep-explicit" -> "def:rep-intertwiner"	[style=dashed];	"def:am-representation"	[color=blue,		fillcolor="#A3D6FF",		label="am-representation",		shape=box,		style=filled];	"def:rep-explicit" -> "def:am-representation"	[style=dashed];	"def:cas-dual-basis" -> "def:cas-basis-dependent"	[style=dashed];	"thm:rep-schur" -> "thm:cas-scalar"	[style=dashed];	"thm:sl2-classification" -> "thm:sl2-commuting-classification"	[style=dashed];	"thm:sl2-classification" -> "thm:sl2-clebsch-gordan"	[style=dashed];	"thm:am-spin-classification"	[label="am-spin-classification",		shape=ellipse];	"thm:sl2-classification" -> "thm:am-spin-classification"	[style=dashed];	"thm:sl2-uniqueness-hw"	[label="sl2-uniqueness-hw",		shape=ellipse];	"thm:sl2-classification" -> "thm:sl2-uniqueness-hw"	[style=dashed];	"def:am-magnetic-basis"	[label="am-magnetic-basis",		shape=box];	"thm:am-spin-classification" -> "def:am-magnetic-basis"	[style=dashed];	"thm:sl2-string-submodule"	[color=blue,		label="sl2-string-submodule",		shape=ellipse];	"thm:sl2-string-submodule" -> "thm:sl2-irreducible-spans"	[style=dashed];	"thm:sl2-basis-theorem"	[label="sl2-basis-theorem",		shape=ellipse];	"thm:sl2-irreducible-spans" -> "thm:sl2-basis-theorem"	[style=dashed];	"thm:sl2-basis-theorem" -> "thm:sl2-classification"	[style=dashed];	"thm:cas-commutes-generators"	[label="cas-commutes-generators",		shape=ellipse];	"thm:cas-commutes-generators" -> "thm:cas-central"	[style=dashed];	"thm:cas-central" -> "thm:cas-central-intertwines"	[style=dashed];	"thm:am-irreducibility-transfer" -> "thm:am-spin-classification"	[style=dashed];	"thm:rep-ker-invariant"	[color=green,		label="rep-ker-invariant",		shape=ellipse];	"def:rep-invariant" -> "thm:rep-ker-invariant"	[style=dashed];	"def:rep-irreducible"	[color=green,		fillcolor="#B0ECA3",		label="rep-irreducible",		shape=box,		style=filled];	"def:rep-invariant" -> "def:rep-irreducible"	[style=dashed];	"thm:rep-range-invariant"	[color=green,		label="rep-range-invariant",		shape=ellipse];	"def:rep-invariant" -> "thm:rep-range-invariant"	[style=dashed];	"def:rep-irreducible" -> "thm:am-irreducibility-transfer"	[style=dashed];	"thm:sl2-string-finite"	[color=darkgreen,		label="sl2-string-finite",		shape=ellipse];	"thm:sl2-string-h" -> "thm:sl2-string-finite"	[style=dashed];	"thm:sl2-string-e" -> "thm:sl2-string-finite"	[style=dashed];	"thm:sl2-string-finite" -> "thm:sl2-string-submodule"	[style=dashed];	"thm:sl2-string-independent"	[color=blue,		label="sl2-string-independent",		shape=ellipse];	"thm:sl2-string-finite" -> "thm:sl2-string-independent"	[style=dashed];	"def:hyd-bound-state"	[label="hyd-bound-state",		shape=box];	"thm:hyd-rescaling-nonzero"	[label="hyd-rescaling-nonzero",		shape=ellipse];	"def:hyd-bound-state" -> "thm:hyd-rescaling-nonzero"	[style=dashed];	"def:hyd-rescaled-rl"	[label="hyd-rescaled-rl",		shape=box];	"thm:hyd-rescaling-nonzero" -> "def:hyd-rescaled-rl"	[style=dashed];	"def:hyd-two-triples"	[label="hyd-two-triples",		shape=box];	"def:hyd-rescaled-rl" -> "def:hyd-two-triples"	[style=dashed];	"thm:hyd-two-factors-commute"	[label="hyd-two-factors-commute",		shape=ellipse];	"def:hyd-two-triples" -> "thm:hyd-two-factors-commute"	[style=dashed];	"thm:hyd-equal-casimirs"	[label="hyd-equal-casimirs",		shape=ellipse];	"def:hyd-two-triples" -> "thm:hyd-equal-casimirs"	[style=dashed];	"thm:hyd-two-factors-commute" -> "thm:hyd-so4-decomposition"	[style=dashed];	"thm:hyd-equal-hw"	[label="hyd-equal-hw",		shape=ellipse];	"thm:hyd-equal-casimirs" -> "thm:hyd-equal-hw"	[style=dashed];	"thm:hyd-so4-decomposition" -> "thm:hyd-classification"	[style=dashed];	"thm:hyd-dimension"	[label="hyd-dimension",		shape=ellipse];	"thm:hyd-equal-hw" -> "thm:hyd-dimension"	[style=dashed];	"thm:rep-eigenvalue-exists"	[color=darkgreen,		label="rep-eigenvalue-exists",		shape=ellipse];	"thm:rep-eigenspace-nonzero"	[color=blue,		label="rep-eigenspace-nonzero",		shape=ellipse];	"thm:rep-eigenvalue-exists" -> "thm:rep-eigenspace-nonzero"	[style=dashed];	"thm:rep-eigenspace-nonzero" -> "thm:rep-schur"	[style=dashed];	"thm:am-commutators"	[label="am-commutators",		shape=ellipse];	"thm:am-commutators" -> "thm:am-is-sl2-triple"	[style=dashed];	"thm:am-commutators" -> "thm:hyd-two-factors-commute"	[style=dashed];	"thm:am-j2-casimir" -> "thm:hyd-equal-casimirs"	[style=dashed];	"thm:hyd-cross-linearity"	[label="hyd-cross-linearity",		shape=ellipse];	"thm:hyd-cross-linearity" -> "def:hyd-rescaled-rl"	[style=dashed];	"def:cas-casimir"	[label="cas-casimir",		shape=box];	"thm:cas-change-of-basis" -> "def:cas-casimir"	[style=dashed];	"thm:sl2-string-independent" -> "thm:sl2-basis-theorem"	[style=dashed];	"thm:hyd-classification" -> "thm:hyd-equal-hw"	[style=dashed];	"thm:hyd-quadratic-energy"	[label="hyd-quadratic-energy",		shape=ellipse];	"thm:hyd-energy-degeneracy"	[label="hyd-energy-degeneracy",		shape=ellipse];	"thm:hyd-quadratic-energy" -> "thm:hyd-energy-degeneracy"	[style=dashed];	"def:rep-intertwiner" -> "thm:rep-ker-invariant"	[style=dashed];	"def:rep-intertwiner" -> "thm:rep-range-invariant"	[style=dashed];	"def:am-representation" -> "def:hyd-bound-state"	[style=dashed];	"def:am-ladder"	[label="am-ladder",		shape=box];	"def:am-representation" -> "def:am-ladder"	[style=dashed];	"def:am-ladder" -> "def:hyd-two-triples"	[style=dashed];	"def:am-ladder" -> "thm:am-commutators"	[style=dashed];	"def:cas-casimir" -> "thm:cas-commutes-generators"	[style=dashed];	"def:cas-casimir" -> "thm:am-j2-casimir"	[style=dashed];	"thm:hyd-dimension" -> "thm:hyd-quadratic-energy"	[style=dashed];	"def:hyd-levi-civita"	[color=blue,		fillcolor="#A3D6FF",		label="hyd-levi-civita",		shape=box,		style=filled];	"def:hyd-levi-civita" -> "thm:hyd-cross-linearity"	[style=dashed];	"def:sl2-standard-module"	[color=blue,		fillcolor="#A3D6FF",		label="sl2-standard-module",		shape=box,		style=filled];	"def:sl2-standard-module" -> "thm:sl2-classification"	[style=dashed];}`)
     .on("end", interactive);
 
 latexLabelEscaper = function(label) {
