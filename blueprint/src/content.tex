@@ -1,15 +1,64 @@
 \chapter*{Overview}
 
-This blueprint lays out a roadmap from the bare notion of a Lie algebra
-representation to the energy spectrum of the hydrogen atom, formalized on top
-of Mathlib's existing Lie theory. It is organized as a dependency graph of
-\emph{theorems and constructions}, not of individual small lemmas: each node
-below corresponds to a genuine mathematical statement, and the graph edges
-(via \texttt{uses}) record exactly which results feed into which.
+\paragraph{The idea.} The standard way to make the hydrogen atom rigorous is
+analytic: unbounded self-adjoint operators, spectral theory, all the
+machinery needed to give the Coulomb Hamiltonian a precise meaning. That work
+is real and hard, and Mathlib's Physlib is already making progress on it.
+
+There is an older, more algebraic story too. The hydrogen atom has a hidden
+symmetry: beyond ordinary rotations, its bound states also carry a conserved
+Runge--Lenz vector, and together these generate a bigger symmetry algebra.
+Lean on the representation theory of that algebra hard enough, and the
+energy levels and their degeneracies fall out of group theory almost without
+touching an actual Hamiltonian --- this is the classical explanation (going
+back to Pauli) of why hydrogen's degeneracy is $n^2$ rather than merely
+$2\ell+1$.
+
+This blueprint tries to build that second route: work out the algebra
+completely first --- classification of irreducible representations, Casimir
+elements, the works --- and only afterward come back and show that the real,
+concrete quantum-mechanical operators satisfy whatever the algebra needed
+all along. That last step is deliberately \emph{not} attempted here (see the
+note on Physlib below); the goal of this pass is to nail down the algebra and
+the exact shape of the bridge to physics that will eventually be needed.
+
+That structure splits the blueprint naturally into two halves, developed
+mostly independently, that need to be stitched together at the end:
+\begin{itemize}
+  \item A \textbf{math half} with no physics content at all (Chapters~1--3,
+    below): representations of Lie algebras, the classification of
+    finite-dimensional irreducible $\sltwo$-modules, Casimir elements, and
+    the classification of jointly-irreducible \emph{commuting pairs} of
+    $\sltwo$-actions --- the algebraic heart of why hydrogen's degeneracy is
+    $n^2$.
+  \item A \textbf{physics half} that names the same objects the way a
+    physicist would (Chapters~4--5, below): angular momentum operators, the
+    Runge--Lenz vector, the hidden $\sofour$ symmetry of the bound states ---
+    currently a self-contained finite-dimensional algebraic model,
+    deliberately decoupled from Physlib's Hilbert-space machinery.
+\end{itemize}
+
+A reader with a physics background can read Chapters~2--3 as ``the abstract
+reason spin is quantized in half-integer steps and total angular momentum
+squared is a good quantum number,'' even though neither chapter mentions
+physics until Chapter~4. A reader with a math background can read Chapters~4--5
+as a worked application of Chapters~1--3 with no new mathematical content,
+just new names for old objects, plus one genuinely new theorem (the
+classification of commuting $\sltwo$-pairs, \S\ref{sec:sl2-commuting}) that
+the application needs and that pure representation theory would want anyway.
+
+This blueprint is organized as a dependency graph of \emph{theorems and
+constructions}, not of individual small lemmas: each node below corresponds
+to a genuine mathematical statement, and the graph edges (via \texttt{uses})
+record exactly which results feed into which.
 
 Nodes already available in Mathlib are marked with a dark green border in the
 dependency graph (\mathlibok); nodes already proved in this project are
 green (\leanok); everything else is a target for future formalization work.
+Most of the blueprint is currently in this last category: the point of
+publishing it at this stage is to fix the right statements and the right
+dependency structure before doing the harder work of proving them, and
+feedback on the definitions themselves is very welcome.
 The chapters mirror the source tree:
 \begin{itemize}
   \item \textbf{Representation theory} ---
@@ -49,6 +98,17 @@ theorems discharge Physlib's open TODO --- is future work, not attempted in
 this pass.
 
 \chapter{Representations of Lie algebras}
+
+This chapter is pure algebra with no physics content whatsoever: it fixes
+what a representation of a Lie algebra even is, and proves the single
+structural fact --- Schur's lemma --- that everything downstream leans on
+repeatedly. Physically-minded readers can think of a representation as ``a
+symmetry acting on a space of quantum states,'' and of Schur's lemma as the
+formal version of the physicist's heuristic that an operator commuting with
+every symmetry of an irreducible system must be a scalar (this is exactly
+how the Casimir element in Chapter~\ref{ch:casimir} is eventually shown to
+act as a single number, the quantum number that labels an irreducible
+multiplet).
 
 \section{The representation object}
 \label{sec:rep-basic}
@@ -273,6 +333,20 @@ the form Chapters~2--3 actually need.
 \end{remark}
 
 \chapter{The Lie algebra $\sltwo$ and its representations}
+\label{ch:sl2}
+
+$\sltwo$ is the smallest non-abelian Lie algebra, and its finite-dimensional
+representations are completely classified: there is exactly one irreducible
+representation of each dimension. That single fact, proved with no physics
+in sight, is secretly the entire reason angular momentum is quantized in
+half-integer steps: $\sltwo$ is (isomorphic to the complexification of) the
+angular-momentum algebra $\liealg{so}_3$, and Chapter~\ref{ch:am} does
+nothing more than transport this classification across that isomorphism. The
+section on commuting $\sltwo$-actions (\S\ref{sec:sl2-commuting}) is the one
+piece of genuinely new mathematics this blueprint needs and Mathlib does not
+yet have: it is what turns ``two commuting conserved quantities'' into a
+concrete dimension count, and it is the algebraic engine behind the
+hydrogen atom's $n^2$ degeneracy in Chapter~\ref{ch:hydrogen}.
 
 \section{$\sltwo$-triples and primitive vectors}
 \label{sec:sl2-basic}
@@ -472,6 +546,21 @@ that goal than the classical Clebsch--Gordan decomposition of
 \end{theorem}
 
 \chapter{The Casimir element}
+\label{ch:casimir}
+
+Physically, ``total angular momentum squared,'' $J^2 = J_x^2+J_y^2+J_z^2$, is
+special because it commutes with every rotation generator, so it can be
+diagonalized simultaneously with a full set of symmetry generators and used
+to label irreducible multiplets by a single quantum number $j(j+1)$. The
+Casimir element is the algebraic definition making this precise for an
+arbitrary Lie algebra with an invariant form, not just $\liealg{so}_3$: an
+element built from the generators themselves that is guaranteed to commute
+with all of them, and which Schur's lemma (Chapter~1) then forces to act as
+a scalar on any irreducible representation. Chapter~\ref{ch:am} identifies
+$J^2$ with the $\sltwo$ Casimir element built here, and
+Chapter~\ref{ch:hydrogen} uses \emph{two} Casimir elements at once ---
+one for each of the two commuting $\sltwo$-actions hiding inside the
+hydrogen atom's dynamical symmetry --- to pin down its spectrum.
 
 \section{Construction}
 \label{sec:cas-basic}
@@ -585,6 +674,23 @@ that goal than the classical Clebsch--Gordan decomposition of
 \end{theorem}
 
 \chapter{Angular momentum}
+\label{ch:am}
+
+Physics starts here: this chapter is where Chapters~1--3's purely algebraic
+results get their first physical names. The three angular-momentum operators
+$J_x,J_y,J_z$ and their commutation relations are exactly an $\sltwo$-triple
+in disguise, so the classification of irreducible $\sltwo$-modules
+(\S\ref{sec:sl2-classification}) immediately gives the spin-quantization rule
+--- every irreducible multiplet of angular-momentum states has a half-integer
+spin $j$ and dimension $2j+1$ --- as a corollary, not a new proof. As
+discussed in the overview, this chapter is deliberately kept as a
+finite-dimensional algebraic model: the operators $J_x,J_y,J_z$ are given as
+abstract data satisfying the right commutation relations, not derived from
+Physlib's Hilbert-space momentum/position operators. This chapter's results
+are used twice in Chapter~\ref{ch:hydrogen}: once directly (ordinary orbital
+angular momentum) and once again after being ``split in half'' by the
+Runge--Lenz vector into the two commuting copies that generate hydrogen's
+hidden $\sofour$ symmetry.
 
 \section{The algebraic representation}
 \label{sec:am-basic}
@@ -662,6 +768,27 @@ that goal than the classical Clebsch--Gordan decomposition of
 \end{definition}
 
 \chapter{The hydrogen atom}
+\label{ch:hydrogen}
+
+This is the payoff chapter, and where everything above gets stitched
+together. Besides ordinary angular momentum $\vec J$, a classical particle
+orbiting under an inverse-square force conserves a second vector quantity,
+the Runge--Lenz vector, which points along the orbit's major axis; quantum
+mechanically it survives as an operator $\vec A$ on the bound-state
+eigenspaces. Together $\vec J$ and (a rescaled) $\vec A$ generate a bigger
+symmetry algebra than rotations alone, and --- remarkably --- it splits as
+two \emph{commuting} copies of the angular-momentum algebra from
+Chapter~\ref{ch:am}, $\vec I = \tfrac12(\vec J+\vec A)$ and
+$\vec K = \tfrac12(\vec J-\vec A)$. Feeding this pair into the classification
+of commuting $\sltwo$-actions (\S\ref{sec:sl2-commuting}) and the two Casimir
+elements it carries (Chapter~\ref{ch:casimir}) is what forces the two
+copies to have equal spin and produces, with no reference to the radial
+Schr\"odinger equation, the characteristic $n^2$-fold degenerate,
+$-1/n^2$-spaced hydrogen spectrum. As throughout, this chapter is a
+self-contained algebraic model: it takes the existence of a
+finite-dimensional bound-state eigenspace with the right operators on it as
+given, rather than deriving it from Physlib's Hamiltonian (see the note on
+Physlib in the Overview).
 
 \section{The Runge--Lenz vector}
 \label{sec:hyd-basic}
