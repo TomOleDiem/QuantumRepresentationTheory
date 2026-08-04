@@ -1,0 +1,181 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../.././style.css"></link><link rel="icon" href="../.././favicon.svg"></link><link rel="mask-icon" href="../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../.././/declarations/declaration-data.bmp" as="image"></link><title>QuantumRepresentationTheory.Representation.Basic</title><script defer="true" src="../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../.././";</script><script>const MODULE_NAME="QuantumRepresentationTheory.Representation.Basic";</script><script type="module" src="../.././jump-src.js"></script><script type="module" src="../.././search.js"></script><script type="module" src="../.././expand-nav.js"></script><script type="module" src="../.././how-about.js"></script><script type="module" src="../.././instances.js"></script><script type="module" src="../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">QuantumRepresentationTheory</span>.<span class="name">Representation</span>.<span class="name">Basic</span></h2><form id="search_form"><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../.././search.html';">Search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/TomOleDiem/QuantumRepresentationTheory/blob/7b36f576428b942053bce1b55df0d750c6e97373/QuantumRepresentationTheory/Representation/Basic.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../.././Init.html">Init</a></li><li><a href="../.././Mathlib.html">Mathlib</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-QuantumRepresentationTheory.Representation.Basic" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#QuantumRepresentationTheory.instEndLieRing"><span class="name">QuantumRepresentationTheory</span>.<span class="name">instEndLieRing</span></a></div><div class="nav_link"><a class="break_within" href="#QuantumRepresentationTheory.LieRepresentation"><span class="name">QuantumRepresentationTheory</span>.<span class="name">LieRepresentation</span></a></div><div class="nav_link"><a class="break_within" href="#QuantumRepresentationTheory.IsInvariantSubspace"><span class="name">QuantumRepresentationTheory</span>.<span class="name">IsInvariantSubspace</span></a></div><div class="nav_link"><a class="break_within" href="#QuantumRepresentationTheory.IsIrreducible"><span class="name">QuantumRepresentationTheory</span>.<span class="name">IsIrreducible</span></a></div><div class="nav_link"><a class="break_within" href="#QuantumRepresentationTheory.instEndLieRingW"><span class="name">QuantumRepresentationTheory</span>.<span class="name">instEndLieRingW</span></a></div><div class="nav_link"><a class="break_within" href="#QuantumRepresentationTheory.IsIntertwiner"><span class="name">QuantumRepresentationTheory</span>.<span class="name">IsIntertwiner</span></a></div><div class="nav_link"><a class="break_within" href="#QuantumRepresentationTheory.IsIntertwiner.ker_isInvariant"><span class="name">QuantumRepresentationTheory</span>.<span class="name">IsIntertwiner</span>.<span class="name">ker_isInvariant</span></a></div><div class="nav_link"><a class="break_within" href="#QuantumRepresentationTheory.IsIntertwiner.range_isInvariant"><span class="name">QuantumRepresentationTheory</span>.<span class="name">IsIntertwiner</span>.<span class="name">range_isInvariant</span></a></div></nav><main>
+<div class="decl" id="QuantumRepresentationTheory.instEndLieRing"><div class="instance"><div class="gh_link"><a href="https://github.com/TomOleDiem/QuantumRepresentationTheory/blob/7b36f576428b942053bce1b55df0d750c6e97373/QuantumRepresentationTheory/Representation/Basic.lean#L21-L28">source</a></div><div class="attributes">@[implicit_reducible]</div>
+<div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumRepresentationTheory/Representation/Basic.html#QuantumRepresentationTheory.instEndLieRing"><span class="name">QuantumRepresentationTheory</span>.<span class="name">instEndLieRing</span></a></span><span class="decl_args">
+<span class="fn">(<span class="fn">K</span> : <a href="../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">V</span> : <a href="../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">K</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Algebra/Lie/Basic.html#LieRing">LieRing</a> <span class="fn">(<a href="../.././Mathlib/Algebra/Module/LinearMap/End.html#Module.End">Module.End</a> <span class="fn">K</span> <span class="fn">V</span>)</span></span></div></div><p>The Lie ring structure on <code><a href="../.././Mathlib/Algebra/Module/LinearMap/End.html#Module.End">Module.End</a> K V</code> given by the commutator bracket.
+Declared once, globally, here (rather than as a <code>local instance</code> re-declared in
+every file that needs bracket notation for endomorphisms) so that importing this
+file is enough to make <code>⁅f, g⁆</code> notation available for <code>f g : <a href="../.././Mathlib/Algebra/Module/LinearMap/End.html#Module.End">Module.End</a> K V</code>
+everywhere in the project, without name collisions between separately-declared
+local copies.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../.././QuantumRepresentationTheory/Representation/Basic.html#QuantumRepresentationTheory.instEndLieRing">QuantumRepresentationTheory.instEndLieRing</a> <span class="fn">K</span> <span class="fn">V</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/Algebra/Lie/OfAssociative.html#LieRing.ofAssociativeRing">LieRing.ofAssociativeRing</a></li></ul></details></div></div><div class="decl" id="QuantumRepresentationTheory.LieRepresentation"><div class="def"><div class="gh_link"><a href="https://github.com/TomOleDiem/QuantumRepresentationTheory/blob/7b36f576428b942053bce1b55df0d750c6e97373/QuantumRepresentationTheory/Representation/Basic.lean#L30-L32">source</a></div><div class="attributes">@[reducible, inline]</div>
+<div class="decl_header"><span class="decl_kind">abbrev</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumRepresentationTheory/Representation/Basic.html#QuantumRepresentationTheory.LieRepresentation"><span class="name">QuantumRepresentationTheory</span>.<span class="name">LieRepresentation</span></a></span><span class="decl_args">
+<span class="fn">(<span class="fn">K</span> : <a href="../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">L</span> : <a href="../.././foundational_types.html">Type</a> v)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">V</span> : <a href="../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Lie/Basic.html#LieRing">LieRing</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Lie/Basic.html#LieAlgebra">LieAlgebra</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">K</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><a href="../.././foundational_types.html">Type</a> (max v w)</div></div><p>A representation of a Lie algebra by linear endomorphisms.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../.././QuantumRepresentationTheory/Representation/Basic.html#QuantumRepresentationTheory.LieRepresentation">QuantumRepresentationTheory.LieRepresentation</a> <span class="fn">K</span> <span class="fn">L</span> <span class="fn">V</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> (<span class="fn">L</span> <a href="../.././Mathlib/Algebra/Lie/Basic.html#LieHom">→ₗ⁅</a><span class="fn">K</span><a href="../.././Mathlib/Algebra/Lie/Basic.html#LieHom">⁆</a> <span class="fn"><a href="../.././Mathlib/Algebra/Module/LinearMap/End.html#Module.End">Module.End</a> <span class="fn">K</span> <span class="fn">V</span></span>)</li></ul></details><details id="instances-for-list-QuantumRepresentationTheory.LieRepresentation" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="QuantumRepresentationTheory.IsInvariantSubspace"><div class="def"><div class="gh_link"><a href="https://github.com/TomOleDiem/QuantumRepresentationTheory/blob/7b36f576428b942053bce1b55df0d750c6e97373/QuantumRepresentationTheory/Representation/Basic.lean#L34-L38">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumRepresentationTheory/Representation/Basic.html#QuantumRepresentationTheory.IsInvariantSubspace"><span class="name">QuantumRepresentationTheory</span>.<span class="name">IsInvariantSubspace</span></a></span><span class="decl_args">
+<span class="fn">(<span class="fn">K</span> : <a href="../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">L</span> : <a href="../.././foundational_types.html">Type</a> v)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">V</span> : <a href="../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Lie/Basic.html#LieRing">LieRing</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Lie/Basic.html#LieAlgebra">LieAlgebra</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">K</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">ρ</span> : <span class="fn"><a href="../.././QuantumRepresentationTheory/Representation/Basic.html#QuantumRepresentationTheory.LieRepresentation">LieRepresentation</a> <span class="fn">K</span> <span class="fn">L</span> <span class="fn">V</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">W</span> : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Submodule/Defs.html#Submodule">Submodule</a> <span class="fn">K</span> <span class="fn">V</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../.././foundational_types.html">Prop</a></div></div><p>A linear subspace preserved by every operator in the representation.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../.././QuantumRepresentationTheory/Representation/Basic.html#QuantumRepresentationTheory.IsInvariantSubspace">QuantumRepresentationTheory.IsInvariantSubspace</a> <span class="fn">K</span> <span class="fn">L</span> <span class="fn">V</span> <span class="fn">ρ</span> <span class="fn">W</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">L</span>), <span class="fn">∀ <span class="fn">v</span> ∈ <span class="fn">W</span>, <span class="fn"><span class="fn">(<span class="fn">ρ</span> <span class="fn">x</span>)</span> <span class="fn">v</span></span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">W</span></span></span></li></ul></details><details id="instances-for-list-QuantumRepresentationTheory.IsInvariantSubspace" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="QuantumRepresentationTheory.IsIrreducible"><div class="def"><div class="gh_link"><a href="https://github.com/TomOleDiem/QuantumRepresentationTheory/blob/7b36f576428b942053bce1b55df0d750c6e97373/QuantumRepresentationTheory/Representation/Basic.lean#L40-L45">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumRepresentationTheory/Representation/Basic.html#QuantumRepresentationTheory.IsIrreducible"><span class="name">QuantumRepresentationTheory</span>.<span class="name">IsIrreducible</span></a></span><span class="decl_args">
+<span class="fn">(<span class="fn">K</span> : <a href="../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">L</span> : <a href="../.././foundational_types.html">Type</a> v)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">V</span> : <a href="../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Lie/Basic.html#LieRing">LieRing</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Lie/Basic.html#LieAlgebra">LieAlgebra</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">K</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">ρ</span> : <span class="fn"><a href="../.././QuantumRepresentationTheory/Representation/Basic.html#QuantumRepresentationTheory.LieRepresentation">LieRepresentation</a> <span class="fn">K</span> <span class="fn">L</span> <span class="fn">V</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../.././foundational_types.html">Prop</a></div></div><p>An irreducible representation has no nontrivial invariant subspaces.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../.././QuantumRepresentationTheory/Representation/Basic.html#QuantumRepresentationTheory.IsIrreducible">QuantumRepresentationTheory.IsIrreducible</a> <span class="fn">K</span> <span class="fn">L</span> <span class="fn">V</span> <span class="fn">ρ</span></span> <a href="../.././Init/Prelude.html#Eq">=</a>   <span class="fn">∀ (<span class="fn">W</span> : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Submodule/Defs.html#Submodule">Submodule</a> <span class="fn">K</span> <span class="fn">V</span></span>), <span class="fn"><span class="fn"><a href="../.././QuantumRepresentationTheory/Representation/Basic.html#QuantumRepresentationTheory.IsInvariantSubspace">QuantumRepresentationTheory.IsInvariantSubspace</a> <span class="fn">K</span> <span class="fn">L</span> <span class="fn">V</span> <span class="fn">ρ</span> <span class="fn">W</span></span> → <span class="fn">W</span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/Order/Notation.html#Bot.bot">⊥</a> <a href="../.././Init/Prelude.html#Or">∨</a> <span class="fn">W</span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/Order/Notation.html#Top.top">⊤</a></span></span></li></ul></details><details id="instances-for-list-QuantumRepresentationTheory.IsIrreducible" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="QuantumRepresentationTheory.instEndLieRingW"><div class="def"><div class="gh_link"><a href="https://github.com/TomOleDiem/QuantumRepresentationTheory/blob/7b36f576428b942053bce1b55df0d750c6e97373/QuantumRepresentationTheory/Representation/Basic.lean#L52-L53">source</a></div><div class="attributes">@[implicit_reducible]</div>
+<div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumRepresentationTheory/Representation/Basic.html#QuantumRepresentationTheory.instEndLieRingW"><span class="name">QuantumRepresentationTheory</span>.<span class="name">instEndLieRingW</span></a></span><span class="decl_args">
+<span class="fn">(<span class="fn">K</span> : <a href="../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">W</span> : <a href="../.././foundational_types.html">Type</a> w')</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">K</span> <span class="fn">W</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Algebra/Lie/Basic.html#LieRing">LieRing</a> <span class="fn">(<a href="../.././Mathlib/Algebra/Module/LinearMap/End.html#Module.End">Module.End</a> <span class="fn">K</span> <span class="fn">W</span>)</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../.././QuantumRepresentationTheory/Representation/Basic.html#QuantumRepresentationTheory.instEndLieRingW">QuantumRepresentationTheory.instEndLieRingW</a> <span class="fn">K</span> <span class="fn">W</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/Algebra/Lie/OfAssociative.html#LieRing.ofAssociativeRing">LieRing.ofAssociativeRing</a></li></ul></details><details id="instances-for-list-QuantumRepresentationTheory.instEndLieRingW" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="QuantumRepresentationTheory.IsIntertwiner"><div class="def"><div class="gh_link"><a href="https://github.com/TomOleDiem/QuantumRepresentationTheory/blob/7b36f576428b942053bce1b55df0d750c6e97373/QuantumRepresentationTheory/Representation/Basic.lean#L55-L61">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumRepresentationTheory/Representation/Basic.html#QuantumRepresentationTheory.IsIntertwiner"><span class="name">QuantumRepresentationTheory</span>.<span class="name">IsIntertwiner</span></a></span><span class="decl_args">
+<span class="fn">(<span class="fn">K</span> : <a href="../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">L</span> : <a href="../.././foundational_types.html">Type</a> v)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">V</span> : <a href="../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Lie/Basic.html#LieRing">LieRing</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Lie/Basic.html#LieAlgebra">LieAlgebra</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">K</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">W</span> : <a href="../.././foundational_types.html">Type</a> w')</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">K</span> <span class="fn">W</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">ρV</span> : <span class="fn"><a href="../.././QuantumRepresentationTheory/Representation/Basic.html#QuantumRepresentationTheory.LieRepresentation">LieRepresentation</a> <span class="fn">K</span> <span class="fn">L</span> <span class="fn">V</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">ρW</span> : <span class="fn"><a href="../.././QuantumRepresentationTheory/Representation/Basic.html#QuantumRepresentationTheory.LieRepresentation">LieRepresentation</a> <span class="fn">K</span> <span class="fn">L</span> <span class="fn">W</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">f</span> : <span class="fn">V</span> <a href="../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">→ₗ[</a><span class="fn">K</span><a href="../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">]</a> <span class="fn">W</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../.././foundational_types.html">Prop</a></div></div><p>A linear map intertwining two Lie algebra representations.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../.././QuantumRepresentationTheory/Representation/Basic.html#QuantumRepresentationTheory.IsIntertwiner">QuantumRepresentationTheory.IsIntertwiner</a> <span class="fn">K</span> <span class="fn">L</span> <span class="fn">V</span> <span class="fn">W</span> <span class="fn">ρV</span> <span class="fn">ρW</span> <span class="fn">f</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">L</span>), <span class="fn"><span class="fn">f</span> <a href="../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap.comp">∘ₗ</a> <span class="fn"><span class="fn">ρV</span> <span class="fn">x</span></span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">ρW</span> <span class="fn">x</span></span> <a href="../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap.comp">∘ₗ</a> <span class="fn">f</span></span></span></li></ul></details><details id="instances-for-list-QuantumRepresentationTheory.IsIntertwiner" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl" id="QuantumRepresentationTheory.IsIntertwiner.ker_isInvariant"><div class="theorem"><div class="gh_link"><a href="https://github.com/TomOleDiem/QuantumRepresentationTheory/blob/7b36f576428b942053bce1b55df0d750c6e97373/QuantumRepresentationTheory/Representation/Basic.lean#L63-L77">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumRepresentationTheory/Representation/Basic.html#QuantumRepresentationTheory.IsIntertwiner.ker_isInvariant"><span class="name">QuantumRepresentationTheory</span>.<span class="name">IsIntertwiner</span>.<span class="name">ker_isInvariant</span></a></span><span class="decl_args">
+<span class="fn">(<span class="fn">K</span> : <a href="../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">L</span> : <a href="../.././foundational_types.html">Type</a> v)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">V</span> : <a href="../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Lie/Basic.html#LieRing">LieRing</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Lie/Basic.html#LieAlgebra">LieAlgebra</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">K</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">W</span> : <a href="../.././foundational_types.html">Type</a> w')</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">K</span> <span class="fn">W</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">ρV</span> : <span class="fn"><a href="../.././QuantumRepresentationTheory/Representation/Basic.html#QuantumRepresentationTheory.LieRepresentation">LieRepresentation</a> <span class="fn">K</span> <span class="fn">L</span> <span class="fn">V</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">ρW</span> : <span class="fn"><a href="../.././QuantumRepresentationTheory/Representation/Basic.html#QuantumRepresentationTheory.LieRepresentation">LieRepresentation</a> <span class="fn">K</span> <span class="fn">L</span> <span class="fn">W</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">f</span> : <span class="fn">V</span> <a href="../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">→ₗ[</a><span class="fn">K</span><a href="../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">]</a> <span class="fn">W</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">hf</span> : <span class="fn"><a href="../.././QuantumRepresentationTheory/Representation/Basic.html#QuantumRepresentationTheory.IsIntertwiner">IsIntertwiner</a> <span class="fn">K</span> <span class="fn">L</span> <span class="fn">V</span> <span class="fn">W</span> <span class="fn">ρV</span> <span class="fn">ρW</span> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././QuantumRepresentationTheory/Representation/Basic.html#QuantumRepresentationTheory.IsInvariantSubspace">IsInvariantSubspace</a> <span class="fn">K</span> <span class="fn">L</span> <span class="fn">V</span> <span class="fn">ρV</span> <span class="fn"><span class="fn">f</span>.<a href="../.././Mathlib/Algebra/Module/Submodule/Ker.html#LinearMap.ker">ker</a></span></span></div></div><p>The kernel of an intertwiner is invariant.</p></div></div><div class="decl" id="QuantumRepresentationTheory.IsIntertwiner.range_isInvariant"><div class="theorem"><div class="gh_link"><a href="https://github.com/TomOleDiem/QuantumRepresentationTheory/blob/7b36f576428b942053bce1b55df0d750c6e97373/QuantumRepresentationTheory/Representation/Basic.lean#L79-L90">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumRepresentationTheory/Representation/Basic.html#QuantumRepresentationTheory.IsIntertwiner.range_isInvariant"><span class="name">QuantumRepresentationTheory</span>.<span class="name">IsIntertwiner</span>.<span class="name">range_isInvariant</span></a></span><span class="decl_args">
+<span class="fn">(<span class="fn">K</span> : <a href="../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">L</span> : <a href="../.././foundational_types.html">Type</a> v)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">V</span> : <a href="../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Lie/Basic.html#LieRing">LieRing</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Lie/Basic.html#LieAlgebra">LieAlgebra</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">K</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">W</span> : <a href="../.././foundational_types.html">Type</a> w')</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">K</span> <span class="fn">W</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">ρV</span> : <span class="fn"><a href="../.././QuantumRepresentationTheory/Representation/Basic.html#QuantumRepresentationTheory.LieRepresentation">LieRepresentation</a> <span class="fn">K</span> <span class="fn">L</span> <span class="fn">V</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">ρW</span> : <span class="fn"><a href="../.././QuantumRepresentationTheory/Representation/Basic.html#QuantumRepresentationTheory.LieRepresentation">LieRepresentation</a> <span class="fn">K</span> <span class="fn">L</span> <span class="fn">W</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">f</span> : <span class="fn">V</span> <a href="../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">→ₗ[</a><span class="fn">K</span><a href="../.././Mathlib/Algebra/Module/LinearMap/Defs.html#LinearMap">]</a> <span class="fn">W</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">hf</span> : <span class="fn"><a href="../.././QuantumRepresentationTheory/Representation/Basic.html#QuantumRepresentationTheory.IsIntertwiner">IsIntertwiner</a> <span class="fn">K</span> <span class="fn">L</span> <span class="fn">V</span> <span class="fn">W</span> <span class="fn">ρV</span> <span class="fn">ρW</span> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././QuantumRepresentationTheory/Representation/Basic.html#QuantumRepresentationTheory.IsInvariantSubspace">IsInvariantSubspace</a> <span class="fn">K</span> <span class="fn">L</span> <span class="fn">W</span> <span class="fn">ρW</span> <span class="fn"><span class="fn">f</span>.<a href="../.././Mathlib/Algebra/Module/Submodule/Range.html#LinearMap.range">range</a></span></span></div></div><p>The range of an intertwiner is invariant.</p></div></div></main>
+<nav class="nav"><iframe src="../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

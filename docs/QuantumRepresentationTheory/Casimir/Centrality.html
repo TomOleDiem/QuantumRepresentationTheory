@@ -1,0 +1,131 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../.././style.css"></link><link rel="icon" href="../.././favicon.svg"></link><link rel="mask-icon" href="../.././favicon.svg" color="#000000"></link><link rel="prefetch" href="../.././/declarations/declaration-data.bmp" as="image"></link><title>QuantumRepresentationTheory.Casimir.Centrality</title><script defer="true" src="../.././mathjax-config.js"></script><script defer="true" src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../.././";</script><script>const MODULE_NAME="QuantumRepresentationTheory.Casimir.Centrality";</script><script type="module" src="../.././jump-src.js"></script><script type="module" src="../.././search.js"></script><script type="module" src="../.././expand-nav.js"></script><script type="module" src="../.././how-about.js"></script><script type="module" src="../.././instances.js"></script><script type="module" src="../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label><span>Documentation</span></h1><h2 class="header_filename break_within"><span class="name">QuantumRepresentationTheory</span>.<span class="name">Casimir</span>.<span class="name">Centrality</span></h2><form id="search_form"><input type="text" name="q" autocomplete="off"></input>&#32;<button id="search_button" onclick="javascript: form.action='../.././search.html';">Search</button></form></header><nav class="internal_nav"><p><a href="#top">return to top</a></p><p class="gh_nav_link"><a href="https://github.com/TomOleDiem/QuantumRepresentationTheory/blob/7b36f576428b942053bce1b55df0d750c6e97373/QuantumRepresentationTheory/Casimir/Centrality.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../.././Init.html">Init</a></li><li><a href="../.././Mathlib.html">Mathlib</a></li><li><a href="../.././QuantumRepresentationTheory/Casimir/Basic.html">QuantumRepresentationTheory.Casimir.Basic</a></li><li><a href="../.././QuantumRepresentationTheory/Representation/Schur.html">QuantumRepresentationTheory.Representation.Schur</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-QuantumRepresentationTheory.Casimir.Centrality" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#QuantumRepresentationTheory.casimir_commutes"><span class="name">QuantumRepresentationTheory</span>.<span class="name">casimir_commutes</span></a></div><div class="nav_link"><a class="break_within" href="#QuantumRepresentationTheory.casimirUEA"><span class="name">QuantumRepresentationTheory</span>.<span class="name">casimirUEA</span></a></div><div class="nav_link"><a class="break_within" href="#QuantumRepresentationTheory.casimirUEA_mem_center"><span class="name">QuantumRepresentationTheory</span>.<span class="name">casimirUEA_mem_center</span></a></div><div class="nav_link"><a class="break_within" href="#QuantumRepresentationTheory.central_commutes_toEnd"><span class="name">QuantumRepresentationTheory</span>.<span class="name">central_commutes_toEnd</span></a></div><div class="nav_link"><a class="break_within" href="#QuantumRepresentationTheory.casimir_scalar"><span class="name">QuantumRepresentationTheory</span>.<span class="name">casimir_scalar</span></a></div></nav><main>
+<div class="mod_doc"><h1 id="Casimir-Centrality" class="markdown-heading">Casimir/Centrality <a class="hover-link" href="#Casimir-Centrality">#</a></h1><p>Part of the blueprint for algebraic quantum representation theory.
+See <code>blueprint/src/content.tex</code>, §&quot;Centrality and the scalar action&quot; (<code>sec:cas-centrality</code>).</p></div><div class="decl sorried" id="QuantumRepresentationTheory.casimir_commutes"><div class="theorem"><div class="gh_link"><a href="https://github.com/TomOleDiem/QuantumRepresentationTheory/blob/7b36f576428b942053bce1b55df0d750c6e97373/QuantumRepresentationTheory/Casimir/Centrality.lean#L22-L26">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name" title="declaration uses 'sorry'"><a class="break_within" href="../.././QuantumRepresentationTheory/Casimir/Centrality.html#QuantumRepresentationTheory.casimir_commutes"><span class="name">QuantumRepresentationTheory</span>.<span class="name">casimir_commutes</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">K</span> : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">L</span> : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">V</span> : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Lie/Basic.html#LieRing">LieRing</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Lie/Basic.html#LieAlgebra">LieAlgebra</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">K</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/LinearAlgebra/FiniteDimensional/Defs.html#FiniteDimensional">FiniteDimensional</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">ρ</span> : <span class="fn"><a href="../.././QuantumRepresentationTheory/Representation/Basic.html#QuantumRepresentationTheory.LieRepresentation">LieRepresentation</a> <span class="fn">K</span> <span class="fn">L</span> <span class="fn">V</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">Φ</span> : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/BilinearMap.html#LinearMap.BilinForm">LinearMap.BilinForm</a> <span class="fn">K</span> <span class="fn">L</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">hΦ</span> : <span class="fn"><span class="fn">Φ</span>.<a href="../.././Mathlib/LinearAlgebra/BilinearForm/Properties.html#LinearMap.BilinForm.Nondegenerate">Nondegenerate</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">y</span> : <span class="fn">L</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../.././Mathlib/Data/Bracket.html#Bracket.bracket">⁅</a><span class="fn"><span class="fn">ρ</span> <span class="fn">y</span></span><a href="../.././Mathlib/Data/Bracket.html#Bracket.bracket">,</a> <span class="fn"><a href="../.././QuantumRepresentationTheory/Casimir/Basic.html#QuantumRepresentationTheory.casimir">casimir</a> <span class="fn">ρ</span> <span class="fn">Φ</span> <span class="fn">hΦ</span></span><a href="../.././Mathlib/Data/Bracket.html#Bracket.bracket">⁆</a> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></div></div><p><strong>The Casimir element commutes with the generators</strong> (<code>thm:cas-commutes-generators</code>).</p></div></div><div class="decl" id="QuantumRepresentationTheory.casimirUEA"><div class="def"><div class="gh_link"><a href="https://github.com/TomOleDiem/QuantumRepresentationTheory/blob/7b36f576428b942053bce1b55df0d750c6e97373/QuantumRepresentationTheory/Casimir/Centrality.lean#L28-L34">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../.././QuantumRepresentationTheory/Casimir/Centrality.html#QuantumRepresentationTheory.casimirUEA"><span class="name">QuantumRepresentationTheory</span>.<span class="name">casimirUEA</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">K</span> : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">L</span> : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Lie/Basic.html#LieRing">LieRing</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Lie/Basic.html#LieAlgebra">LieAlgebra</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/LinearAlgebra/FiniteDimensional/Defs.html#FiniteDimensional">FiniteDimensional</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">Φ</span> : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/BilinearMap.html#LinearMap.BilinForm">LinearMap.BilinForm</a> <span class="fn">K</span> <span class="fn">L</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">hΦ</span> : <span class="fn"><span class="fn">Φ</span>.<a href="../.././Mathlib/LinearAlgebra/BilinearForm/Properties.html#LinearMap.BilinForm.Nondegenerate">Nondegenerate</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Algebra/Lie/UniversalEnveloping.html#UniversalEnvelopingAlgebra">UniversalEnvelopingAlgebra</a> <span class="fn">K</span> <span class="fn">L</span></span></div></div><p>The Casimir element of the adjoint representation, as an element of the universal
+enveloping algebra <code>U(L)</code> itself (rather than as an operator via some <code>ρ</code>):
+<code>C = ∑ᵢ ι(bᵢ) ι(bⁱ)</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details id="instances-for-list-QuantumRepresentationTheory.casimirUEA" class="instances-for-list"><summary>Instances For</summary><ul class="instances-for-enum"></ul></details></div></div><div class="decl sorried" id="QuantumRepresentationTheory.casimirUEA_mem_center"><div class="theorem"><div class="gh_link"><a href="https://github.com/TomOleDiem/QuantumRepresentationTheory/blob/7b36f576428b942053bce1b55df0d750c6e97373/QuantumRepresentationTheory/Casimir/Centrality.lean#L36-L42">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name" title="declaration uses 'sorry'"><a class="break_within" href="../.././QuantumRepresentationTheory/Casimir/Centrality.html#QuantumRepresentationTheory.casimirUEA_mem_center"><span class="name">QuantumRepresentationTheory</span>.<span class="name">casimirUEA_mem_center</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">K</span> : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">L</span> : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Lie/Basic.html#LieRing">LieRing</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Lie/Basic.html#LieAlgebra">LieAlgebra</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/LinearAlgebra/FiniteDimensional/Defs.html#FiniteDimensional">FiniteDimensional</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">Φ</span> : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/BilinearMap.html#LinearMap.BilinForm">LinearMap.BilinForm</a> <span class="fn">K</span> <span class="fn">L</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">hΦ</span> : <span class="fn"><span class="fn">Φ</span>.<a href="../.././Mathlib/LinearAlgebra/BilinearForm/Properties.html#LinearMap.BilinForm.Nondegenerate">Nondegenerate</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././QuantumRepresentationTheory/Casimir/Centrality.html#QuantumRepresentationTheory.casimirUEA">casimirUEA</a> <span class="fn">Φ</span> <span class="fn">hΦ</span></span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Subalgebra.center">Subalgebra.center</a> <span class="fn">K</span> <span class="fn">(<a href="../.././Mathlib/Algebra/Lie/UniversalEnveloping.html#UniversalEnvelopingAlgebra">UniversalEnvelopingAlgebra</a> <span class="fn">K</span> <span class="fn">L</span>)</span></span></div></div><p><strong>Centrality of the Casimir element</strong> (<code>thm:cas-central</code>). The correct ambient object
+is <code><a href="../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Subalgebra.center">Subalgebra.center</a></code>, not <code><a href="../.././Mathlib/Algebra/Ring/Subring/Basic.html#Subring.center">Subring.center</a></code>, since we need <code>K</code>-linearity of the
+centralizing condition.</p></div></div><div class="decl sorried" id="QuantumRepresentationTheory.central_commutes_toEnd"><div class="theorem"><div class="gh_link"><a href="https://github.com/TomOleDiem/QuantumRepresentationTheory/blob/7b36f576428b942053bce1b55df0d750c6e97373/QuantumRepresentationTheory/Casimir/Centrality.lean#L46-L53">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name" title="declaration uses 'sorry'"><a class="break_within" href="../.././QuantumRepresentationTheory/Casimir/Centrality.html#QuantumRepresentationTheory.central_commutes_toEnd"><span class="name">QuantumRepresentationTheory</span>.<span class="name">central_commutes_toEnd</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">K</span> : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">L</span> : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">V</span> : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Lie/Basic.html#LieRing">LieRing</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Lie/Basic.html#LieAlgebra">LieAlgebra</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">K</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Lie/Basic.html#LieRingModule">LieRingModule</a> <span class="fn">L</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Lie/Basic.html#LieModule">LieModule</a> <span class="fn">K</span> <span class="fn">L</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">z</span> : <span class="fn"><a href="../.././Mathlib/Algebra/Lie/UniversalEnveloping.html#UniversalEnvelopingAlgebra">UniversalEnvelopingAlgebra</a> <span class="fn">K</span> <span class="fn">L</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">hz</span> : <span class="fn">z</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Subalgebra.center">Subalgebra.center</a> <span class="fn">K</span> <span class="fn">(<a href="../.././Mathlib/Algebra/Lie/UniversalEnveloping.html#UniversalEnvelopingAlgebra">UniversalEnvelopingAlgebra</a> <span class="fn">K</span> <span class="fn">L</span>)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">x</span> : <span class="fn">L</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn">(<a href="../.././Mathlib/Algebra/Lie/UniversalEnveloping.html#UniversalEnvelopingAlgebra.lift">UniversalEnvelopingAlgebra.lift</a> <span class="fn">K</span>)</span> <span class="fn">(<a href="../.././Mathlib/Algebra/Lie/OfAssociative.html#LieModule.toEnd">LieModule.toEnd</a> <span class="fn">K</span> <span class="fn">L</span> <span class="fn">V</span>)</span>)</span> <span class="fn">z</span></span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">(<a href="../.././Mathlib/Algebra/Lie/OfAssociative.html#LieModule.toEnd">LieModule.toEnd</a> <span class="fn">K</span> <span class="fn">L</span> <span class="fn">V</span>)</span> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><span class="fn">(<a href="../.././Mathlib/Algebra/Lie/OfAssociative.html#LieModule.toEnd">LieModule.toEnd</a> <span class="fn">K</span> <span class="fn">L</span> <span class="fn">V</span>)</span> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">(<span class="fn">(<a href="../.././Mathlib/Algebra/Lie/UniversalEnveloping.html#UniversalEnvelopingAlgebra.lift">UniversalEnvelopingAlgebra.lift</a> <span class="fn">K</span>)</span> <span class="fn">(<a href="../.././Mathlib/Algebra/Lie/OfAssociative.html#LieModule.toEnd">LieModule.toEnd</a> <span class="fn">K</span> <span class="fn">L</span> <span class="fn">V</span>)</span>)</span> <span class="fn">z</span></span></div></div><p><strong>A central element gives a <code><a href="../.././Mathlib/Algebra/Lie/Basic.html#LieModuleHom">LieModuleHom</a></code></strong> (<code>thm:cas-central-intertwines</code>). If <code>z</code>
+is central in <code>U(L)</code>, its image under the extension of <code><a href="../.././Mathlib/Algebra/Lie/OfAssociative.html#LieModule.toEnd">LieModule.toEnd</a> K L V</code> commutes
+with <code><a href="../.././Mathlib/Algebra/Lie/OfAssociative.html#LieModule.toEnd">LieModule.toEnd</a> K L V x</code> for every <code>x : L</code>.</p></div></div><div class="decl sorried" id="QuantumRepresentationTheory.casimir_scalar"><div class="theorem"><div class="gh_link"><a href="https://github.com/TomOleDiem/QuantumRepresentationTheory/blob/7b36f576428b942053bce1b55df0d750c6e97373/QuantumRepresentationTheory/Casimir/Centrality.lean#L55-L59">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name" title="declaration uses 'sorry'"><a class="break_within" href="../.././QuantumRepresentationTheory/Casimir/Centrality.html#QuantumRepresentationTheory.casimir_scalar"><span class="name">QuantumRepresentationTheory</span>.<span class="name">casimir_scalar</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">K</span> : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">L</span> : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{<span class="fn">V</span> : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Lie/Basic.html#LieRing">LieRing</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Lie/Basic.html#LieAlgebra">LieAlgebra</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Module/Defs.html#Module">Module</a> <span class="fn">K</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Lie/Basic.html#LieRingModule">LieRingModule</a> <span class="fn">L</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Lie/Basic.html#LieModule">LieModule</a> <span class="fn">K</span> <span class="fn">L</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed">IsAlgClosed</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/LinearAlgebra/FiniteDimensional/Defs.html#FiniteDimensional">FiniteDimensional</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/LinearAlgebra/FiniteDimensional/Defs.html#FiniteDimensional">FiniteDimensional</a> <span class="fn">K</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[<span class="fn"><a href="../.././Mathlib/Algebra/Lie/Semisimple/Defs.html#LieModule.IsIrreducible">LieModule.IsIrreducible</a> <span class="fn">K</span> <span class="fn">L</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(<span class="fn">Φ</span> : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/BilinearMap.html#LinearMap.BilinForm">LinearMap.BilinForm</a> <span class="fn">K</span> <span class="fn">L</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(<span class="fn">hΦ</span> : <span class="fn"><span class="fn">Φ</span>.<a href="../.././Mathlib/LinearAlgebra/BilinearForm/Properties.html#LinearMap.BilinForm.Nondegenerate">Nondegenerate</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ (<span class="fn">c</span> : <span class="fn">K</span>), <span class="fn"><a href="../.././QuantumRepresentationTheory/Casimir/Basic.html#QuantumRepresentationTheory.casimir">casimir</a> <span class="fn">(<a href="../.././Mathlib/Algebra/Lie/OfAssociative.html#LieModule.toEnd">LieModule.toEnd</a> <span class="fn">K</span> <span class="fn">L</span> <span class="fn">V</span>)</span> <span class="fn">Φ</span> <span class="fn">hΦ</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">c</span> <a href="../.././Init/Prelude.html#HSMul.hSMul">•</a> <span class="fn">1</span></span></div></div><p><strong>Schur gives a scalar Casimir</strong> (<code>thm:cas-scalar</code>).</p></div></div></main>
+<nav class="nav"><iframe src="../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>
