@@ -141,13 +141,7 @@
   <a href="sect0003.html#a0000000011"><span class="toc_ref"></span> <span class="toc_entry">No Clebsch–Gordan or weight-multiplicity machinery.</span></a>
  </li>
 <li class="">
-  <a href="sect0003.html#a0000000012"><span class="toc_ref"></span> <span class="toc_entry">The Killing form claim was wrong in an earlier draft, now fixed.</span></a>
- </li>
-<li class="">
-  <a href="sect0003.html#a0000000013"><span class="toc_ref"></span> <span class="toc_entry">“Self-adjoint” was removed from Definition&#160;<a href="ch-am.html#def:am-representation">45</a>.</span></a>
- </li>
-<li class="">
-  <a href="sect0003.html#a0000000014"><span class="toc_ref"></span> <span class="toc_entry">The explicit-representation bridge (§<a href="sect0002.html#sec:rep-basic">1.1</a>, Remark&#160;<a href="sect0002.html#def:rep-bridge">13</a>) remains unbuilt.</span></a>
+  <a href="sect0003.html#a0000000012"><span class="toc_ref"></span> <span class="toc_entry">The explicit-representation bridge (§<a href="sect0002.html#sec:rep-basic">1.1</a>, Remark&#160;<a href="sect0002.html#def:rep-bridge">13</a>) remains unbuilt.</span></a>
  </li>
 
   </ul>
@@ -162,7 +156,7 @@
 
 <div class="main-text">
 <h1 id="a0000000004">Caveats</h1>
-<p>This chapter is not part of the theorem dependency graph above; it collects things found while auditing this blueprint against the current state of Mathlib, before making it public. Some are corrections already applied above; others are open opportunities for whoever picks this up next. </p>
+<p>This chapter is not part of the theorem dependency graph above. It collects things worth knowing about the current state of Mathlib relevant to this blueprint: gaps this project fills, gaps it doesn’t, and available infrastructure it doesn’t yet use. </p>
 <h4 id="a0000000007">The Casimir element does not exist in Mathlib.</h4>
 <p> Checked with a case-insensitive search of the entire Mathlib tree for “Casimir”: zero hits. Everything in Chapter&#160;<a href="ch-casimir.html">3</a> (basis-dependent construction, change-of-basis invariance, centrality via the universal enveloping algebra) is new relative to Mathlib, not merely restated in a different form. </p>
 <h4 id="a0000000008">No exceptional low-rank Lie algebra isomorphisms.</h4>
@@ -173,11 +167,7 @@
 <p> <span class="ttfamily">Mathlib.RingTheory.SimpleModule.Basic</span> gives the division-ring level (<span class="ttfamily">bijective_or_eq_zero</span>, <span class="ttfamily">Module.End.instDivisionRing</span>) but stops there — no algebraically-closed-field “it’s a scalar” step. That step exists in full generality in <span class="ttfamily">Mathlib.CategoryTheory.Preadditive.Schur</span> (<span class="ttfamily">endomorphism_simple_eq_smul_id</span>), for any \(\Bbbk \)-linear category with kernels, algebraically closed \(\Bbbk \), finite-dimensional hom spaces — exactly Theorem&#160;<a href="sect0002.html#thm:rep-schur">16</a>’s statement, one level of abstraction up. The obstruction to reusing it directly is that Mathlib has no bundled category of Lie modules (no <span class="ttfamily">LieModuleCat</span>, unlike <span class="ttfamily">ModuleCat</span> or <span class="ttfamily">FGModuleCat</span>). Group representations do not have this problem: <span class="ttfamily">Mathlib.RepresentationTheory.FDRep</span> is a genuine category and imports <span class="ttfamily">CategoryTheory.Preadditive.Schur</span> directly to get Schur’s lemma for free (<span class="ttfamily">finrank_hom_simple_simple</span>). <span class="ttfamily">FDRep</span> is the exact template a <span class="ttfamily">LieModuleCat</span> would follow; building it is a well-scoped, plausible Mathlib contribution, but Theorem&#160;<a href="sect0002.html#thm:rep-schur">16</a> as it stands takes the direct route (extract an eigenvalue via <span class="ttfamily">Module.End.exists_eigenvalue</span>, show the shifted map is a <span class="ttfamily">LieModuleHom</span> with nontrivial kernel, conclude by irreducibility) rather than waiting on that infrastructure. </p>
 <h4 id="a0000000011">No Clebsch–Gordan or weight-multiplicity machinery.</h4>
 <p> Checked for any existing tensor-product decomposition or weight-multiplicity result for \(\mathfrak {sl}_2\) or semisimple Lie algebra representations (searching for “ClebschGordan”, and for weight-space/tensor-product combinations in <span class="ttfamily">Mathlib.Algebra.Lie.Weights</span>): nothing found. Everything in §<a href="ch-sl2.html#sec:sl2-commuting">2.3</a>–§<a href="ch-sl2.html#sec:sl2-cg">2.4</a> is new. </p>
-<h4 id="a0000000012">The Killing form claim was wrong in an earlier draft, now fixed.</h4>
-<p> An earlier version of Definition&#160;<a href="ch-casimir.html#def:cas-invariant-form">35</a>’s parenthetical about the Killing form asserted a fact about Mathlib without checking it closely enough, then a hasty correction asserted the opposite, also without checking closely enough. The actual state, now reflected there: Mathlib has both Cartan criteria in <span class="ttfamily">Mathlib.Algebra.Lie.CartanCriterion</span>, and <span class="ttfamily">LieAlgebra.hasTrivialRadical_iff_isKilling</span> does give the full equivalence between trivial radical (which coincides with semisimplicity in characteristic zero) and a nondegenerate Killing form. Flagged here as a reminder that citations in this blueprint should be checked against the actual Mathlib source, not assumed from familiarity with the mathematics. </p>
-<h4 id="a0000000013">“Self-adjoint” was removed from Definition&#160;<a href="ch-am.html#def:am-representation">45</a>.</h4>
-<p> An earlier draft described the angular momentum operators as self-adjoint, which does not match the actual Lean definition (deliberately: physical self-adjointness is exactly the kind of fact that belongs to a future Physlib bridge, not to this algebraic model). The blueprint text is now corrected to match the Lean code. </p>
-<h4 id="a0000000014">The explicit-representation bridge (§<a href="sect0002.html#sec:rep-basic">1.1</a>, Remark&#160;<a href="sect0002.html#def:rep-bridge">13</a>) remains unbuilt.</h4>
+<h4 id="a0000000012">The explicit-representation bridge (§<a href="sect0002.html#sec:rep-basic">1.1</a>, Remark&#160;<a href="sect0002.html#def:rep-bridge">13</a>) remains unbuilt.</h4>
 <p> This is the one gap flagged already in Chapter&#160;1 that is worth re-emphasizing here: Chapters&#160;4–5 use <span class="ttfamily">LieRepresentation</span> (an explicit morphism into \(\operatorname {End}_K(V)\)) rather than Mathlib’s instance-based <span class="ttfamily">LieModule</span>, specifically because Mathlib has no public constructor turning an explicit morphism back into local <span class="ttfamily">LieRingModule</span>/<span class="ttfamily">LieModule</span> instances. Until that bridge is built, results proved in the generic, instance-based Chapters&#160;1–3 (irreducibility transfer, the classification theorems, Casimir scalars) have to be re-derived or manually transported for the explicit-morphism objects in Chapters&#160;4–5 rather than applied directly.  </p>
 
 </div> <!--main-text -->
