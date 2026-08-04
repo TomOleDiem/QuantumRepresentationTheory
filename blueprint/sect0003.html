@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+  MathJax = { 
+    tex: {
+		    inlineMath: [['$','$'], ['\\(','\\)']]
+	} }
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<meta name="generator" content="plasTeX" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Caveats</title>
+<link rel="prev" href="ch-hydrogen.html" title="The hydrogen atom" />
+<link rel="up" href="index.html" title="QuantumRepresentationTheory" />
+<link rel="stylesheet" href="styles/theme-white.css" />
+<link rel="stylesheet" href="styles/amsthm.css" />
+<link rel="stylesheet" href="styles/showmore.css" />
+<link rel="stylesheet" href="styles/blueprint.css" />
+<link rel="stylesheet" href="styles/extra_styles.css" />
+</head>
+
+<body>
+<header>
+<svg  id="toc-toggle" class="icon icon-list-numbered "><use xlink:href="symbol-defs.svg#icon-list-numbered"></use></svg>
+<h1 id="doc_title"><a href="index.html">QuantumRepresentationTheory</a></h1>
+</header>
+
+<div class="wrapper">
+<nav class="toc">
+<ul class="sub-toc-0">
+<li class="">
+  <a href="sect0001.html"><span class="toc_ref"></span> <span class="toc_entry">Overview</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0001.html#a0000000005"><span class="toc_ref"></span> <span class="toc_entry">The idea.</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000006"><span class="toc_ref"></span> <span class="toc_entry">Scope of Chapters 4–5, and a note on Physlib.</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0002.html"><span class="toc_ref">1</span> <span class="toc_entry">Representations of Lie algebras</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0002.html#sec:rep-basic"><span class="toc_ref">1.1</span> <span class="toc_entry">The representation object</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#sec:rep-generic"><span class="toc_ref">1.2</span> <span class="toc_entry">Generic representations as Mathlib objects</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#sec:rep-schur"><span class="toc_ref">1.3</span> <span class="toc_entry">Schur’s lemma</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="ch-sl2.html"><span class="toc_ref">2</span> <span class="toc_entry">The Lie algebra \(\mathfrak {sl}_2\) and its representations</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="ch-sl2.html#sec:sl2-basic"><span class="toc_ref">2.1</span> <span class="toc_entry">\(\mathfrak {sl}_2\)-triples and primitive vectors</span></a>
+ </li>
+<li class="">
+  <a href="ch-sl2.html#sec:sl2-classification"><span class="toc_ref">2.2</span> <span class="toc_entry">Classification of irreducible \(\mathfrak {sl}_2\)-modules</span></a>
+ </li>
+<li class="">
+  <a href="ch-sl2.html#sec:sl2-commuting"><span class="toc_ref">2.3</span> <span class="toc_entry">Commuting \(\mathfrak {sl}_2\)-actions and tensor products</span></a>
+ </li>
+<li class="">
+  <a href="ch-sl2.html#sec:sl2-cg"><span class="toc_ref">2.4</span> <span class="toc_entry">Clebsch–Gordan decomposition</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="ch-casimir.html"><span class="toc_ref">3</span> <span class="toc_entry">The Casimir element</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="ch-casimir.html#sec:cas-basic"><span class="toc_ref">3.1</span> <span class="toc_entry">Construction</span></a>
+ </li>
+<li class="">
+  <a href="ch-casimir.html#sec:cas-centrality"><span class="toc_ref">3.2</span> <span class="toc_entry">Centrality and the scalar action</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="ch-am.html"><span class="toc_ref">4</span> <span class="toc_entry">Angular momentum</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="ch-am.html#sec:am-basic"><span class="toc_ref">4.1</span> <span class="toc_entry">The algebraic representation</span></a>
+ </li>
+<li class="">
+  <a href="ch-am.html#sec:am-classification"><span class="toc_ref">4.2</span> <span class="toc_entry">Spin classification</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="ch-hydrogen.html"><span class="toc_ref">5</span> <span class="toc_entry">The hydrogen atom</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="ch-hydrogen.html#sec:hyd-basic"><span class="toc_ref">5.1</span> <span class="toc_entry">The Runge–Lenz vector</span></a>
+ </li>
+<li class="">
+  <a href="ch-hydrogen.html#sec:hyd-symmetry"><span class="toc_ref">5.2</span> <span class="toc_entry">The hidden \(\mathfrak {so}_4\) symmetry</span></a>
+ </li>
+<li class="">
+  <a href="ch-hydrogen.html#sec:hyd-spectrum"><span class="toc_ref">5.3</span> <span class="toc_entry">The energy spectrum</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class=" active current">
+  <a href="sect0003.html"><span class="toc_ref"></span> <span class="toc_entry">Caveats</span></a>
+  <span class="expand-toc">▼</span>
+  <ul class="sub-toc-1 active">
+     <li class="">
+  <a href="sect0003.html#a0000000007"><span class="toc_ref"></span> <span class="toc_entry">The Casimir element does not exist in Mathlib.</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000008"><span class="toc_ref"></span> <span class="toc_entry">No exceptional low-rank Lie algebra isomorphisms.</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000009"><span class="toc_ref"></span> <span class="toc_entry">Mathlib already has the concrete Lie ring structure this project needs for \(\mathfrak {so}(3)\), unused.</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000010"><span class="toc_ref"></span> <span class="toc_entry">Schur’s lemma exists in Mathlib at two levels, neither directly reusable yet.</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000011"><span class="toc_ref"></span> <span class="toc_entry">No Clebsch–Gordan or weight-multiplicity machinery.</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000012"><span class="toc_ref"></span> <span class="toc_entry">The Killing form claim was wrong in an earlier draft, now fixed.</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000013"><span class="toc_ref"></span> <span class="toc_entry">“Self-adjoint” was removed from Definition&#160;<a href="ch-am.html#def:am-representation">45</a>.</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000014"><span class="toc_ref"></span> <span class="toc_entry">The explicit-representation bridge (§<a href="sect0002.html#sec:rep-basic">1.1</a>, Remark&#160;<a href="sect0002.html#def:rep-bridge">13</a>) remains unbuilt.</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li ><a href="dep_graph_document.html">Dependency graph</a></li>
+</ul>
+</nav>
+
+<div class="content">
+<div class="content-wrapper">
+
+
+<div class="main-text">
+<h1 id="a0000000004">Caveats</h1>
+<p>This chapter is not part of the theorem dependency graph above; it collects things found while auditing this blueprint against the current state of Mathlib, before making it public. Some are corrections already applied above; others are open opportunities for whoever picks this up next. </p>
+<h4 id="a0000000007">The Casimir element does not exist in Mathlib.</h4>
+<p> Checked with a case-insensitive search of the entire Mathlib tree for “Casimir”: zero hits. Everything in Chapter&#160;<a href="ch-casimir.html">3</a> (basis-dependent construction, change-of-basis invariance, centrality via the universal enveloping algebra) is new relative to Mathlib, not merely restated in a different form. </p>
+<h4 id="a0000000008">No exceptional low-rank Lie algebra isomorphisms.</h4>
+<p> Mathlib has a genuine general construction of \(\mathfrak {so}(n)\) as skew-symmetric matrices (<span class="ttfamily">LieAlgebra.Orthogonal.so</span>, with the equivalent “indefinite form” presentation <span class="ttfamily">so’</span>, covering \(\mathfrak {so}(3)\) and \(\mathfrak {so}(4)\) as the low-rank cases of types \(B_1\) and \(D_2\)), and separately the general skew-adjoint-endomorphism construction (<span class="ttfamily">Mathlib.Algebra.Lie.SkewAdjoint</span>) it is built from. But we found no proof anywhere of the classical exceptional isomorphisms \(\mathfrak {so}(3)\cong \mathfrak {sl}_2\) or \(\mathfrak {so}(4)\cong \mathfrak {sl}_2\oplus \mathfrak {sl}_2\) (\(B_1 \cong A_1\), \(D_2\cong A_1\times A_1\)) — we checked the root-system and Dynkin-diagram files (<span class="ttfamily">CartanMatrix.lean</span>, <span class="ttfamily">Irreducible.lean</span>, even the dedicated <span class="ttfamily">RootSystem/Finite/G2.lean</span> for the \(G_2\) exceptional type) and found nothing for rank \(\le 2\). Theorem&#160;<a href="ch-am.html#thm:am-is-sl2-triple">48</a> and the \(\vec I,\vec K\) construction in §<a href="ch-hydrogen.html#sec:hyd-symmetry">5.2</a> therefore prove these isomorphisms <em>ad hoc</em>, computationally, rather than by invoking a general theorem, because no such general theorem is available to invoke. </p>
+<h4 id="a0000000009">Mathlib already has the concrete Lie ring structure this project needs for \(\mathfrak {so}(3)\), unused.</h4>
+<p> <span class="ttfamily">Mathlib.LinearAlgebra.CrossProduct</span> packages <span class="ttfamily">Fin 3 → R</span> with the cross product as a genuine <span class="ttfamily">LieRing</span> (<span class="ttfamily">Cross.lieRing</span>), with antisymmetry (<span class="ttfamily">cross_anticomm</span>) and the Jacobi identity (<span class="ttfamily">jacobi_cross</span>) already proved, and the cross product itself is bilinear by construction (it is built as a <span class="ttfamily">LinearMap.mk₂</span>, so Theorem&#160;<a href="ch-hydrogen.html#thm:hyd-cross-linearity">54</a> would be free). Neither <span class="ttfamily">AngularMomentumRepresentation</span> (§<a href="ch-am.html#sec:am-basic">4.1</a>) nor the Levi-Civita-based <span class="ttfamily">crossComponent</span> (§<a href="ch-hydrogen.html#sec:hyd-basic">5.1</a>) currently uses this: angular momentum is presented as three operators satisfying axiomatized commutation relations, rather than as a representation of this concrete, already-available Lie ring. Routing Chapters&#160;<a href="ch-am.html">4</a>–<a href="ch-hydrogen.html">5</a> through <span class="ttfamily">Cross.lieRing</span> instead is a live simplification opportunity, not attempted in this pass. </p>
+<h4 id="a0000000010">Schur’s lemma exists in Mathlib at two levels, neither directly reusable yet.</h4>
+<p> <span class="ttfamily">Mathlib.RingTheory.SimpleModule.Basic</span> gives the division-ring level (<span class="ttfamily">bijective_or_eq_zero</span>, <span class="ttfamily">Module.End.instDivisionRing</span>) but stops there — no algebraically-closed-field “it’s a scalar” step. That step exists in full generality in <span class="ttfamily">Mathlib.CategoryTheory.Preadditive.Schur</span> (<span class="ttfamily">endomorphism_simple_eq_smul_id</span>), for any \(\Bbbk \)-linear category with kernels, algebraically closed \(\Bbbk \), finite-dimensional hom spaces — exactly Theorem&#160;<a href="sect0002.html#thm:rep-schur">16</a>’s statement, one level of abstraction up. The obstruction to reusing it directly is that Mathlib has no bundled category of Lie modules (no <span class="ttfamily">LieModuleCat</span>, unlike <span class="ttfamily">ModuleCat</span> or <span class="ttfamily">FGModuleCat</span>). Group representations do not have this problem: <span class="ttfamily">Mathlib.RepresentationTheory.FDRep</span> is a genuine category and imports <span class="ttfamily">CategoryTheory.Preadditive.Schur</span> directly to get Schur’s lemma for free (<span class="ttfamily">finrank_hom_simple_simple</span>). <span class="ttfamily">FDRep</span> is the exact template a <span class="ttfamily">LieModuleCat</span> would follow; building it is a well-scoped, plausible Mathlib contribution, but Theorem&#160;<a href="sect0002.html#thm:rep-schur">16</a> as it stands takes the direct route (extract an eigenvalue via <span class="ttfamily">Module.End.exists_eigenvalue</span>, show the shifted map is a <span class="ttfamily">LieModuleHom</span> with nontrivial kernel, conclude by irreducibility) rather than waiting on that infrastructure. </p>
+<h4 id="a0000000011">No Clebsch–Gordan or weight-multiplicity machinery.</h4>
+<p> Checked for any existing tensor-product decomposition or weight-multiplicity result for \(\mathfrak {sl}_2\) or semisimple Lie algebra representations (searching for “ClebschGordan”, and for weight-space/tensor-product combinations in <span class="ttfamily">Mathlib.Algebra.Lie.Weights</span>): nothing found. Everything in §<a href="ch-sl2.html#sec:sl2-commuting">2.3</a>–§<a href="ch-sl2.html#sec:sl2-cg">2.4</a> is new. </p>
+<h4 id="a0000000012">The Killing form claim was wrong in an earlier draft, now fixed.</h4>
+<p> An earlier version of Definition&#160;<a href="ch-casimir.html#def:cas-invariant-form">35</a>’s parenthetical about the Killing form asserted a fact about Mathlib without checking it closely enough, then a hasty correction asserted the opposite, also without checking closely enough. The actual state, now reflected there: Mathlib has both Cartan criteria in <span class="ttfamily">Mathlib.Algebra.Lie.CartanCriterion</span>, and <span class="ttfamily">LieAlgebra.hasTrivialRadical_iff_isKilling</span> does give the full equivalence between trivial radical (which coincides with semisimplicity in characteristic zero) and a nondegenerate Killing form. Flagged here as a reminder that citations in this blueprint should be checked against the actual Mathlib source, not assumed from familiarity with the mathematics. </p>
+<h4 id="a0000000013">“Self-adjoint” was removed from Definition&#160;<a href="ch-am.html#def:am-representation">45</a>.</h4>
+<p> An earlier draft described the angular momentum operators as self-adjoint, which does not match the actual Lean definition (deliberately: physical self-adjointness is exactly the kind of fact that belongs to a future Physlib bridge, not to this algebraic model). The blueprint text is now corrected to match the Lean code. </p>
+<h4 id="a0000000014">The explicit-representation bridge (§<a href="sect0002.html#sec:rep-basic">1.1</a>, Remark&#160;<a href="sect0002.html#def:rep-bridge">13</a>) remains unbuilt.</h4>
+<p> This is the one gap flagged already in Chapter&#160;1 that is worth re-emphasizing here: Chapters&#160;4–5 use <span class="ttfamily">LieRepresentation</span> (an explicit morphism into \(\operatorname {End}_K(V)\)) rather than Mathlib’s instance-based <span class="ttfamily">LieModule</span>, specifically because Mathlib has no public constructor turning an explicit morphism back into local <span class="ttfamily">LieRingModule</span>/<span class="ttfamily">LieModule</span> instances. Until that bridge is built, results proved in the generic, instance-based Chapters&#160;1–3 (irreducibility transfer, the classification theorems, Casimir scalars) have to be re-derived or manually transported for the explicit-morphism objects in Chapters&#160;4–5 rather than applied directly.  </p>
+
+</div> <!--main-text -->
+</div> <!-- content-wrapper -->
+</div> <!-- content -->
+</div> <!-- wrapper -->
+
+<nav class="prev_up_next">
+  <svg  id="showmore-minus" class="icon icon-eye-minus showmore"><use xlink:href="symbol-defs.svg#icon-eye-minus"></use></svg>
+
+  <svg  id="showmore-plus" class="icon icon-eye-plus showmore"><use xlink:href="symbol-defs.svg#icon-eye-plus"></use></svg>
+
+  <a href="ch-hydrogen.html" title="The hydrogen atom"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
+</a>
+  <a href="index.html" title="QuantumRepresentationTheory"><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
+</a>
+</nav>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/plastex.js"></script>
+<script type="text/javascript" src="js/svgxuse.js"></script>
+<script type="text/javascript" src="js/js.cookie.min.js"></script>
+<script type="text/javascript" src="js/showmore.js"></script>
+</body>
+</html>

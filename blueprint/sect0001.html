@@ -37,10 +37,10 @@
   <span class="expand-toc">▼</span>
   <ul class="sub-toc-1 active">
      <li class="">
-  <a href="sect0001.html#a0000000004"><span class="toc_ref"></span> <span class="toc_entry">The idea.</span></a>
+  <a href="sect0001.html#a0000000005"><span class="toc_ref"></span> <span class="toc_entry">The idea.</span></a>
  </li>
 <li class="">
-  <a href="sect0001.html#a0000000005"><span class="toc_ref"></span> <span class="toc_entry">Scope of Chapters 4–5, and a note on Physlib.</span></a>
+  <a href="sect0001.html#a0000000006"><span class="toc_ref"></span> <span class="toc_entry">Scope of Chapters 4–5, and a note on Physlib.</span></a>
  </li>
 
   </ul>
@@ -122,6 +122,37 @@
 
   </ul>
  </li>
+<li class="">
+  <a href="sect0003.html"><span class="toc_ref"></span> <span class="toc_entry">Caveats</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0003.html#a0000000007"><span class="toc_ref"></span> <span class="toc_entry">The Casimir element does not exist in Mathlib.</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000008"><span class="toc_ref"></span> <span class="toc_entry">No exceptional low-rank Lie algebra isomorphisms.</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000009"><span class="toc_ref"></span> <span class="toc_entry">Mathlib already has the concrete Lie ring structure this project needs for \(\mathfrak {so}(3)\), unused.</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000010"><span class="toc_ref"></span> <span class="toc_entry">Schur’s lemma exists in Mathlib at two levels, neither directly reusable yet.</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000011"><span class="toc_ref"></span> <span class="toc_entry">No Clebsch–Gordan or weight-multiplicity machinery.</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000012"><span class="toc_ref"></span> <span class="toc_entry">The Killing form claim was wrong in an earlier draft, now fixed.</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000013"><span class="toc_ref"></span> <span class="toc_entry">“Self-adjoint” was removed from Definition&#160;<a href="ch-am.html#def:am-representation">45</a>.</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000014"><span class="toc_ref"></span> <span class="toc_entry">The explicit-representation bridge (§<a href="sect0002.html#sec:rep-basic">1.1</a>, Remark&#160;<a href="sect0002.html#def:rep-bridge">13</a>) remains unbuilt.</span></a>
+ </li>
+
+  </ul>
+ </li>
 <li ><a href="dep_graph_document.html">Dependency graph</a></li>
 </ul>
 </nav>
@@ -132,7 +163,7 @@
 
 <div class="main-text">
 <h1 id="a0000000002">Overview</h1>
-<h4 id="a0000000004">The idea.</h4>
+<h4 id="a0000000005">The idea.</h4>
 <p> The standard way to make the hydrogen atom rigorous is analytic: unbounded self-adjoint operators, spectral theory, all the machinery needed to give the Coulomb Hamiltonian a precise meaning. That work is real and hard, and Mathlib’s Physlib is already making progress on it. </p>
 <p>There is an older, more algebraic story too. The hydrogen atom has a hidden symmetry: beyond ordinary rotations, its bound states also carry a conserved Runge–Lenz vector, and together these generate a bigger symmetry algebra. Lean on the representation theory of that algebra hard enough, and the energy levels and their degeneracies fall out of group theory almost without touching an actual Hamiltonian — this is the classical explanation (going back to Pauli) of why hydrogen’s degeneracy is \(n^2\) rather than merely \(2\ell +1\). </p>
 <p>This blueprint tries to build that second route: work out the algebra completely first — classification of irreducible representations, Casimir elements, the works — and only afterward come back and show that the real, concrete quantum-mechanical operators satisfy whatever the algebra needed all along. That last step is deliberately <em>not</em> attempted here (see the note on Physlib below); the goal of this pass is to nail down the algebra and the exact shape of the bridge to physics that will eventually be needed. </p>
@@ -159,7 +190,7 @@
 </li>
 </ul>
 <p>Throughout, \(K\) is a field (eventually specialized to \(\mathbb {C}\)), \(L\) a Lie algebra over \(K\), and modules are finite-dimensional unless stated otherwise. </p>
-<h4 id="a0000000005">Scope of Chapters 4–5, and a note on Physlib.</h4>
+<h4 id="a0000000006">Scope of Chapters 4–5, and a note on Physlib.</h4>
 <p> Physlib already has a substantial, mostly-proved analytic treatment of this material — <span class="ttfamily">QuantumMechanics/Hydrogen/Basic.lean</span> and <span class="ttfamily">.../LaplaceRungeLenzVector.lean</span> define the (regularized) hydrogen Hamiltonian and Runge–Lenz operator on Schwartz space and prove their commutation relations and the identity \(\mathbf{A}^2 = 2m\mathbf{H}(\mathbf{L}^2 + \tfrac 14\hbar ^2(d-1)^2) + \dots \); <span class="ttfamily">QuantumMechanics/Operators/AngularMomentum.lean</span> proves the analogous facts for \(\mathbf L\). Its own module documentation lists the bound-state energy spectrum as an open TODO. Chapters&#160;4–5 below are deliberately kept as a <em>decoupled, finite-dimensional algebraic model</em>: they do not depend on Physlib’s Hilbert-space/self-adjoint-operator machinery, and in particular do not attempt the analytic work (essential self-adjointness, finite-dimensionality of eigenspaces) needed to connect a literal Physlib <span class="ttfamily">HydrogenAtom</span> to the abstract representation theory here. Wiring the two together — so that this project’s classification theorems discharge Physlib’s open TODO — is future work, not attempted in this pass. </p>
 
 </div> <!--main-text -->

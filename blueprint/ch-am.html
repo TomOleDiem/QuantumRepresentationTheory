@@ -37,10 +37,10 @@
   <span class="expand-toc">▶</span>
   <ul class="sub-toc-1">
      <li class="">
-  <a href="sect0001.html#a0000000004"><span class="toc_ref"></span> <span class="toc_entry">The idea.</span></a>
+  <a href="sect0001.html#a0000000005"><span class="toc_ref"></span> <span class="toc_entry">The idea.</span></a>
  </li>
 <li class="">
-  <a href="sect0001.html#a0000000005"><span class="toc_ref"></span> <span class="toc_entry">Scope of Chapters 4–5, and a note on Physlib.</span></a>
+  <a href="sect0001.html#a0000000006"><span class="toc_ref"></span> <span class="toc_entry">Scope of Chapters 4–5, and a note on Physlib.</span></a>
  </li>
 
   </ul>
@@ -122,6 +122,37 @@
 
   </ul>
  </li>
+<li class="">
+  <a href="sect0003.html"><span class="toc_ref"></span> <span class="toc_entry">Caveats</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0003.html#a0000000007"><span class="toc_ref"></span> <span class="toc_entry">The Casimir element does not exist in Mathlib.</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000008"><span class="toc_ref"></span> <span class="toc_entry">No exceptional low-rank Lie algebra isomorphisms.</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000009"><span class="toc_ref"></span> <span class="toc_entry">Mathlib already has the concrete Lie ring structure this project needs for \(\mathfrak {so}(3)\), unused.</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000010"><span class="toc_ref"></span> <span class="toc_entry">Schur’s lemma exists in Mathlib at two levels, neither directly reusable yet.</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000011"><span class="toc_ref"></span> <span class="toc_entry">No Clebsch–Gordan or weight-multiplicity machinery.</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000012"><span class="toc_ref"></span> <span class="toc_entry">The Killing form claim was wrong in an earlier draft, now fixed.</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000013"><span class="toc_ref"></span> <span class="toc_entry">“Self-adjoint” was removed from Definition&#160;<a href="ch-am.html#def:am-representation">45</a>.</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000014"><span class="toc_ref"></span> <span class="toc_entry">The explicit-representation bridge (§<a href="sect0002.html#sec:rep-basic">1.1</a>, Remark&#160;<a href="sect0002.html#def:rep-bridge">13</a>) remains unbuilt.</span></a>
+ </li>
+
+  </ul>
+ </li>
 <li ><a href="dep_graph_document.html">Dependency graph</a></li>
 </ul>
 </nav>
@@ -194,7 +225,8 @@
         </div>
   </div>
   <div class="definition_thmcontent">
-  <p>    An algebraic angular momentum representation is an explicit representation \(\rho \) (Definition&#160;<a href="sect0002.html#def:rep-explicit">7</a>) of the Lie algebra \(\mathfrak {so}_3 \cong \mathfrak {sl}_2\) on a state space \(V\), presented via self-adjoint operators \(J_x, J_y, J_z\) satisfying \([J_x,J_y] = iJ_z\) and cyclic permutations. </p>
+  <p>    An algebraic angular momentum representation is an explicit representation \(\rho \) (Definition&#160;<a href="sect0002.html#def:rep-explicit">7</a>) of the Lie algebra \(\mathfrak {so}_3 \cong \mathfrak {sl}_2\) on a state space \(V\), presented via operators \(J_x, J_y, J_z\) satisfying \([J_x,J_y] = iJ_z\) and cyclic permutations. The physical requirement that \(J_x,J_y,J_z\) be self-adjoint on a Hilbert space is <em>not</em> part of this definition: it is exactly the kind of fact that belongs on the Physlib side of the future bridge discussed in the Overview, not something assumed here. </p>
+<p><em>Caveat:</em> the commutation relations here are currently axiomatized as three fields of a structure. Mathlib already packages \(\mathfrak {so}_3\) concretely as <span class="ttfamily">Cross.lieRing</span>, the Lie ring structure on \(\texttt{Fin 3} \to R\) given by the cross product (in <span class="ttfamily">Mathlib.LinearAlgebra.CrossProduct</span>), with the Jacobi identity and antisymmetry already proved (<span class="ttfamily">jacobi_cross</span>, <span class="ttfamily">cross_anticomm</span>). Presenting angular momentum as an honest representation of that concrete Lie ring, rather than an axiomatized triple of operators, is a more idiomatic route not yet taken — see the caveats chapter. </p>
 
   </div>
 </div>
