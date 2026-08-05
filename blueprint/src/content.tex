@@ -298,6 +298,7 @@ the form Chapters~2--3 actually need.
 \begin{theorem}[Eigenspace of an endomorphism is nonzero]
   \label{thm:rep-eigenspace-nonzero}
   \lean{QuantumRepresentationTheory.exists_ker_smul_id_ne_bot}
+  \leanok
   \uses{thm:rep-eigenvalue-exists}
   Under the hypotheses of Theorem~\ref{thm:rep-eigenvalue-exists}, there is
   $c \in K$ with $\ker(f - c \cdot \mathrm{id}_V) \neq 0$.
@@ -306,6 +307,7 @@ the form Chapters~2--3 actually need.
 \begin{theorem}[Schur's lemma]
   \label{thm:rep-schur}
   \lean{QuantumRepresentationTheory.schur}
+  \leanok
   \uses{def:rep-hom, def:rep-irreducible-generic, thm:rep-hom-ker-range,
         thm:rep-eigenspace-nonzero}
   Let $K$ be algebraically closed, let $M$ be a finite-dimensional
