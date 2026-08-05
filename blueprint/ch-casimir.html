@@ -322,6 +322,8 @@
           
           <li><a href="sect0002.html#def:rep-to-end">Definition 2</a></li>
           
+          <li><a href="ch-casimir.html#def:cas-invariant-form">Definition 35</a></li>
+          
         </ul>
     
       </div>
@@ -351,10 +353,11 @@
         </div>
   </div>
   <div class="definition_thmcontent">
-  <p>    For a representation \(\rho \) of \(L\) on \(V\) and a basis \(x_1,\dots ,x_d\) of \(L\) with \(\Phi \)-dual basis \(x^1,\dots ,x^d\), the Casimir operator is </p>
+  <p>    For a representation \(\rho \) of \(L\) on \(V\), a <em>nondegenerate and Lie-invariant</em> form \(\Phi \) (Definition&#160;<a href="ch-casimir.html#def:cas-invariant-form">35</a>), and a basis \(x_1,\dots ,x_d\) of \(L\) with \(\Phi \)-dual basis \(x^1,\dots ,x^d\), the Casimir operator is </p>
 <div class="displaymath" id="a0000000015">
   \[  C_\rho \; =\;  \sum _{i=1}^d \rho (x_i)\, \rho (x^i) \; \in \;  \operatorname {End}_K(V).  \]
 </div>
+<p> Invariance of \(\Phi \) is essential here, not just nondegeneracy: it is what makes Theorem&#160;<a href="ch-casimir.html#thm:cas-commutes-generators">40</a> true. </p>
 
   </div>
 </div>
@@ -493,6 +496,8 @@
     <span class="theorem_thmtitle">The Casimir element commutes with the generators</span>
     <div class="thm_header_extras">
 
+    
+    ✓
         </div>
     <div class="thm_header_hidden_extras">
 
@@ -757,6 +762,8 @@
     <span class="theorem_thmtitle">Schur gives a scalar Casimir</span>
     <div class="thm_header_extras">
 
+    
+    ✓
         </div>
     <div class="thm_header_hidden_extras">
 
@@ -777,7 +784,7 @@
           
           <li><a href="sect0002.html#thm:rep-schur">Theorem 16</a></li>
           
-          <li><a href="ch-casimir.html#thm:cas-central-intertwines">Theorem 43</a></li>
+          <li><a href="ch-casimir.html#thm:cas-commutes-generators">Theorem 40</a></li>
           
           <li><a href="ch-casimir.html#def:cas-casimir">Definition 39</a></li>
           
@@ -810,7 +817,7 @@
         </div>
   </div>
   <div class="theorem_thmcontent">
-  <p>    If \(\rho \) is a finite-dimensional irreducible representation of \(L\) over an algebraically closed field, \(C_\rho \) acts on \(V\) as multiplication by a scalar \(c(\rho ) \in K\). </p>
+  <p>    If \(\rho \) is a finite-dimensional irreducible representation of \(L\) over an algebraically closed field, \(C_\rho \) acts on \(V\) as multiplication by a scalar \(c(\rho ) \in K\). The Lean proof takes a direct route: package Theorem&#160;<a href="ch-casimir.html#thm:cas-commutes-generators">40</a> into a <span class="ttfamily">LieModuleHom</span> self-map of \(V\) and apply Theorem&#160;<a href="sect0002.html#thm:rep-schur">16</a> directly, rather than going through the universal-enveloping-algebra route of Theorem&#160;<a href="ch-casimir.html#thm:cas-central-intertwines">43</a>. </p>
 
   </div>
 </div>
