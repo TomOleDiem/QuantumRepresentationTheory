@@ -446,10 +446,19 @@ calculus for $\sltwo$-triples; the classification work in
   \label{thm:sl2-string-independent}
   \lean{QuantumRepresentationTheory.string_linearIndependent}
   \uses{thm:sl2-string-finite, thm:sl2-string-h}
-  If $m$ is primitive of weight $n \in \mathbb{N}$, the vectors
-  $m, fm, \dots, f^n m$ are linearly independent, since they lie in distinct
-  $h$-eigenspaces (Theorem~\ref{thm:sl2-string-h}) and are all nonzero
+  \leanok
+  If $K$ has characteristic zero and $m$ is primitive of weight
+  $n \in \mathbb{N}$, the vectors $m, fm, \dots, f^n m$ are linearly
+  independent, since they lie in distinct $h$-eigenspaces
+  (Theorem~\ref{thm:sl2-string-h}) and are all nonzero
   (Theorem~\ref{thm:sl2-string-finite}).
+
+  \emph{The characteristic-zero hypothesis is necessary}, not a formalization
+  artifact, and was missing from an earlier version of this statement: in
+  characteristic $2$, the adjoint representation of $\sltwo$ on itself has a
+  primitive vector $m = e$ of weight $n = 2$ (since $2 = 0$ in $K$), but
+  $f^2 \cdot e = -2f = 0$, so the length-$3$ string $(e, \pm h, 0)$ is not
+  linearly independent.
 \end{theorem}
 
 \begin{theorem}[The string spans a submodule]

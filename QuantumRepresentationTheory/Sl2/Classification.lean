@@ -21,11 +21,36 @@ variable {K L M : Type*} [Field K] [LieRing L] [LieAlgebra K L]
 def stringVecs (f : L) (m : M) (n : ℕ) (k : Fin (n + 1)) : M :=
   (LieModule.toEnd K L M f ^ (k : ℕ)) m
 
-/-- **Linear independence of the primitive-vector string** (`thm:sl2-string-independent`). -/
-theorem string_linearIndependent {t : IsSl2Triple h e f}
+/-- **Linear independence of the primitive-vector string** (`thm:sl2-string-independent`).
+
+The hypothesis `CharZero K` is necessary and was missing from an earlier version
+of this statement: Mathlib's own
+`IsSl2Triple.HasPrimitiveVectorWith.pow_toEnd_f_ne_zero_of_eq_nat`, which this
+proof relies on to keep the string from collapsing to `0` early, itself requires
+`CharZero`. Concretely, in characteristic `2` the adjoint representation of
+`sl₂` on itself has a primitive vector `m = e` of weight `n = 2` (since `2 = 0`
+in `K`), but `f²·e = -2f = 0`, so the length-`3` string `(e, ±h, 0)` is not
+linearly independent. -/
+theorem string_linearIndependent [CharZero K] {t : IsSl2Triple h e f}
     (P : t.HasPrimitiveVectorWith m (n : K)) :
     LinearIndependent K (stringVecs (K := K) f m n) := by
-  sorry
+  have hne : ∀ k : Fin (n + 1), stringVecs (K := K) f m n k ≠ 0 := fun k =>
+    P.pow_toEnd_f_ne_zero_of_eq_nat rfl (Nat.lt_succ_iff.mp k.isLt)
+  have heig : ∀ k : Fin (n + 1),
+      (LieModule.toEnd K L M h).HasEigenvector ((n : K) - 2 * (k : ℕ))
+        (stringVecs (K := K) f m n k) := by
+    intro k
+    refine ⟨?_, hne k⟩
+    rw [Module.End.mem_eigenspace_iff, LieModule.toEnd_apply_apply]
+    exact P.lie_h_pow_toEnd_f k
+  have hinj : Function.Injective (fun k : Fin (n + 1) => (n : K) - 2 * (k : ℕ)) := by
+    intro k₁ k₂ hk
+    simp only [sub_right_inj, mul_eq_mul_left_iff] at hk
+    rcases hk with hk | hk
+    · exact Fin.ext (Nat.cast_injective hk)
+    · norm_num at hk
+  exact (LieModule.toEnd K L M h).eigenvectors_linearIndependent'
+    (fun k : Fin (n + 1) => (n : K) - 2 * (k : ℕ)) hinj (stringVecs (K := K) f m n) heig
 
 /-- The span of the primitive-vector string, as a plain `K`-submodule. -/
 def stringSpan (f : L) (m : M) (n : ℕ) : Submodule K M :=

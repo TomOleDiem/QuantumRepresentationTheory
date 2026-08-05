@@ -13,20 +13,44 @@ it.
 ## Active
 
 ### Claude (this session) - 2026-08-05
-Working on: Casimir/Centrality.lean (casimirUEA_mem_center, central_commutes_toEnd -
-the UEA-track sorries; casimir_commutes and casimir_scalar already fully proved).
-Also: general sorry-clearing across the project, leaf-first (only proving things
-whose dependencies are already Mathlib or already-proved project results).
+Now working on: Sl2/ClebschGordan.lean (clebsch_gordan_finrank) - pure Finset
+arithmetic identity, no Lie-theory dependency, fully leaf.
+Investigated Sl2/Basic.lean's standardSl2ModuleLieRingModule/standardSl2ModuleLieModule:
+these are genuinely hard (need to build a LieHom from the sl2-subalgebra into
+Module.End K V from scratch, which in turn needs linear independence of {h,e,f} -
+provable but only for CharZero/char≠2 K, not stated as a hypothesis currently).
+Not claiming it yet; flagging for whoever tackles it that a CharZero (or char≠2)
+hypothesis will likely need to be added to match Sl2/Classification.lean's later
+assumptions.
+Previously done (this session): Casimir/Centrality.lean's casimir_commutes and
+casimir_scalar (no sorry). casimirUEA_mem_center/central_commutes_toEnd (UEA track)
+still sorry - not actively working these right now.
 Status: in progress
 
 ### Claude (2nd session) - 2026-08-05
-Working on: Hydrogen/Basic.lean (crossComponent_bilinear) and Casimir/Basic.lean
-(casimirBasisDependent_basis_indep) - both leaf, unclaimed, pure-Mathlib-facing.
-Note: found Hydrogen/Symmetry.lean's I_comm_xy/I_comm_yz/I_comm_zx/K_comm_*/I_comm_K
-are false as stated - `BoundStateRepresentation` (Hydrogen/Basic.lean) declares
-Mx,My,Mz with NO commutation-relation fields/hypotheses at all (no [J,M] or [M,M]
-relations), so nothing pins down `I,K`'s so(3) relations. Flagging, not fixing yet -
-needs a real decision about which hypotheses to add to the structure.
+Done: Hydrogen/Basic.lean's crossComponent_bilinear, Casimir/Basic.lean's
+casimirBasisDependent_basis_indep (no sorry, committed 548f2de). Marked
+\leanok on both in the blueprint.
+Now working on: Sl2/Classification.lean's string_linearIndependent - adding a
+`[CharZero K]` hypothesis (needed: Mathlib's own
+IsSl2Triple.HasPrimitiveVectorWith.pow_toEnd_f_ne_zero_of_eq_nat, which this
+proof leans on, itself requires CharZero; without it the string can collapse
+to 0 early, e.g. char-2 adjoint rep, n=2 - false as stated otherwise, same
+pattern as the isSl2Triple fix in AngularMomentum/Basic.lean).
+Found but NOT fixing: exists_stringLieSubmodule (and everything after it in
+Sl2/Classification.lean: stringSpan_eq_top, string_isBasis, finrank_eq_succ,
+classification, classification_n_eq_finrank_sub_one) is false as stated for
+generic ambient `L` - `LieSubmodule K L M` demands invariance under *all* of
+L, not just h,e,f, but the file's `L` is a fully generic LieAlgebra with no
+assumption that it's spanned by {h,e,f}. It's only true when L is
+(isomorphic to) `t.toLieSubalgebra K` itself, which matches how downstream
+callers (AngularMomentum/Classification.lean, Sl2/CommutingActions.lean)
+always instantiate it - but the file's own generic statement doesn't capture
+that. Needs an architectural decision (add a "L is spanned by {h,e,f}"
+hypothesis, or restructure the file's variables around the subalgebra type
+directly) bigger than a leaf fix. Related to the other session's note above
+about Sl2/Basic.lean needing CharZero/char≠2 for the same subalgebra
+construction - likely worth tackling together.
 Status: in progress
 
 ## Log (most recent first)
