@@ -548,12 +548,20 @@ that goal than the classical Clebsch--Gordan decomposition of
 \begin{theorem}[Clebsch--Gordan decomposition]
   \label{thm:sl2-clebsch-gordan}
   \lean{QuantumRepresentationTheory.clebsch_gordan_finrank, QuantumRepresentationTheory.clebsch_gordan}
-  \uses{thm:sl2-classification, thm:sl2-tensor-action}
-  For $m, n \in \mathbb{N}$, the diagonal $\sltwo$-module $V(m) \otimes_K
-  V(n)$ (Theorem~\ref{thm:sl2-tensor-action}) decomposes as
+  \leanok
+  \uses{def:sl2-standard-module}
+  For $m, n \in \mathbb{N}$,
   \[
-    V(m) \otimes_K V(n) \;\cong_K\; \bigoplus_{k=0}^{\min(m,n)} V(m+n-2k).
+    V(m) \otimes_K V(n) \;\cong_K\; \bigoplus_{k=0}^{\min(m,n)} V(m+n-2k)
   \]
+  as $K$-vector spaces, with matching dimension count $(m+1)(n+1) =
+  \sum_{k=0}^{\min(m,n)} (m+n-2k+1)$. The vector-space isomorphism is proved
+  directly from the dimension count (any two finite-dimensional spaces of
+  equal dimension over a field are linearly isomorphic); it does not yet
+  intertwine the diagonal $\sltwo$-action on the left with the direct-sum
+  action on the right (Theorem~\ref{thm:sl2-tensor-action}), which would
+  need the classification theorem (Theorem~\ref{thm:sl2-classification})
+  and is future work.
 \end{theorem}
 
 \chapter{The Casimir element}

@@ -31,9 +31,23 @@ External feedback received: someone reviewing the blueprint suggested
 angular momentum should really be an antisymmetric 2-tensor (so(n)-style),
 not a 3-vector specific to 3D - a real point (so(3)'s vector-via-cross-
 product presentation is a low-dimension coincidence) but a bigger design
-question than a leaf fix; not acted on yet, flagging here so whoever picks
-it up doesn't duplicate the "stay algebraic, decoupled from Physlib" scoping
-discussion already baked into the Overview/Chapter 4 text.
+question than a leaf fix. Per user's explicit direction, only documented
+this (new Caveats paragraph, committed 7d87f2c) rather than acting on it -
+also connects it to the concrete Hydrogen/Symmetry.lean gap below. Not
+attempting a rewrite; flagging so whoever revisits doesn't duplicate the
+"stay algebraic, decoupled from Physlib" scoping discussion already baked
+into the Overview/Chapter 4 text.
+Also done (once Sl2/Basic.lean became buildable again): Sl2/ClebschGordan.lean's
+`clebsch_gordan` (vector-space form) - both of that file's theorems are now
+sorry-free. Proved via pure dimension-counting
+(FiniteDimensional.nonempty_linearEquiv_of_finrank_eq +
+Module.finrank_tensorProduct/finrank_directSum/finrank_pi +
+clebsch_gordan_finrank), no Lie-theory content needed. Also corrected the
+blueprint's \uses for thm:sl2-clebsch-gordan: it cited thm:sl2-classification
+and thm:sl2-tensor-action, but the actual Lean `clebsch_gordan` is
+(deliberately, per its own doc comment) only a plain vector-space
+isomorphism, not yet sl2-equivariant, so neither is really used - reworded
+the theorem statement to say so honestly and marked \leanok.
 Status: in progress
 
 ### Claude (2nd session) - 2026-08-05

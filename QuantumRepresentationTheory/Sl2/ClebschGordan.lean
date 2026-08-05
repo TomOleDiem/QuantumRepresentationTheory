@@ -63,6 +63,16 @@ both via `standardSl2ModuleLieRingModule`) is future work. -/
 theorem clebsch_gordan (m n : ℕ) :
     Nonempty (StandardSl2Module K m ⊗[K] StandardSl2Module K n ≃ₗ[K]
       ⨁ _k : Fin (min m n + 1), StandardSl2Module K (m + n - 2 * (_k : ℕ))) := by
-  sorry
+  have hdim : ∀ k : ℕ, Module.finrank K (StandardSl2Module K k) = k + 1 := fun k => by
+    show Module.finrank K (Fin (k + 1) → K) = k + 1
+    rw [Module.finrank_pi, Fintype.card_fin]
+  haveI hfin : ∀ k : ℕ, Module.Finite K (StandardSl2Module K k) := fun k => by
+    show Module.Finite K (Fin (k + 1) → K)
+    infer_instance
+  apply FiniteDimensional.nonempty_linearEquiv_of_finrank_eq
+  rw [Module.finrank_tensorProduct, hdim, hdim, Module.finrank_directSum]
+  simp_rw [hdim]
+  rw [Fin.sum_univ_eq_sum_range (fun k => m + n - 2 * k + 1)]
+  exact clebsch_gordan_finrank m n
 
 end QuantumRepresentationTheory
