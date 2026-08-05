@@ -102,6 +102,31 @@ theorem spin_classification [FiniteDimensional ℂ V] (ρ : AngularMomentumRepre
       Nonempty (V ≃ₗ⁅ℂ, ↥((ρ.isSl2Triple hz).toLieSubalgebra ℂ)⁆ StandardSl2Module ℂ n) := by
   sorry
 
+/-- **`J+J- = Jx²+Jy²+Jz`**: the standard ladder-operator identity, a purely algebraic
+consequence of the commutation relations (no representation theory needed). Used to
+reduce `Jsq_eq_smul` to a statement about `Jp * Jm`, via
+`J² = Jp*Jm + Jz*Jz - Jz` (equivalently `Jm*Jp + Jz*Jz + Jz`). -/
+private theorem Jp_mul_Jm (ρ : AngularMomentumRepresentation V) :
+    ρ.Jp * ρ.Jm = ρ.Jx * ρ.Jx + ρ.Jy * ρ.Jy + ρ.Jz := by
+  have hexpand : ρ.Jp * ρ.Jm = ρ.Jx * ρ.Jx + ρ.Jy * ρ.Jy -
+      Complex.I • (ρ.Jx * ρ.Jy - ρ.Jy * ρ.Jx) := by
+    simp only [Jp, Jm, add_mul, mul_sub, smul_mul_assoc, mul_smul_comm, smul_add, smul_smul,
+      Complex.I_mul_I, neg_one_smul, smul_sub]
+    abel
+  have hcomm : ρ.Jx * ρ.Jy - ρ.Jy * ρ.Jx = Complex.I • ρ.Jz := by
+    have := ρ.comm_xy
+    rwa [LieRing.of_associative_ring_bracket] at this
+  rw [hexpand, hcomm, smul_smul, Complex.I_mul_I, neg_one_smul]
+  abel
+
+/-- **`J² = J+J- + Jz² - Jz`**: a purely algebraic consequence of the commutation
+relations (no representation theory needed), used to reduce `Jsq_eq_smul` to a
+statement about the ladder operators. -/
+private theorem Jsq_eq_Jp_mul_Jm (ρ : AngularMomentumRepresentation V) :
+    ρ.Jx * ρ.Jx + ρ.Jy * ρ.Jy + ρ.Jz * ρ.Jz =
+      ρ.Jp * ρ.Jm + ρ.Jz * ρ.Jz - ρ.Jz := by
+  rw [Jp_mul_Jm]; abel
+
 /-- **`J² = Jx²+Jy²+Jz²` is (a rescaling of) the Casimir element** (`thm:am-j2-casimir`):
 on an irreducible summand of spin `j = n/2`, `J²` acts as the scalar `j(j+1)`. -/
 theorem Jsq_eq_smul [FiniteDimensional ℂ V] (ρ : AngularMomentumRepresentation V)

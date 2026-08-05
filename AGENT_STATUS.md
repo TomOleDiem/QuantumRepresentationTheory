@@ -48,6 +48,16 @@ and thm:sl2-tensor-action, but the actual Lean `clebsch_gordan` is
 (deliberately, per its own doc comment) only a plain vector-space
 isomorphism, not yet sl2-equivariant, so neither is really used - reworded
 the theorem statement to say so honestly and marked \leanok.
+Currently: adding two private helper lemmas to AngularMomentum/Classification.lean
+towards Jsq_eq_smul (still sorry, not attempting the full proof - it needs
+either Sl2/Classification's machinery or a from-scratch primitive-vector
+argument, both substantial). The clean fact: `Jp*Jm = Jx*Jx+Jy*Jy+Jz` (the
+standard ladder-operator identity - NOT `Jp*Jm = J²`, an easy sign error to
+make, since `[Jx,Jy]=iJz` gives an extra `+Jz` term), hence
+`J² = Jp*Jm+Jz*Jz-Jz`. Verified in isolation (Sl2/Basic.lean was mid-edit
+and broken at the time, couldn't build-test in place) via a standalone
+repro file matching the real defs; waiting for Sl2/Basic.lean to stabilize
+to do a real build check before committing.
 Status: in progress
 
 ### Claude (2nd session) - 2026-08-05
