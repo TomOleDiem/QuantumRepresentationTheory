@@ -15,6 +15,8 @@ namespace QuantumRepresentationTheory
 
 open Module (Basis finBasis)
 
+attribute [local instance 100] LieRing.ofAssociativeRing
+
 variable {K L V : Type*} [Field K] [LieRing L] [LieAlgebra K L]
     [AddCommGroup V] [Module K V]
 
@@ -95,19 +97,91 @@ theorem casimir_commutes [FiniteDimensional K L] (ρ : LieRepresentation K L V)
 
 /-- The Casimir element of the adjoint representation, as an element of the universal
 enveloping algebra `U(L)` itself (rather than as an operator via some `ρ`):
-`C = ∑ᵢ ι(bᵢ) ι(bⁱ)`. -/
-def casimirUEA [FiniteDimensional K L] (Φ : LinearMap.BilinForm K L) (hΦ : Φ.Nondegenerate) :
-    UniversalEnvelopingAlgebra K L :=
+`C = ∑ᵢ ι(bᵢ) ι(bⁱ)`. As with `casimirBasisDependent`, `Φ` must be Lie-invariant
+(not just nondegenerate) for `casimirUEA_mem_center` to hold; this was missing from
+an earlier version of this definition. -/
+def casimirUEA [FiniteDimensional K L] (Φ : LinearMap.BilinForm K L) (hΦ : Φ.Nondegenerate)
+    (_hΦ_inv : Φ.lieInvariant L) : UniversalEnvelopingAlgebra K L :=
   ∑ i, UniversalEnvelopingAlgebra.ι K (finBasis K L i) *
       UniversalEnvelopingAlgebra.ι K (Φ.dualBasis hΦ (finBasis K L) i)
+
+/-- The universal enveloping algebra, viewed as a `LieRepresentation` of `L` via left
+multiplication through `ι`. Used only to transport `casimir_commutes` (proved once, for a
+general representation) into a statement about `casimirUEA`, rather than re-proving the
+same commutator computation from scratch inside `U(L)`. -/
+private def regRep [FiniteDimensional K L] :
+    LieRepresentation K L (UniversalEnvelopingAlgebra K L) :=
+  { (LinearMap.mul K (UniversalEnvelopingAlgebra K L)).comp
+      (UniversalEnvelopingAlgebra.ι K).toLinearMap with
+    map_lie' := by
+      intro x y
+      ext w
+      show LinearMap.mul K (UniversalEnvelopingAlgebra K L)
+          (UniversalEnvelopingAlgebra.ι K ⁅x, y⁆) w =
+        (⁅LinearMap.mul K (UniversalEnvelopingAlgebra K L) (UniversalEnvelopingAlgebra.ι K x),
+          LinearMap.mul K (UniversalEnvelopingAlgebra K L) (UniversalEnvelopingAlgebra.ι K y)⁆ :
+            Module.End K (UniversalEnvelopingAlgebra K L)) w
+      rw [(UniversalEnvelopingAlgebra.ι K).map_lie, LieRing.of_associative_ring_bracket,
+        LieRing.of_associative_ring_bracket, LinearMap.sub_apply]
+      simp only [LinearMap.mul_apply', Module.End.mul_apply, sub_mul, mul_assoc] }
+
+private theorem regRep_apply [FiniteDimensional K L] (x : L) (w : UniversalEnvelopingAlgebra K L) :
+    regRep x w = UniversalEnvelopingAlgebra.ι K x * w := by
+  show LinearMap.mul K (UniversalEnvelopingAlgebra K L) (UniversalEnvelopingAlgebra.ι K x) w = _
+  rw [LinearMap.mul_apply']
+
+private theorem casimir_regRep_apply [FiniteDimensional K L] (Φ : LinearMap.BilinForm K L)
+    (hΦ : Φ.Nondegenerate) (hΦ_inv : Φ.lieInvariant L) (w : UniversalEnvelopingAlgebra K L) :
+    casimir regRep Φ hΦ hΦ_inv w = casimirUEA Φ hΦ hΦ_inv * w := by
+  show casimirBasisDependent regRep Φ hΦ hΦ_inv (finBasis K L) w = _
+  simp only [casimirBasisDependent, casimirUEA, LinearMap.sum_apply, Module.End.mul_apply,
+    regRep_apply, Finset.sum_mul, mul_assoc]
 
 /-- **Centrality of the Casimir element** (`thm:cas-central`). The correct ambient object
 is `Subalgebra.center`, not `Subring.center`, since we need `K`-linearity of the
 centralizing condition. -/
 theorem casimirUEA_mem_center [FiniteDimensional K L] (Φ : LinearMap.BilinForm K L)
-    (hΦ : Φ.Nondegenerate) :
-    casimirUEA Φ hΦ ∈ Subalgebra.center K (UniversalEnvelopingAlgebra K L) := by
-  sorry
+    (hΦ : Φ.Nondegenerate) (hΦ_inv : Φ.lieInvariant L) :
+    casimirUEA Φ hΦ hΦ_inv ∈ Subalgebra.center K (UniversalEnvelopingAlgebra K L) := by
+  set C := casimirUEA Φ hΦ hΦ_inv with hC_def
+  have hcomm_gen : ∀ x : L, UniversalEnvelopingAlgebra.ι K x * C = C * UniversalEnvelopingAlgebra.ι K x := by
+    intro x
+    have h := casimir_commutes regRep Φ hΦ hΦ_inv x
+    rw [LieRing.of_associative_ring_bracket, sub_eq_zero] at h
+    have h1 := LinearMap.congr_fun h (1 : UniversalEnvelopingAlgebra K L)
+    simp only [Module.End.mul_apply] at h1
+    rwa [casimir_regRep_apply, casimir_regRep_apply, regRep_apply, regRep_apply, mul_one,
+      mul_one] at h1
+  rw [Subalgebra.mem_center_iff]
+  intro w
+  have hsurj : Function.Surjective (UniversalEnvelopingAlgebra.mkAlgHom K L) :=
+    RingCon.mkₐ_surjective _
+  obtain ⟨t, rfl⟩ := hsurj w
+  induction t using TensorAlgebra.induction with
+  | algebraMap r =>
+      rw [AlgHom.commutes]
+      exact Algebra.commutes r C
+  | ι x =>
+      have hx : UniversalEnvelopingAlgebra.mkAlgHom K L (TensorAlgebra.ι K x) =
+          UniversalEnvelopingAlgebra.ι K x := rfl
+      rw [hx]
+      exact hcomm_gen x
+  | mul a b ha hb =>
+      simp only [map_mul] at ⊢
+      calc UniversalEnvelopingAlgebra.mkAlgHom K L a * UniversalEnvelopingAlgebra.mkAlgHom K L b * C
+          = UniversalEnvelopingAlgebra.mkAlgHom K L a *
+              (UniversalEnvelopingAlgebra.mkAlgHom K L b * C) := by rw [mul_assoc]
+        _ = UniversalEnvelopingAlgebra.mkAlgHom K L a *
+              (C * UniversalEnvelopingAlgebra.mkAlgHom K L b) := by rw [hb]
+        _ = (UniversalEnvelopingAlgebra.mkAlgHom K L a * C) *
+              UniversalEnvelopingAlgebra.mkAlgHom K L b := by rw [mul_assoc]
+        _ = (C * UniversalEnvelopingAlgebra.mkAlgHom K L a) *
+              UniversalEnvelopingAlgebra.mkAlgHom K L b := by rw [ha]
+        _ = C * (UniversalEnvelopingAlgebra.mkAlgHom K L a *
+              UniversalEnvelopingAlgebra.mkAlgHom K L b) := by rw [mul_assoc]
+  | add a b ha hb =>
+      simp only [map_add] at ⊢
+      rw [add_mul, mul_add, ha, hb]
 
 variable [LieRingModule L V] [LieModule K L V]
 
@@ -118,7 +192,10 @@ theorem central_commutes_toEnd (z : UniversalEnvelopingAlgebra K L)
     (hz : z ∈ Subalgebra.center K (UniversalEnvelopingAlgebra K L)) (x : L) :
     UniversalEnvelopingAlgebra.lift K (LieModule.toEnd K L V) z * LieModule.toEnd K L V x =
       LieModule.toEnd K L V x * UniversalEnvelopingAlgebra.lift K (LieModule.toEnd K L V) z := by
-  sorry
+  have h := (Subalgebra.mem_center_iff.mp hz) (UniversalEnvelopingAlgebra.ι K x)
+  have h2 := congrArg (UniversalEnvelopingAlgebra.lift K (LieModule.toEnd K L V)) h
+  simp only [map_mul, UniversalEnvelopingAlgebra.lift_ι_apply] at h2
+  exact h2.symm
 
 /-- **Schur gives a scalar Casimir** (`thm:cas-scalar`). -/
 theorem casimir_scalar [IsAlgClosed K] [FiniteDimensional K L] [FiniteDimensional K V]

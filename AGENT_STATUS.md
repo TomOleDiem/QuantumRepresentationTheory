@@ -13,18 +13,25 @@ it.
 ## Active
 
 ### Claude (this session) - 2026-08-05
-Now working on: Sl2/ClebschGordan.lean (clebsch_gordan_finrank) - pure Finset
-arithmetic identity, no Lie-theory dependency, fully leaf.
+Done this session (no sorry, full project builds, blueprint \leanok'd, not yet
+committed): Sl2/ClebschGordan.lean's clebsch_gordan_finrank (pure Finset identity).
+Casimir/Centrality.lean's casimirUEA_mem_center and central_commutes_toEnd (the
+UEA-track theorems) - Casimir/Centrality.lean and Casimir/Basic.lean are now both
+fully sorry-free. Note: casimirUEA's signature changed, gained a
+`(hΦ_inv : Φ.lieInvariant L)` parameter - same missing-invariance bug as
+casimirBasisDependent had; checked no other file references casimirUEA.
+casimirUEA_mem_center's proof reuses casimir_commutes via a "regular representation"
+trick (L acting on U(L) itself by left mult. through ι) rather than re-deriving the
+same commutator computation - `regRep`/`regRep_apply`/`casimir_regRep_apply` in
+Centrality.lean, all private.
+Not claiming a new file yet this message; about to pick the next leaf sorry.
 Investigated Sl2/Basic.lean's standardSl2ModuleLieRingModule/standardSl2ModuleLieModule:
 these are genuinely hard (need to build a LieHom from the sl2-subalgebra into
 Module.End K V from scratch, which in turn needs linear independence of {h,e,f} -
 provable but only for CharZero/char≠2 K, not stated as a hypothesis currently).
-Not claiming it yet; flagging for whoever tackles it that a CharZero (or char≠2)
+Not claiming it; flagging for whoever tackles it that a CharZero (or char≠2)
 hypothesis will likely need to be added to match Sl2/Classification.lean's later
-assumptions.
-Previously done (this session): Casimir/Centrality.lean's casimir_commutes and
-casimir_scalar (no sorry). casimirUEA_mem_center/central_commutes_toEnd (UEA track)
-still sorry - not actively working these right now.
+assumptions - same issue the 2nd session flagged below for string_linearIndependent.
 Status: in progress
 
 ### Claude (2nd session) - 2026-08-05
