@@ -607,6 +607,7 @@ hydrogen atom's dynamical symmetry --- to pin down its spectrum.
   \label{def:cas-basis-dependent}
   \lean{QuantumRepresentationTheory.casimirBasisDependent}
   \uses{def:cas-dual-basis, def:rep-to-end, def:cas-invariant-form}
+  \leanok
   For a representation $\rho$ of $L$ on $V$, a \emph{nondegenerate and
   Lie-invariant} form $\Phi$ (Definition~\ref{def:cas-invariant-form}), and a
   basis $x_1,\dots,x_d$ of $L$ with $\Phi$-dual basis $x^1,\dots,x^d$, the
@@ -631,6 +632,7 @@ hydrogen atom's dynamical symmetry --- to pin down its spectrum.
   \label{def:cas-casimir}
   \lean{QuantumRepresentationTheory.casimir}
   \uses{thm:cas-change-of-basis}
+  \leanok
   Write $C_\rho \in \End_K(V)$ for the common value of
   Definition~\ref{def:cas-basis-dependent}, independent of the choice of
   basis by Theorem~\ref{thm:cas-change-of-basis}.
@@ -728,6 +730,7 @@ hidden $\sofour$ symmetry.
   \label{def:am-representation}
   \lean{QuantumRepresentationTheory.AngularMomentumRepresentation}
   \uses{def:rep-explicit}
+  \leanok
   An algebraic angular momentum representation is an explicit representation
   $\rho$ (Definition~\ref{def:rep-explicit}) of the Lie algebra $\liealg{so}_3
   \cong \sltwo$ on a state space $V$, presented via operators $J_x, J_y, J_z$
@@ -752,6 +755,7 @@ hidden $\sofour$ symmetry.
   \label{def:am-ladder}
   \lean{QuantumRepresentationTheory.AngularMomentumRepresentation.Jp, QuantumRepresentationTheory.AngularMomentumRepresentation.Jm}
   \uses{def:am-representation}
+  \leanok
   $J_\pm := J_x \pm i J_y$.
 \end{definition}
 
@@ -815,6 +819,7 @@ hidden $\sofour$ symmetry.
   \label{def:am-magnetic-basis}
   \lean{QuantumRepresentationTheory.AngularMomentumRepresentation.magneticBasisVec}
   \uses{thm:sl2-basis-theorem, thm:am-spin-classification}
+  \leanok
   The basis $\ket{j,m}$ for $m = -j,\dots,j$ of the spin-$j$ representation
   produced by Theorem~\ref{thm:sl2-basis-theorem}, reindexed by the magnetic
   quantum number $m = j - k$.
@@ -849,6 +854,7 @@ Physlib in the Overview).
 \begin{definition}[Levi-Civita symbol]
   \label{def:hyd-levi-civita}
   \lean{QuantumRepresentationTheory.leviCivita}
+  \leanok
   $\varepsilon_{ijk}$, the totally antisymmetric symbol on $\{1,2,3\}$ with
   $\varepsilon_{123}=1$, used to write the cross product and the commutation
   relations below.
@@ -876,6 +882,7 @@ Physlib in the Overview).
   \label{def:hyd-bound-state}
   \lean{QuantumRepresentationTheory.BoundStateRepresentation}
   \uses{def:am-representation}
+  \leanok
   The explicit representation of the hydrogen Hamiltonian's dynamical
   symmetry algebra on a fixed negative-energy eigenspace $V_E$ of the
   Hamiltonian $H$, carrying the angular momentum representation
@@ -896,6 +903,7 @@ Physlib in the Overview).
   \label{def:hyd-rescaled-rl}
   \lean{QuantumRepresentationTheory.BoundStateRepresentation.Ax, QuantumRepresentationTheory.BoundStateRepresentation.Ay, QuantumRepresentationTheory.BoundStateRepresentation.Az}
   \uses{thm:hyd-rescaling-nonzero, thm:hyd-cross-linearity}
+  \leanok
   $\vec A := \vec M/\sqrt{-2mE}$ on $V_E$, chosen so that $\vec J$ and
   $\vec A$ satisfy the commutation relations of two copies of $\liealg{so}_3$
   (Theorem~\ref{thm:hyd-two-factors-commute}).
@@ -908,6 +916,7 @@ Physlib in the Overview).
   \label{def:hyd-two-triples}
   \lean{QuantumRepresentationTheory.BoundStateRepresentation.Ix, QuantumRepresentationTheory.BoundStateRepresentation.Iy, QuantumRepresentationTheory.BoundStateRepresentation.Iz, QuantumRepresentationTheory.BoundStateRepresentation.Kx, QuantumRepresentationTheory.BoundStateRepresentation.Ky, QuantumRepresentationTheory.BoundStateRepresentation.Kz}
   \uses{def:am-ladder, def:hyd-rescaled-rl}
+  \leanok
   On $V_E$, set $\vec I := \tfrac12(\vec J + \vec A)$ and
   $\vec K := \tfrac12(\vec J - \vec A)$.
 \end{definition}
