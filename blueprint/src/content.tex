@@ -1085,3 +1085,25 @@ is built, results proved in the generic, instance-based Chapters~1--3
 (irreducibility transfer, the classification theorems, Casimir scalars) have
 to be re-derived or manually transported for the explicit-morphism objects
 in Chapters~4--5 rather than applied directly.
+
+\paragraph{Angular momentum as a 3-vector is a low-dimension coincidence,
+not the right general object.} \texttt{AngularMomentumRepresentation}
+(\S\ref{sec:am-basic}) presents angular momentum as three operators
+$J_x,J_y,J_z$ with axiomatized commutation relations, mirroring the
+physicist's $\vec J$. The correct general object is the antisymmetric
+generator $J_{ij}=-J_{ji}$ of rotations in the $(i,j)$-plane --- an element
+of $\liealg{so}(n)$, i.e.\ of $\Lambda^2 V$ for the defining representation
+--- and identifying it with a vector via $J_i = \varepsilon_{ijk}J_{jk}$ is
+special to $n=3$ (the only dimension in which $\Lambda^2 V\cong V$). The same
+issue recurs one level up: \texttt{BoundStateRepresentation}
+(\S\ref{sec:hyd-basic}) presents the Runge--Lenz vector as three
+unconstrained operators $M_x,M_y,M_z$ with no commutation hypotheses at all
+relating them to $\vec J$ or to each other, which is why
+\texttt{Hydrogen/Symmetry.lean}'s $\vec I,\vec K$ commutator theorems
+(\S\ref{sec:hyd-symmetry}) are currently unprovable as stated --- nothing in
+the structure pins down the $\liealg{so}(4)$ relations a genuine Runge--Lenz
+vector must satisfy. A single $\liealg{so}(4)$-antisymmetric-tensor
+presentation of $(\vec J,\vec M)$ together would fix both problems at once
+(and generalize past $n=3,4$ for free), at the cost of rederiving the
+current per-component commutation-relation statements as theorems rather
+than definitions. Not attempted in this pass.
