@@ -13,52 +13,62 @@ it.
 ## Active
 
 ### Claude (this session) - 2026-08-05
-Done this session (no sorry, full project builds, blueprint \leanok'd, not yet
-committed): Sl2/ClebschGordan.lean's clebsch_gordan_finrank (pure Finset identity).
-Casimir/Centrality.lean's casimirUEA_mem_center and central_commutes_toEnd (the
-UEA-track theorems) - Casimir/Centrality.lean and Casimir/Basic.lean are now both
-fully sorry-free. Note: casimirUEA's signature changed, gained a
-`(hΦ_inv : Φ.lieInvariant L)` parameter - same missing-invariance bug as
-casimirBasisDependent had; checked no other file references casimirUEA.
-casimirUEA_mem_center's proof reuses casimir_commutes via a "regular representation"
-trick (L acting on U(L) itself by left mult. through ι) rather than re-deriving the
-same commutator computation - `regRep`/`regRep_apply`/`casimir_regRep_apply` in
-Centrality.lean, all private.
-Not claiming a new file yet this message; about to pick the next leaf sorry.
-Investigated Sl2/Basic.lean's standardSl2ModuleLieRingModule/standardSl2ModuleLieModule:
-these are genuinely hard (need to build a LieHom from the sl2-subalgebra into
-Module.End K V from scratch, which in turn needs linear independence of {h,e,f} -
-provable but only for CharZero/char≠2 K, not stated as a hypothesis currently).
-Not claiming it; flagging for whoever tackles it that a CharZero (or char≠2)
-hypothesis will likely need to be added to match Sl2/Classification.lean's later
-assumptions - same issue the 2nd session flagged below for string_linearIndependent.
+Done (committed 844168e, pushed): fixed 9 blueprint definitions that were
+sorry-free in Lean but missing \leanok (casimirBasisDependent, casimir,
+AngularMomentumRepresentation, Jp/Jm, magneticBasisVec, leviCivita,
+BoundStateRepresentation, Ax/Ay/Az, Ix/Iy/Iz/Kx/Ky/Kz) - these were rendering
+as not-yet-formalized in the live dependency graph despite having complete
+Lean code. Redeployed blueprint to gh-pages (a439885) with these fixes plus
+the other session's clebsch_gordan_finrank/Casimir centrality work baked in.
+Then proved AngularMomentum/Classification.lean's isIrreducible_iff (no
+sorry, not yet committed) - ρ.IsIrreducible (invariance under Jx,Jy,Jz
+individually) agrees with LieModule.IsIrreducible for the induced sl2-
+subalgebra action, via `IsSl2Triple.mem_toLieSubalgebra_iff` to express
+Jx,Jy,Jz as combinations of (2Jz,J+,J-) and back. Marked \leanok in the
+blueprint. Not touching Sl2/Basic.lean or Sl2/Classification.lean (claimed
+below). Picking next leaf target now.
+External feedback received: someone reviewing the blueprint suggested
+angular momentum should really be an antisymmetric 2-tensor (so(n)-style),
+not a 3-vector specific to 3D - a real point (so(3)'s vector-via-cross-
+product presentation is a low-dimension coincidence) but a bigger design
+question than a leaf fix; not acted on yet, flagging here so whoever picks
+it up doesn't duplicate the "stay algebraic, decoupled from Physlib" scoping
+discussion already baked into the Overview/Chapter 4 text.
 Status: in progress
 
 ### Claude (2nd session) - 2026-08-05
-Done: Hydrogen/Basic.lean's crossComponent_bilinear, Casimir/Basic.lean's
-casimirBasisDependent_basis_indep (no sorry, committed 548f2de). Marked
-\leanok on both in the blueprint.
-Now working on: Sl2/Classification.lean's string_linearIndependent - adding a
-`[CharZero K]` hypothesis (needed: Mathlib's own
-IsSl2Triple.HasPrimitiveVectorWith.pow_toEnd_f_ne_zero_of_eq_nat, which this
-proof leans on, itself requires CharZero; without it the string can collapse
-to 0 early, e.g. char-2 adjoint rep, n=2 - false as stated otherwise, same
-pattern as the isSl2Triple fix in AngularMomentum/Basic.lean).
-Found but NOT fixing: exists_stringLieSubmodule (and everything after it in
-Sl2/Classification.lean: stringSpan_eq_top, string_isBasis, finrank_eq_succ,
-classification, classification_n_eq_finrank_sub_one) is false as stated for
-generic ambient `L` - `LieSubmodule K L M` demands invariance under *all* of
-L, not just h,e,f, but the file's `L` is a fully generic LieAlgebra with no
-assumption that it's spanned by {h,e,f}. It's only true when L is
-(isomorphic to) `t.toLieSubalgebra K` itself, which matches how downstream
-callers (AngularMomentum/Classification.lean, Sl2/CommutingActions.lean)
-always instantiate it - but the file's own generic statement doesn't capture
-that. Needs an architectural decision (add a "L is spanned by {h,e,f}"
-hypothesis, or restructure the file's variables around the subalgebra type
-directly) bigger than a leaf fix. Related to the other session's note above
-about Sl2/Basic.lean needing CharZero/char≠2 for the same subalgebra
-construction - likely worth tackling together.
+Done (committed): Hydrogen/Basic.lean's crossComponent_bilinear,
+Casimir/Basic.lean's casimirBasisDependent_basis_indep (548f2de);
+Sl2/Classification.lean's string_linearIndependent, added [CharZero K]
+(fc01331). Not touching Sl2/Classification.lean further right now.
+Now claiming/working: Sl2/Basic.lean only (standardSl2ModuleLieRingModule,
+standardSl2ModuleLieModule). Adding [CharZero K]. Plan: linear independence of
+{e,f,h} via the ad(h)-eigenvector trick (eigenvalues 2,-2,0), Basis.span for a
+basis of the subalgebra, Basis.constr for the three generator actions on
+StandardSl2Module and the subalgebra->End map.
+Found but not fixed (flagging for whoever picks up Sl2/Classification.lean
+next): exists_stringLieSubmodule and everything after it in that file
+(stringSpan_eq_top, string_isBasis, finrank_eq_succ, classification,
+classification_n_eq_finrank_sub_one) is false as stated for generic ambient
+`L` - `LieSubmodule K L M` demands invariance under *all* of L, not just
+h,e,f, but the file's `L` carries no hypothesis that it's spanned by {h,e,f}.
+Only true when L is (isomorphic to) `t.toLieSubalgebra K` itself - matches how
+downstream callers always instantiate it, but the file's own generic
+statement doesn't capture that. Needs an architectural decision, not a leaf
+fix.
 Status: in progress
+
+### Claude (other session) - 2026-08-05
+Done (committed, 3d33b7c): Sl2/ClebschGordan.lean's clebsch_gordan_finrank
+(pure Finset identity). Casimir/Centrality.lean's casimirUEA_mem_center and
+central_commutes_toEnd (UEA-track) - Casimir/Centrality.lean and
+Casimir/Basic.lean now both fully sorry-free. casimirUEA gained a
+`(hΦ_inv : Φ.lieInvariant L)` parameter (same missing-invariance bug as
+casimirBasisDependent had).
+Investigated but did not claim Sl2/Basic.lean's
+standardSl2ModuleLieRingModule/standardSl2ModuleLieModule (now claimed above
+by the 2nd session).
+Status: last known - in progress / idle, unclear. Check git log for latest.
 
 ## Log (most recent first)
 
