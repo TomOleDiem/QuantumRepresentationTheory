@@ -597,12 +597,16 @@ hydrogen atom's dynamical symmetry --- to pin down its spectrum.
 \begin{definition}[Basis-dependent Casimir element]
   \label{def:cas-basis-dependent}
   \lean{QuantumRepresentationTheory.casimirBasisDependent}
-  \uses{def:cas-dual-basis, def:rep-to-end}
-  For a representation $\rho$ of $L$ on $V$ and a basis $x_1,\dots,x_d$ of
-  $L$ with $\Phi$-dual basis $x^1,\dots,x^d$, the Casimir operator is
+  \uses{def:cas-dual-basis, def:rep-to-end, def:cas-invariant-form}
+  For a representation $\rho$ of $L$ on $V$, a \emph{nondegenerate and
+  Lie-invariant} form $\Phi$ (Definition~\ref{def:cas-invariant-form}), and a
+  basis $x_1,\dots,x_d$ of $L$ with $\Phi$-dual basis $x^1,\dots,x^d$, the
+  Casimir operator is
   \[
     C_\rho \;=\; \sum_{i=1}^d \rho(x_i)\,\rho(x^i) \;\in\; \End_K(V).
   \]
+  Invariance of $\Phi$ is essential here, not just nondegeneracy: it is what
+  makes Theorem~\ref{thm:cas-commutes-generators} true.
 \end{definition}
 
 \begin{theorem}[Change-of-basis invariance]
@@ -628,6 +632,7 @@ hydrogen atom's dynamical symmetry --- to pin down its spectrum.
 \begin{theorem}[The Casimir element commutes with the generators]
   \label{thm:cas-commutes-generators}
   \lean{QuantumRepresentationTheory.casimir_commutes}
+  \leanok
   \uses{def:cas-casimir, def:cas-invariant-form}
   For every $y \in L$, $[\rho(y), C_\rho] = 0$ in $\End_K(V)$.
 \end{theorem}
@@ -674,10 +679,15 @@ hydrogen atom's dynamical symmetry --- to pin down its spectrum.
 \begin{theorem}[Schur gives a scalar Casimir]
   \label{thm:cas-scalar}
   \lean{QuantumRepresentationTheory.casimir_scalar}
-  \uses{thm:rep-schur, thm:cas-central-intertwines, def:cas-casimir}
+  \leanok
+  \uses{thm:rep-schur, thm:cas-commutes-generators, def:cas-casimir}
   If $\rho$ is a finite-dimensional irreducible representation of $L$ over an
   algebraically closed field, $C_\rho$ acts on $V$ as multiplication by a
-  scalar $c(\rho) \in K$.
+  scalar $c(\rho) \in K$. The Lean proof takes a direct route: package
+  Theorem~\ref{thm:cas-commutes-generators} into a \texttt{LieModuleHom}
+  self-map of $V$ and apply Theorem~\ref{thm:rep-schur} directly, rather than
+  going through the universal-enveloping-algebra route of
+  Theorem~\ref{thm:cas-central-intertwines}.
 \end{theorem}
 
 \chapter{Angular momentum}
@@ -744,9 +754,19 @@ hidden $\sofour$ symmetry.
   \label{thm:am-is-sl2-triple}
   \lean{QuantumRepresentationTheory.AngularMomentumRepresentation.isSl2Triple}
   \uses{thm:am-commutators, def:sl2-triple, def:rep-bridge}
-  $(J_z, J_+, J_-)$ is an $\sltwo$-triple in the sense of
-  Definition~\ref{def:sl2-triple}, via the bridge construction of
+  If $J_z \neq 0$, then $(J_z, J_+, J_-)$ is an $\sltwo$-triple in the sense
+  of Definition~\ref{def:sl2-triple}, via the bridge construction of
   Remark~\ref{def:rep-bridge} turning $\rho$ into local Lie-module instances.
+
+  \emph{The hypothesis $J_z \neq 0$ is necessary}, not a formalization
+  artifact: the all-zero representation ($J_x=J_y=J_z=0$) satisfies
+  Definition~\ref{def:am-representation} but gives $h = 2J_z = 0$, which an
+  $\sltwo$-triple explicitly excludes. This is the honest statement of a real
+  fact --- the trivial, spin-$0$ representation does not generate an actual
+  copy of $\sltwo$ inside $\operatorname{End}(V)$ --- and it means
+  Theorem~\ref{thm:am-irreducibility-transfer} and
+  Theorem~\ref{thm:am-spin-classification} downstream will need to either
+  carry this hypothesis or special-case spin $0$ separately.
 \end{theorem}
 
 \section{Spin classification}

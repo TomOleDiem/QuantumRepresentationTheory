@@ -23,13 +23,14 @@ namespace BoundStateRepresentation
 commuting `I`- and `K`-triples, by `Sl2.CommutingActions.commuting_classification_finrank`
 applied to `H.IRep.isSl2Triple` and `H.KRep.isSl2Triple`. -/
 theorem classification_finrank [FiniteDimensional ℂ V] (H : BoundStateRepresentation V)
+    (hIz : H.IRep.Jz ≠ 0) (hKz : H.KRep.Jz ≠ 0)
     (hcomm : ∀ x ∈ ({(2 : ℂ) • H.Iz, H.IRep.Jp, H.IRep.Jm} : Set (Module.End ℂ V)),
       ∀ y ∈ ({(2 : ℂ) • H.Kz, H.KRep.Jp, H.KRep.Jm} : Set (Module.End ℂ V)), ⁅x, y⁆ = 0)
     (hirr : ∀ W : Submodule ℂ V,
       (∀ x ∈ ({(2 : ℂ) • H.Iz, H.IRep.Jp, H.IRep.Jm, (2 : ℂ) • H.Kz, H.KRep.Jp, H.KRep.Jm} :
         Set (Module.End ℂ V)), ∀ v ∈ W, x v ∈ W) → W = ⊥ ∨ W = ⊤) :
     ∃ m n : ℕ, Module.finrank ℂ V = (m + 1) * (n + 1) :=
-  commuting_classification_finrank H.IRep.isSl2Triple H.KRep.isSl2Triple hcomm hirr
+  commuting_classification_finrank (H.IRep.isSl2Triple hIz) (H.KRep.isSl2Triple hKz) hcomm hirr
 
 /-- **Equal Casimirs force equal highest weights, hence dimension `(p+1)²`**
 (`thm:hyd-equal-hw`, `thm:hyd-dimension`): combining `classification_finrank` with
