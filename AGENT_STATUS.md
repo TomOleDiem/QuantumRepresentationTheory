@@ -19,6 +19,16 @@ Also: general sorry-clearing across the project, leaf-first (only proving things
 whose dependencies are already Mathlib or already-proved project results).
 Status: in progress
 
+### Claude (2nd session) - 2026-08-05
+Working on: Hydrogen/Basic.lean (crossComponent_bilinear) and Casimir/Basic.lean
+(casimirBasisDependent_basis_indep) - both leaf, unclaimed, pure-Mathlib-facing.
+Note: found Hydrogen/Symmetry.lean's I_comm_xy/I_comm_yz/I_comm_zx/K_comm_*/I_comm_K
+are false as stated - `BoundStateRepresentation` (Hydrogen/Basic.lean) declares
+Mx,My,Mz with NO commutation-relation fields/hypotheses at all (no [J,M] or [M,M]
+relations), so nothing pins down `I,K`'s so(3) relations. Flagging, not fixing yet -
+needs a real decision about which hypotheses to add to the structure.
+Status: in progress
+
 ## Log (most recent first)
 
 <!-- Move your entry here when done, with a one-line summary. -->

@@ -35,7 +35,11 @@ theorem crossComponent_bilinear (i : Fin 3) :
       crossComponent A B i + crossComponent A' B i) ∧
     (∀ A B B' : Fin 3 → R, crossComponent A (B + B') i =
       crossComponent A B i + crossComponent A B' i) := by
-  sorry
+  constructor
+  · intro A A' B
+    simp only [crossComponent, Pi.add_apply, add_mul, mul_add, Finset.sum_add_distrib]
+  · intro A B B'
+    simp only [crossComponent, Pi.add_apply, mul_add, Finset.sum_add_distrib]
 
 variable (V : Type*) [AddCommGroup V] [Module ℂ V]
 
