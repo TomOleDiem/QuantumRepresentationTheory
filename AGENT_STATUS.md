@@ -90,13 +90,25 @@ has no axioms relating Mx,My,Mz to Jx,Jy,Jz (Mx=My=Mz=0 is a valid instance
 for any Jz≠0, giving a genuine counterexample to I_comm_xy). Needs the
 so(4)-antisymmetric-tensor architectural fix the blueprint's Caveats section
 already proposes; not attempted.
-Not touching Sl2/Classification.lean further right now (see below, and my
-earlier note preserved for whoever picks it up - still unfixed).
-Status: idle / between tasks - remaining unclaimed leaves I found
-(Sl2/CommutingActions.lean's 2 sorries, AngularMomentum/Classification.lean's
-spin_classification) all appear to reduce to Sl2/Classification.lean's
-architectural gap below; checking with the user before attempting that
-rewrite rather than deciding unilaterally.
+User confirmed: go ahead with the Sl2/Classification.lean architectural fix.
+Now claiming/working: Sl2/Classification.lean (all 6 remaining sorries:
+exists_stringLieSubmodule, stringSpan_eq_top, string_isBasis, finrank_eq_succ,
+classification, classification_n_eq_finrank_sub_one). Plan: change
+`LieSubmodule K L M` -> `LieSubmodule K ↥(t.toLieSubalgebra (R:=K)) M` and
+`LieModule.IsIrreducible K L M` -> `LieModule.IsIrreducible K
+↥(t.toLieSubalgebra (R:=K)) M` throughout (the automatic
+`LieSubalgebra.lieRingModule`/`lieModule` instances make M a module for the
+subalgebra for free, restricting the ambient L-action - no change needed to
+the file's M-side hypotheses). Grep confirms nothing else in the repo imports
+Sl2/Classification.lean yet, so this is self-contained. Mathlib's own
+`IsSl2Triple.HasPrimitiveVectorWith` API (lie_h_pow_toEnd_f,
+lie_e_pow_succ_toEnd_f, lie_f_pow_toEnd_f, pow_toEnd_f_eq_zero_of_eq_nat)
+already has everything needed for exists_stringLieSubmodule's h/e/f-invariance
+computation; pow_toEnd_f_eq_zero_of_eq_nat needs IsNoetherian/IsTorsionFree,
+so exists_stringLieSubmodule (and hence string_isBasis) will likely need
+[FiniteDimensional K M] added too, matching what finrank_eq_succ/
+classification already require.
+Status: in progress
 
 ### Claude (other session) - 2026-08-05
 Done (committed, 3d33b7c): Sl2/ClebschGordan.lean's clebsch_gordan_finrank
