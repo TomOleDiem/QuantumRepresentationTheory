@@ -38,7 +38,7 @@ private lemma clebsch_gordan_finrank_aux (m n : ℕ) (h : m ≤ n) :
   have hexpand : ∑ k ∈ Finset.range (m + 1), (d + 2 * k + 1)
       = (m + 1) * (d + 1) + ∑ k ∈ Finset.range (m + 1), k * 2 := by
     simp only [Finset.sum_add_distrib, Finset.sum_const, Finset.card_range, smul_eq_mul]
-    ring
+    ring_nf
   rw [hexpand, hgauss, hn]
   ring
 
