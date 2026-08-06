@@ -116,11 +116,21 @@ weight n, compute J^2 m0 = (n/2)(n/2+1).m0 directly, then irreducibility on
 ker(J^2 - c.1) forces it to be everything). Both marked \leanok.
 Repo-wide remaining sorries: Hydrogen/Symmetry.lean's 7 (flagged
 false-as-stated, not attempting - see below) and Sl2/CommutingActions.lean's
-2 (commuting_classification, commuting_classification_finrank - untouched
-this session, not yet re-assessed now that Sl2/Classification.lean is done;
-worth another look but is a genuinely different theorem, classifying TWO
-commuting sl2-triples jointly).
-Status: idle (angular momentum classification task complete per user request)
+2 (commuting_classification, commuting_classification_finrank).
+User confirmed: go ahead and attempt commuting_classification. Now
+claiming/working: Sl2/CommutingActions.lean. Checked Mathlib first - no
+Weyl/complete-reducibility theorem for Lie modules exists there, so this
+needs a from-scratch joint-highest-weight-vector argument: since e1,e2
+commute (hcomm) the subalgebra spanned by {h1,h2,e1,e2} is solvable, so
+(via Lie's theorem, alg closed + finite dim) there's a common eigenvector
+m0 for all four; generate the bivariate string f1^a f2^b m0, show it's a
+basis (mirroring Sl2/Classification.lean's single-triple string argument,
+doubled), use hirr to see it spans everything, then match against
+StandardSl2Module K m ⊗ StandardSl2Module K n via basis matching (only a
+plain LinearEquiv is required per the file's own TODO note, not full
+equivariance). Expect this to take a while; will update here again once
+either done or blocked on something new.
+Status: in progress
 
 ### Claude (other session) - 2026-08-05
 Done (committed, 3d33b7c): Sl2/ClebschGordan.lean's clebsch_gordan_finrank
