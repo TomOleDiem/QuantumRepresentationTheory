@@ -32,44 +32,225 @@ def Ix (H : BoundStateRepresentation V) : Module.End ℂ V := (2 : ℂ)⁻¹ •
 @[inherit_doc Ix] def Kz (H : BoundStateRepresentation V) : Module.End ℂ V :=
   (2 : ℂ)⁻¹ • (H.Jz - H.Az)
 
+/-! ### The rescaled Runge–Lenz vector inherits `M`'s `so(4)` relations
+
+`A := (rescalingConst)⁻¹ • M`, so each of `BoundStateRepresentation`'s `JM_*`/`MM_*`
+fields (stated for `M`) transfers to `A` by pulling the scalar `(rescalingConst)⁻¹`
+through the bracket, using `endLieSmul`/`endSmulLie` and `rescalingConst_sq` (for the
+`MM_*`-derived facts, where the rescaling has to cancel the `-2E/m` factor).
+
+`endSmulLie`/`endLieSmul` are bespoke replacements for the generic `smul_lie`/`lie_smul`
+(which need a `LieRingModule L M` instance for possibly-distinct `L,M`; here `L = M =
+Module.End ℂ V` and the only registered such instance is the self-action one - which,
+empirically, doesn't always unify syntactically with the associative-ring bracket used
+for `Module.End`'s own `LieRing` structure). Proved directly via
+`LieRing.of_associative_ring_bracket`, mirroring `Sl2/Basic.lean`'s `endSmulLie` etc. -/
+
+private theorem endSmulLie (c : ℂ) (x y : Module.End ℂ V) : ⁅c • x, y⁆ = c • ⁅x, y⁆ := by
+  simp only [LieRing.of_associative_ring_bracket, smul_mul_assoc, mul_smul_comm, smul_sub]
+
+private theorem endLieSmul (c : ℂ) (x y : Module.End ℂ V) : ⁅x, c • y⁆ = c • ⁅x, y⁆ := by
+  simp only [LieRing.of_associative_ring_bracket, smul_mul_assoc, mul_smul_comm, smul_sub]
+
+private theorem A_scale (H : BoundStateRepresentation V) {X Y Z : Module.End ℂ V} (c1 : ℂ)
+    (h : ⁅X, Y⁆ = c1 • Z) :
+    ⁅X, (H.rescalingConst⁻¹ : ℂ) • Y⁆ = c1 • ((H.rescalingConst⁻¹ : ℂ) • Z) := by
+  rw [endLieSmul, h, smul_comm]
+
+private theorem JA_xy (H : BoundStateRepresentation V) : ⁅H.Jx, H.Ay⁆ = Complex.I • H.Az :=
+  H.A_scale Complex.I H.JM_xy
+
+private theorem JA_yx (H : BoundStateRepresentation V) : ⁅H.Jy, H.Ax⁆ = -Complex.I • H.Az :=
+  H.A_scale (-Complex.I) H.JM_yx
+
+private theorem JA_yz (H : BoundStateRepresentation V) : ⁅H.Jy, H.Az⁆ = Complex.I • H.Ax :=
+  H.A_scale Complex.I H.JM_yz
+
+private theorem JA_zy (H : BoundStateRepresentation V) : ⁅H.Jz, H.Ay⁆ = -Complex.I • H.Ax :=
+  H.A_scale (-Complex.I) H.JM_zy
+
+private theorem JA_zx (H : BoundStateRepresentation V) : ⁅H.Jz, H.Ax⁆ = Complex.I • H.Ay :=
+  H.A_scale Complex.I H.JM_zx
+
+private theorem JA_xz (H : BoundStateRepresentation V) : ⁅H.Jx, H.Az⁆ = -Complex.I • H.Ay :=
+  H.A_scale (-Complex.I) H.JM_xz
+
+private theorem JA_xx (H : BoundStateRepresentation V) : ⁅H.Jx, H.Ax⁆ = 0 := by
+  show ⁅H.Jx, (H.rescalingConst⁻¹ : ℂ) • H.Mx⁆ = 0
+  rw [endLieSmul, H.JM_xx, smul_zero]
+
+private theorem JA_yy (H : BoundStateRepresentation V) : ⁅H.Jy, H.Ay⁆ = 0 := by
+  show ⁅H.Jy, (H.rescalingConst⁻¹ : ℂ) • H.My⁆ = 0
+  rw [endLieSmul, H.JM_yy, smul_zero]
+
+private theorem JA_zz (H : BoundStateRepresentation V) : ⁅H.Jz, H.Az⁆ = 0 := by
+  show ⁅H.Jz, (H.rescalingConst⁻¹ : ℂ) • H.Mz⁆ = 0
+  rw [endLieSmul, H.JM_zz, smul_zero]
+
+private theorem rescalingConst_ne_zero (H : BoundStateRepresentation V) :
+    (H.rescalingConst : ℂ) ≠ 0 :=
+  Complex.ofReal_ne_zero.mpr H.rescalingConst_pos.ne'
+
+private theorem rescalingConst_sq_C (H : BoundStateRepresentation V) :
+    (H.rescalingConst : ℂ) ^ 2 = ((-2 * H.E / H.m : ℝ) : ℂ) := by
+  rw [← H.rescalingConst_sq]; push_cast; ring
+
+private theorem AA_xy (H : BoundStateRepresentation V) : ⁅H.Ax, H.Ay⁆ = Complex.I • H.Jz := by
+  show ⁅(H.rescalingConst⁻¹ : ℂ) • H.Mx, (H.rescalingConst⁻¹ : ℂ) • H.My⁆ = Complex.I • H.Jz
+  rw [endSmulLie, endLieSmul, H.MM_xy, smul_smul, smul_smul, smul_smul]
+  rw [show (H.rescalingConst⁻¹ : ℂ) * (H.rescalingConst⁻¹ : ℂ) * Complex.I
+        * ((-2 * H.E / H.m : ℝ) : ℂ) = Complex.I
+      from by rw [← H.rescalingConst_sq_C]; field_simp [H.rescalingConst_ne_zero]]
+
+private theorem AA_yz (H : BoundStateRepresentation V) : ⁅H.Ay, H.Az⁆ = Complex.I • H.Jx := by
+  show ⁅(H.rescalingConst⁻¹ : ℂ) • H.My, (H.rescalingConst⁻¹ : ℂ) • H.Mz⁆ = Complex.I • H.Jx
+  rw [endSmulLie, endLieSmul, H.MM_yz, smul_smul, smul_smul, smul_smul]
+  rw [show (H.rescalingConst⁻¹ : ℂ) * (H.rescalingConst⁻¹ : ℂ) * Complex.I
+        * ((-2 * H.E / H.m : ℝ) : ℂ) = Complex.I
+      from by rw [← H.rescalingConst_sq_C]; field_simp [H.rescalingConst_ne_zero]]
+
+private theorem AA_zx (H : BoundStateRepresentation V) : ⁅H.Az, H.Ax⁆ = Complex.I • H.Jy := by
+  show ⁅(H.rescalingConst⁻¹ : ℂ) • H.Mz, (H.rescalingConst⁻¹ : ℂ) • H.Mx⁆ = Complex.I • H.Jy
+  rw [endSmulLie, endLieSmul, H.MM_zx, smul_smul, smul_smul, smul_smul]
+  rw [show (H.rescalingConst⁻¹ : ℂ) * (H.rescalingConst⁻¹ : ℂ) * Complex.I
+        * ((-2 * H.E / H.m : ℝ) : ℂ) = Complex.I
+      from by rw [← H.rescalingConst_sq_C]; field_simp [H.rescalingConst_ne_zero]]
+
+/-! ### Reversed-order brackets
+
+`add_lie`/`sub_lie`/`lie_add`/`lie_sub` expand a bracket of sums/differences into *all
+four* cross terms in a fixed pairing order, which doesn't always match the order the
+`JA_*`/`AA_*`/`comm_*` lemmas above are stated in (e.g. `⁅Ax,Jy⁆` shows up, not
+`⁅Jy,Ax⁆`). `lie_anti` flips a bracket's argument order (`⁅Y,X⁆ = -⁅X,Y⁆`), used here to
+generate the reversed-order companion of each fact needed below, so the main proofs can
+finish with a single order-agnostic `simp only`. -/
+
+private theorem lie_anti (X Y : Module.End ℂ V) : ⁅Y, X⁆ = -⁅X, Y⁆ :=
+  neg_eq_iff_eq_neg.mp (lie_skew X Y)
+
+private theorem comm_yx (H : BoundStateRepresentation V) : ⁅H.Jy, H.Jx⁆ = -Complex.I • H.Jz := by
+  simp [lie_anti, H.comm_xy]
+private theorem comm_zy (H : BoundStateRepresentation V) : ⁅H.Jz, H.Jy⁆ = -Complex.I • H.Jx := by
+  simp [lie_anti, H.comm_yz]
+private theorem comm_xz (H : BoundStateRepresentation V) : ⁅H.Jx, H.Jz⁆ = -Complex.I • H.Jy := by
+  simp [lie_anti, H.comm_zx]
+
+private theorem AJ_xy (H : BoundStateRepresentation V) : ⁅H.Ax, H.Jy⁆ = Complex.I • H.Az := by
+  simp [lie_anti, H.JA_yx]
+private theorem AJ_yx (H : BoundStateRepresentation V) : ⁅H.Ay, H.Jx⁆ = -Complex.I • H.Az := by
+  simp [lie_anti, H.JA_xy]
+private theorem AJ_yz (H : BoundStateRepresentation V) : ⁅H.Ay, H.Jz⁆ = Complex.I • H.Ax := by
+  simp [lie_anti, H.JA_zy]
+private theorem AJ_zy (H : BoundStateRepresentation V) : ⁅H.Az, H.Jy⁆ = -Complex.I • H.Ax := by
+  simp [lie_anti, H.JA_yz]
+private theorem AJ_zx (H : BoundStateRepresentation V) : ⁅H.Az, H.Jx⁆ = Complex.I • H.Ay := by
+  simp [lie_anti, H.JA_xz]
+private theorem AJ_xz (H : BoundStateRepresentation V) : ⁅H.Ax, H.Jz⁆ = -Complex.I • H.Ay := by
+  simp [lie_anti, H.JA_zx]
+private theorem AJ_xx (H : BoundStateRepresentation V) : ⁅H.Ax, H.Jx⁆ = 0 := by
+  simp [lie_anti, H.JA_xx]
+private theorem AJ_yy (H : BoundStateRepresentation V) : ⁅H.Ay, H.Jy⁆ = 0 := by
+  simp [lie_anti, H.JA_yy]
+private theorem AJ_zz (H : BoundStateRepresentation V) : ⁅H.Az, H.Jz⁆ = 0 := by
+  simp [lie_anti, H.JA_zz]
+
+private theorem AA_yx (H : BoundStateRepresentation V) : ⁅H.Ay, H.Ax⁆ = -Complex.I • H.Jz := by
+  simp [lie_anti, H.AA_xy]
+private theorem AA_zy (H : BoundStateRepresentation V) : ⁅H.Az, H.Ay⁆ = -Complex.I • H.Jx := by
+  simp [lie_anti, H.AA_yz]
+private theorem AA_xz (H : BoundStateRepresentation V) : ⁅H.Ax, H.Az⁆ = -Complex.I • H.Jy := by
+  simp [lie_anti, H.AA_zx]
+
 /-- **`I` and `K` each satisfy `so(3)` relations and commute with each other**
-(`thm:hyd-two-factors-commute`).
-
-**Currently unprovable as stated**, and deliberately left `sorry` rather than patched: this
-is already documented in `blueprint/src/content.tex`'s Caveats section
-("Angular momentum as a 3-vector is a low-dimension coincidence, not the right general
-object"). `BoundStateRepresentation` (`Hydrogen/Basic.lean`) presents the Runge–Lenz vector
-as three *unconstrained* operators `Mx, My, Mz` with no commutation hypotheses at all
-relating them to `Jx, Jy, Jz` or to each other — nothing in the structure pins down the
-`so(4)` relations a genuine Runge–Lenz vector must satisfy. Concretely, `Mx = My = Mz = 0`
-(hence `Ax = Ay = Az = 0`) is a valid `BoundStateRepresentation` for *any* choice of
-`AngularMomentumRepresentation` with `Jz ≠ 0`, giving `Ix = Jx/2` etc., and then
-`⁅Ix,Iy⁆ = (1/4)⁅Jx,Jy⁆ = (i/4)•Jz ≠ (i/2)•Jz = i•Iz` whenever `Jz ≠ 0` — a genuine
-counterexample to `I_comm_xy` as stated. Fixing this needs an architectural change to
-`BoundStateRepresentation` (the `so(4)`-antisymmetric-tensor presentation the blueprint
-proposes), not a leaf-level proof. -/
+(`thm:hyd-two-factors-commute`), the standard fact about the hydrogen atom's hidden
+`SO(4)` symmetry: since `A` inherits `M`'s `so(4)` relations (`JA_*`/`AA_*` above),
+expanding `⁅Ix,Iy⁆ = 4⁻¹⁅Jx+Ax,Jy+Ay⁆` and substituting gives `i•Iz` directly. -/
 theorem I_comm_xy (H : BoundStateRepresentation V) : ⁅H.Ix, H.Iy⁆ = Complex.I • H.Iz := by
-  sorry
+  show ⁅(2 : ℂ)⁻¹ • (H.Jx + H.Ax), (2 : ℂ)⁻¹ • (H.Jy + H.Ay)⁆
+      = Complex.I • ((2 : ℂ)⁻¹ • (H.Jz + H.Az))
+  simp only [endSmulLie, endLieSmul, add_lie, lie_add, H.comm_xy, H.JA_xy, H.AJ_xy, H.AA_xy]
+  match_scalars <;> ring
+
 theorem I_comm_yz (H : BoundStateRepresentation V) : ⁅H.Iy, H.Iz⁆ = Complex.I • H.Ix := by
-  sorry
+  show ⁅(2 : ℂ)⁻¹ • (H.Jy + H.Ay), (2 : ℂ)⁻¹ • (H.Jz + H.Az)⁆
+      = Complex.I • ((2 : ℂ)⁻¹ • (H.Jx + H.Ax))
+  simp only [endSmulLie, endLieSmul, add_lie, lie_add, H.comm_yz, H.JA_yz, H.AJ_yz, H.AA_yz]
+  match_scalars <;> ring
+
 theorem I_comm_zx (H : BoundStateRepresentation V) : ⁅H.Iz, H.Ix⁆ = Complex.I • H.Iy := by
-  sorry
+  show ⁅(2 : ℂ)⁻¹ • (H.Jz + H.Az), (2 : ℂ)⁻¹ • (H.Jx + H.Ax)⁆
+      = Complex.I • ((2 : ℂ)⁻¹ • (H.Jy + H.Ay))
+  simp only [endSmulLie, endLieSmul, add_lie, lie_add, H.comm_zx, H.JA_zx, H.AJ_zx, H.AA_zx]
+  match_scalars <;> ring
+
 theorem K_comm_xy (H : BoundStateRepresentation V) : ⁅H.Kx, H.Ky⁆ = Complex.I • H.Kz := by
-  sorry
+  show ⁅(2 : ℂ)⁻¹ • (H.Jx - H.Ax), (2 : ℂ)⁻¹ • (H.Jy - H.Ay)⁆
+      = Complex.I • ((2 : ℂ)⁻¹ • (H.Jz - H.Az))
+  simp only [endSmulLie, endLieSmul, sub_lie, lie_sub, H.comm_xy, H.JA_xy, H.AJ_xy, H.AA_xy]
+  match_scalars <;> ring
+
 theorem K_comm_yz (H : BoundStateRepresentation V) : ⁅H.Ky, H.Kz⁆ = Complex.I • H.Kx := by
-  sorry
+  show ⁅(2 : ℂ)⁻¹ • (H.Jy - H.Ay), (2 : ℂ)⁻¹ • (H.Jz - H.Az)⁆
+      = Complex.I • ((2 : ℂ)⁻¹ • (H.Jx - H.Ax))
+  simp only [endSmulLie, endLieSmul, sub_lie, lie_sub, H.comm_yz, H.JA_yz, H.AJ_yz, H.AA_yz]
+  match_scalars <;> ring
+
 theorem K_comm_zx (H : BoundStateRepresentation V) : ⁅H.Kz, H.Kx⁆ = Complex.I • H.Ky := by
-  sorry
+  show ⁅(2 : ℂ)⁻¹ • (H.Jz - H.Az), (2 : ℂ)⁻¹ • (H.Jx - H.Ax)⁆
+      = Complex.I • ((2 : ℂ)⁻¹ • (H.Jy - H.Ay))
+  simp only [endSmulLie, endLieSmul, sub_lie, lie_sub, H.comm_zx, H.JA_zx, H.AJ_zx, H.AA_zx]
+  match_scalars <;> ring
 
-/-- `I` and `K` commute with each other componentwise.
-
-Same underlying gap as `I_comm_xy` etc. (see its doc comment): unprovable without
-commutation hypotheses relating `Mx,My,Mz` to `Jx,Jy,Jz`, which `BoundStateRepresentation`
-does not currently provide. Left `sorry`, not patched. -/
+/-- `I` and `K` commute with each other componentwise (`thm:hyd-two-factors-commute`):
+since `⁅Ji,Aj⁆` is symmetric-in-sign under swapping which of `J,A` gets the `+`, the
+cross terms in `⁅Jx±Ax, Jy∓Ay⁆`-style expansions cancel, and the same-index case
+additionally needs `JA_xx`/`JA_yy`/`JA_zz` (`⁅Ji,Ai⁆=0`) to kill `⁅Ax,Ax⁆`'s partner. -/
 theorem I_comm_K (H : BoundStateRepresentation V) (a b : Module.End ℂ V)
     (ha : a = H.Ix ∨ a = H.Iy ∨ a = H.Iz) (hb : b = H.Kx ∨ b = H.Ky ∨ b = H.Kz) :
     ⁅a, b⁆ = 0 := by
-  sorry
+  have hIKxx : ⁅H.Ix, H.Kx⁆ = 0 := by
+    show ⁅(2 : ℂ)⁻¹ • (H.Jx + H.Ax), (2 : ℂ)⁻¹ • (H.Jx - H.Ax)⁆ = 0
+    simp [add_lie, lie_sub, lie_self, H.JA_xx, H.AJ_xx]
+  have hIKyy : ⁅H.Iy, H.Ky⁆ = 0 := by
+    show ⁅(2 : ℂ)⁻¹ • (H.Jy + H.Ay), (2 : ℂ)⁻¹ • (H.Jy - H.Ay)⁆ = 0
+    simp [add_lie, lie_sub, lie_self, H.JA_yy, H.AJ_yy]
+  have hIKzz : ⁅H.Iz, H.Kz⁆ = 0 := by
+    show ⁅(2 : ℂ)⁻¹ • (H.Jz + H.Az), (2 : ℂ)⁻¹ • (H.Jz - H.Az)⁆ = 0
+    simp [add_lie, lie_sub, lie_self, H.JA_zz, H.AJ_zz]
+  have hIKxy : ⁅H.Ix, H.Ky⁆ = 0 := by
+    show ⁅(2 : ℂ)⁻¹ • (H.Jx + H.Ax), (2 : ℂ)⁻¹ • (H.Jy - H.Ay)⁆ = 0
+    simp only [endSmulLie, endLieSmul, add_lie, lie_sub, H.comm_xy, H.JA_xy, H.AJ_xy, H.AA_xy]
+    match_scalars <;> ring
+  have hIKxz : ⁅H.Ix, H.Kz⁆ = 0 := by
+    show ⁅(2 : ℂ)⁻¹ • (H.Jx + H.Ax), (2 : ℂ)⁻¹ • (H.Jz - H.Az)⁆ = 0
+    simp only [endSmulLie, endLieSmul, add_lie, lie_sub, H.comm_xz, H.JA_xz, H.AJ_xz, H.AA_xz]
+    match_scalars <;> ring
+  have hIKyx : ⁅H.Iy, H.Kx⁆ = 0 := by
+    show ⁅(2 : ℂ)⁻¹ • (H.Jy + H.Ay), (2 : ℂ)⁻¹ • (H.Jx - H.Ax)⁆ = 0
+    simp only [endSmulLie, endLieSmul, add_lie, lie_sub, H.comm_yx, H.JA_yx, H.AJ_yx, H.AA_yx]
+    match_scalars <;> ring
+  have hIKyz : ⁅H.Iy, H.Kz⁆ = 0 := by
+    show ⁅(2 : ℂ)⁻¹ • (H.Jy + H.Ay), (2 : ℂ)⁻¹ • (H.Jz - H.Az)⁆ = 0
+    simp only [endSmulLie, endLieSmul, add_lie, lie_sub, H.comm_yz, H.JA_yz, H.AJ_yz, H.AA_yz]
+    match_scalars <;> ring
+  have hIKzx : ⁅H.Iz, H.Kx⁆ = 0 := by
+    show ⁅(2 : ℂ)⁻¹ • (H.Jz + H.Az), (2 : ℂ)⁻¹ • (H.Jx - H.Ax)⁆ = 0
+    simp only [endSmulLie, endLieSmul, add_lie, lie_sub, H.comm_zx, H.JA_zx, H.AJ_zx, H.AA_zx]
+    match_scalars <;> ring
+  have hIKzy : ⁅H.Iz, H.Ky⁆ = 0 := by
+    show ⁅(2 : ℂ)⁻¹ • (H.Jz + H.Az), (2 : ℂ)⁻¹ • (H.Jy - H.Ay)⁆ = 0
+    simp only [endSmulLie, endLieSmul, add_lie, lie_sub, H.comm_zy, H.JA_zy, H.AJ_zy, H.AA_zy]
+    match_scalars <;> ring
+  rcases ha with rfl | rfl | rfl <;> rcases hb with rfl | rfl | rfl
+  · exact hIKxx
+  · exact hIKxy
+  · exact hIKxz
+  · exact hIKyx
+  · exact hIKyy
+  · exact hIKyz
+  · exact hIKzx
+  · exact hIKzy
+  · exact hIKzz
 
 /-- **`$\sofour \cong \liealg{so}_3\oplus\liealg{so}_3$` decomposition** (`thm:hyd-so4-decomposition`):
 `I` generates an `sl₂`-triple. -/

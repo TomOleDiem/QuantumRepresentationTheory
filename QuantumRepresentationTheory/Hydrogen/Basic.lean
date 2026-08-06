@@ -46,8 +46,19 @@ variable (V : Type*) [AddCommGroup V] [Module ℂ V]
 /-- **Bound-state representation** (`def:hyd-bound-state`). The explicit representation
 of the hydrogen Hamiltonian's dynamical symmetry algebra on a fixed negative-energy
 eigenspace `V`: the angular momentum representation `(Jx,Jy,Jz)`, the (unnormalized)
-Runge–Lenz operator `(Mx,My,Mz)`, and the physical parameters (mass `m`, Coulomb
-constant `k`, energy eigenvalue `E < 0`). -/
+Runge–Lenz operator `(Mx,My,Mz)`, the physical parameters (mass `m`, Coulomb constant
+`k`, energy eigenvalue `E < 0`), and the `so(4)` commutation relations tying them
+together: `M` transforms as a vector under `J` (`JM_*`), and `M`'s self-commutator
+closes back onto `J`, rescaled by the (fixed) energy eigenvalue (`MM_*`). This is the
+standard quantum Runge–Lenz algebra for the hydrogen atom (e.g. Sakurai's or Griffiths'
+treatment of the hidden `SO(4)` symmetry); on the fixed negative-energy eigenspace `V`
+it is genuine data about the representation, not derivable from the `AngularMomentumRepresentation`
+axioms alone, so it is taken as given here, consistent with this project's algebraic
+(rather than Hamiltonian-derived) scope. Without these relations, `Mx = My = Mz = 0` would
+be a valid (but physically nonsensical) instance, which is why an earlier version of this
+structure — omitting them — left `Hydrogen/Symmetry.lean`'s `I,K` commutator theorems
+unprovable (documented in the blueprint's Caveats chapter; see git history for the
+counterexample). -/
 structure BoundStateRepresentation extends AngularMomentumRepresentation V where
   Mx : Module.End ℂ V
   My : Module.End ℂ V
@@ -57,6 +68,23 @@ structure BoundStateRepresentation extends AngularMomentumRepresentation V where
   E : ℝ
   m_pos : 0 < m
   E_neg : E < 0
+  /-- `M` transforms as a vector under `J`: `[Jᵢ, Mⱼ] = i εᵢⱼₖ Mₖ`, spelled out
+  component-wise since `Jx,Jy,Jz,Mx,My,Mz` are separate fields rather than
+  `Fin 3 → Module.End ℂ V`-valued (see the blueprint's Caveats chapter). -/
+  JM_xy : ⁅Jx, My⁆ = Complex.I • Mz
+  JM_yx : ⁅Jy, Mx⁆ = -Complex.I • Mz
+  JM_yz : ⁅Jy, Mz⁆ = Complex.I • Mx
+  JM_zy : ⁅Jz, My⁆ = -Complex.I • Mx
+  JM_zx : ⁅Jz, Mx⁆ = Complex.I • My
+  JM_xz : ⁅Jx, Mz⁆ = -Complex.I • My
+  JM_xx : ⁅Jx, Mx⁆ = 0
+  JM_yy : ⁅Jy, My⁆ = 0
+  JM_zz : ⁅Jz, Mz⁆ = 0
+  /-- `M`'s self-commutator closes back onto `J`, rescaled by `-2E/m`:
+  `[Mᵢ, Mⱼ] = i εᵢⱼₖ (-2E/m) Jₖ`. -/
+  MM_xy : ⁅Mx, My⁆ = Complex.I • ((-2 * E / m : ℝ) : ℂ) • Jz
+  MM_yz : ⁅My, Mz⁆ = Complex.I • ((-2 * E / m : ℝ) : ℂ) • Jx
+  MM_zx : ⁅Mz, Mx⁆ = Complex.I • ((-2 * E / m : ℝ) : ℂ) • Jy
 
 namespace BoundStateRepresentation
 
@@ -74,6 +102,12 @@ def rescalingConst (H : BoundStateRepresentation V) : ℝ :=
 
 theorem rescalingConst_pos (H : BoundStateRepresentation V) : 0 < H.rescalingConst :=
   Real.sqrt_pos.mpr H.rescaling_pos
+
+/-- `rescalingConst² = -2E/m`, the identity that makes `MM_xy` etc. rescale into the
+`⁅Ax,Ay⁆ = i•Jz` form used by `Hydrogen/Symmetry.lean`. -/
+theorem rescalingConst_sq (H : BoundStateRepresentation V) :
+    H.rescalingConst ^ 2 = -2 * H.E / H.m :=
+  Real.sq_sqrt H.rescaling_pos.le
 
 /-- **Rescaled Runge–Lenz vector** (`def:hyd-rescaled-rl`): `A := M / √(-2E/m)`, chosen
 so that `J` and `A` satisfy the commutation relations of two copies of `so(3)`

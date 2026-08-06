@@ -906,7 +906,17 @@ Physlib in the Overview).
   symmetry algebra on a fixed negative-energy eigenspace $V_E$ of the
   Hamiltonian $H$, carrying the angular momentum representation
   $(J_x,J_y,J_z)$ of Definition~\ref{def:am-representation} together with
-  the (unnormalized) Runge--Lenz operator $\vec M$.
+  the (unnormalized) Runge--Lenz operator $\vec M$, subject to the standard
+  quantum Runge--Lenz algebra: $\vec M$ transforms as a vector under $\vec
+  J$ ($[J_i,M_j]=i\varepsilon_{ijk}M_k$) and its self-commutator closes back
+  onto $\vec J$, rescaled by the fixed energy eigenvalue
+  ($[M_i,M_j]=i\varepsilon_{ijk}(-2E/m)J_k$). These relations are genuine
+  data about the representation (not derivable from
+  Definition~\ref{def:am-representation} alone) and are taken as given here,
+  consistent with this project's algebraic scope; without them
+  $\vec M \equiv 0$ would be a valid but physically vacuous instance, which
+  is why an earlier version of this definition (omitting them) left
+  Theorem~\ref{thm:hyd-two-factors-commute} unprovable.
 \end{definition}
 
 \begin{theorem}[The rescaling constant is nonzero]
@@ -943,6 +953,7 @@ Physlib in the Overview).
 \begin{theorem}[$I$ and $K$ each satisfy $\liealg{so}_3$ relations and commute with each other]
   \label{thm:hyd-two-factors-commute}
   \lean{QuantumRepresentationTheory.BoundStateRepresentation.I_comm_xy, QuantumRepresentationTheory.BoundStateRepresentation.I_comm_yz, QuantumRepresentationTheory.BoundStateRepresentation.I_comm_zx, QuantumRepresentationTheory.BoundStateRepresentation.K_comm_xy, QuantumRepresentationTheory.BoundStateRepresentation.K_comm_yz, QuantumRepresentationTheory.BoundStateRepresentation.K_comm_zx, QuantumRepresentationTheory.BoundStateRepresentation.I_comm_K}
+  \leanok
   \uses{def:hyd-two-triples, thm:am-commutators}
   $[I_x,I_y]=iI_z$ (and cyclic permutations), likewise for $\vec K$, and
   $[I_a, K_b] = 0$ for all $a,b \in \{x,y,z\}$.
@@ -951,6 +962,7 @@ Physlib in the Overview).
 \begin{theorem}[$\sofour \cong \liealg{so}_3\oplus\liealg{so}_3$ decomposition]
   \label{thm:hyd-so4-decomposition}
   \lean{QuantumRepresentationTheory.BoundStateRepresentation.IRep, QuantumRepresentationTheory.BoundStateRepresentation.KRep}
+  \leanok
   \uses{thm:hyd-two-factors-commute, thm:am-is-sl2-triple}
   $\vec I$ and $\vec K$ each generate an $\sltwo$-triple in the sense of
   Theorem~\ref{thm:am-is-sl2-triple}, realizing the dynamical symmetry
@@ -1113,16 +1125,25 @@ physicist's $\vec J$. The correct general object is the antisymmetric
 generator $J_{ij}=-J_{ji}$ of rotations in the $(i,j)$-plane --- an element
 of $\liealg{so}(n)$, i.e.\ of $\Lambda^2 V$ for the defining representation
 --- and identifying it with a vector via $J_i = \varepsilon_{ijk}J_{jk}$ is
-special to $n=3$ (the only dimension in which $\Lambda^2 V\cong V$). The same
-issue recurs one level up: \texttt{BoundStateRepresentation}
-(\S\ref{sec:hyd-basic}) presents the Runge--Lenz vector as three
+special to $n=3$ (the only dimension in which $\Lambda^2 V\cong V$). A
+general $\liealg{so}(n)$-antisymmetric-tensor presentation would generalize
+past $n=3$ for free, at the cost of rederiving the current per-component
+commutation-relation statements as theorems rather than definitions; not
+attempted in this pass, since it is a genuinely different (larger) scope
+than fixing the concrete gap below.
+
+The same issue recurred one level up, and \emph{was} fixed (in the concrete,
+$n=3$-specific form): an earlier version of \texttt{BoundStateRepresentation}
+(\S\ref{sec:hyd-basic}) presented the Runge--Lenz vector as three
 unconstrained operators $M_x,M_y,M_z$ with no commutation hypotheses at all
-relating them to $\vec J$ or to each other, which is why
+relating them to $\vec J$ or to each other, leaving
 \texttt{Hydrogen/Symmetry.lean}'s $\vec I,\vec K$ commutator theorems
-(\S\ref{sec:hyd-symmetry}) are currently unprovable as stated --- nothing in
-the structure pins down the $\liealg{so}(4)$ relations a genuine Runge--Lenz
-vector must satisfy. A single $\liealg{so}(4)$-antisymmetric-tensor
-presentation of $(\vec J,\vec M)$ together would fix both problems at once
-(and generalize past $n=3,4$ for free), at the cost of rederiving the
-current per-component commutation-relation statements as theorems rather
-than definitions. Not attempted in this pass.
+(\S\ref{sec:hyd-symmetry}) unprovable as stated (concrete counterexample:
+$\vec M \equiv 0$). Definition~\ref{def:hyd-bound-state} now includes the
+standard quantum Runge--Lenz commutation relations
+($[J_i,M_j]=i\varepsilon_{ijk}M_k$, $[M_i,M_j]=i\varepsilon_{ijk}(-2E/m)J_k$,
+spelled out component-wise rather than via the $\liealg{so}(n)$-tensor
+machinery above) as explicit hypotheses, and
+Theorem~\ref{thm:hyd-two-factors-commute} is proved from them. This is the
+scoped, $n=3,4$-specific fix; the fully general $\liealg{so}(n)$ rewrite
+described above remains future work.
