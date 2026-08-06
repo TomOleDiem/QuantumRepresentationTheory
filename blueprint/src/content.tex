@@ -528,18 +528,26 @@ that goal than the classical Clebsch--Gordan decomposition of
 \begin{theorem}[Classification of jointly irreducible commuting $\sltwo$-actions]
   \label{thm:sl2-commuting-classification}
   \lean{QuantumRepresentationTheory.commuting_classification, QuantumRepresentationTheory.commuting_classification_finrank}
-  \uses{thm:sl2-classification, thm:sl2-tensor-action}
+  \leanok
+  \uses{def:sl2-standard-module}
   Let $\rho_1, \rho_2$ be representations of two $\sltwo$-triples on a
   finite-dimensional space $V$ over an algebraically closed field of
   characteristic zero, with $[\rho_1(x), \rho_2(y)] = 0$ for all $x, y$, and
   suppose $V$ has no proper subspace invariant under both actions
-  simultaneously. Then there exist $m, n \in \mathbb{N}$ and a linear
-  isomorphism
+  simultaneously. Then there exist $m, n \in \mathbb{N}$ with
+  $\dim_K V = (m+1)(n+1)$ and a linear isomorphism
   \[
     V \;\cong_K\; V(m) \otimes_K V(n)
   \]
-  intertwining $(\rho_1, \rho_2)$ with the actions of the two tensor factors
-  of Theorem~\ref{thm:sl2-tensor-action}.
+  as $K$-vector spaces. Proved via a joint primitive vector: since $\rho_1,
+  \rho_2$ commute, a highest-weight vector for $\rho_1$ can be found inside a
+  $\rho_1$-weight-space that is itself $\rho_2$-invariant, giving a single
+  vector primitive for both triples; the bivariate string it generates is a
+  basis of $V$ (linear independence via a combined eigenvalue, spanning via
+  the joint-irreducibility hypothesis), giving the dimension count directly.
+  As with Theorem~\ref{thm:sl2-clebsch-gordan}, the isomorphism does not yet
+  intertwine $(\rho_1,\rho_2)$ with the actions of the two tensor factors
+  (Theorem~\ref{thm:sl2-tensor-action}); that upgrade is future work.
 \end{theorem}
 
 \section{Clebsch--Gordan decomposition}
