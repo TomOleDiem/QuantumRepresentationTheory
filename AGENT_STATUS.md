@@ -117,20 +117,31 @@ ker(J^2 - c.1) forces it to be everything). Both marked \leanok.
 Repo-wide remaining sorries: Hydrogen/Symmetry.lean's 7 (flagged
 false-as-stated, not attempting - see below) and Sl2/CommutingActions.lean's
 2 (commuting_classification, commuting_classification_finrank).
-User confirmed: go ahead and attempt commuting_classification. Now
-claiming/working: Sl2/CommutingActions.lean. Checked Mathlib first - no
-Weyl/complete-reducibility theorem for Lie modules exists there, so this
-needs a from-scratch joint-highest-weight-vector argument: since e1,e2
-commute (hcomm) the subalgebra spanned by {h1,h2,e1,e2} is solvable, so
-(via Lie's theorem, alg closed + finite dim) there's a common eigenvector
-m0 for all four; generate the bivariate string f1^a f2^b m0, show it's a
-basis (mirroring Sl2/Classification.lean's single-triple string argument,
-doubled), use hirr to see it spans everything, then match against
-StandardSl2Module K m ⊗ StandardSl2Module K n via basis matching (only a
-plain LinearEquiv is required per the file's own TODO note, not full
-equivariance). Expect this to take a while; will update here again once
-either done or blocked on something new.
-Status: in progress
+User confirmed: go ahead and attempt commuting_classification.
+Done (committed 4105969): Sl2/CommutingActions.lean - both
+commuting_classification and commuting_classification_finrank proved;
+the file is now fully sorry-free. Ended up NOT needing Mathlib's general
+Lie's-theorem machinery (checked, none exists for Lie modules) - instead
+built the joint primitive vector concretely: get a primitive vector for t1
+on all of V, note ker(e1)⊓ker(h1-n1•1) is invariant under h2,e2,f2 (they
+commute with e1,h1) and nonzero, package it as a LieSubmodule for t2's
+subalgebra (needed a new lemma, isSl2Triple_sub, added to Sl2/Basic.lean:
+hSub/eSub/fSub form a genuine IsSl2Triple within the subalgebra), and take
+ITS primitive vector - automatically primitive for t1 too since it lies in
+that invariant space. The bivariate string f1^a(f2^b m0) is then a basis:
+linearly independent via the combined operator h1+(n1+1)•h2 (injective
+combined eigenvalue, proved via an integer argument since K need not be
+ordered), spanning via reusing Sl2/Classification's single-triple string
+API twice (once per triple, commuting the other triple's generators
+through) plus the joint-irreducibility hypothesis. Dimension count then
+gives commuting_classification via FiniteDimensional.nonempty_linearEquiv_of_finrank_eq,
+same technique as Sl2/ClebschGordan.lean. Reworded the blueprint entry to
+honestly state a vector-space (not yet equivariant) isomorphism, matching
+the file's own TODO and the precedent already set by thm:sl2-clebsch-gordan.
+Repo-wide, the only remaining sorries anywhere are Hydrogen/Symmetry.lean's
+7 already-flagged false-as-stated theorems (need the so(4)-tensor
+architectural fix; not attempted, out of scope unless requested).
+Status: idle
 
 ### Claude (other session) - 2026-08-05
 Done (committed, 3d33b7c): Sl2/ClebschGordan.lean's clebsch_gordan_finrank
