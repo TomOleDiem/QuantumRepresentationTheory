@@ -432,6 +432,7 @@ calculus for $\sltwo$-triples; the classification work in
 \begin{definition}[Standard module $V(n)$]
   \label{def:sl2-standard-module}
   \lean{QuantumRepresentationTheory.StandardSl2Module, QuantumRepresentationTheory.StandardSl2Module.v, QuantumRepresentationTheory.standardSl2ModuleLieRingModule, QuantumRepresentationTheory.standardSl2ModuleLieModule}
+  \leanok
   For $n \in \mathbb{N}$, the standard module $V(n)$ is the
   $(n+1)$-dimensional $\sltwo$-module with basis $v_0, \dots, v_n$ on which
   $h \cdot v_k = (n-2k) v_k$, $f \cdot v_k = v_{k+1}$ (and $v_{n+1} := 0$), and
@@ -464,6 +465,7 @@ calculus for $\sltwo$-triples; the classification work in
 \begin{theorem}[The string spans a submodule]
   \label{thm:sl2-string-submodule}
   \lean{QuantumRepresentationTheory.exists_stringLieSubmodule}
+  \leanok
   \uses{thm:sl2-string-finite, thm:sl2-string-h, thm:sl2-string-e}
   The span of $m, fm, \dots, f^n m$ is invariant under $h$, $e$, and $f$,
   hence is a Lie submodule.
@@ -472,6 +474,7 @@ calculus for $\sltwo$-triples; the classification work in
 \begin{theorem}[Irreducibility forces the string to span]
   \label{thm:sl2-irreducible-spans}
   \lean{QuantumRepresentationTheory.stringSpan_eq_top}
+  \leanok
   \uses{def:rep-irreducible-generic, thm:sl2-string-submodule}
   If $M$ is an irreducible $\sltwo$-module, the submodule of
   Theorem~\ref{thm:sl2-string-submodule} is nonzero, hence equal to $M$.
@@ -480,6 +483,7 @@ calculus for $\sltwo$-triples; the classification work in
 \begin{theorem}[Basis theorem]
   \label{thm:sl2-basis-theorem}
   \lean{QuantumRepresentationTheory.string_isBasis, QuantumRepresentationTheory.finrank_eq_succ}
+  \leanok
   \uses{thm:sl2-string-independent, thm:sl2-irreducible-spans}
   If $M$ is a finite-dimensional irreducible $\sltwo$-module with primitive
   vector $m$ of weight $n$, then $m, fm, \dots, f^n m$ is a basis of $M$; in
@@ -489,6 +493,7 @@ calculus for $\sltwo$-triples; the classification work in
 \begin{theorem}[Classification of irreducible $\sltwo$-modules]
   \label{thm:sl2-classification}
   \lean{QuantumRepresentationTheory.classification}
+  \leanok
   \uses{thm:sl2-basis-theorem, def:sl2-standard-module,
         thm:sl2-primitive-exists}
   Every finite-dimensional irreducible $\sltwo$-module over an algebraically
@@ -500,6 +505,7 @@ calculus for $\sltwo$-triples; the classification work in
 \begin{theorem}[Uniqueness of the highest weight]
   \label{thm:sl2-uniqueness-hw}
   \lean{QuantumRepresentationTheory.classification_n_eq_finrank_sub_one}
+  \leanok
   \uses{thm:sl2-classification}
   The integer $n$ in Theorem~\ref{thm:sl2-classification} is an isomorphism
   invariant of $M$: it equals $\dim M - 1$.
@@ -778,6 +784,7 @@ hidden $\sofour$ symmetry.
 \begin{theorem}[Commutation relations for the ladder operators]
   \label{thm:am-commutators}
   \lean{QuantumRepresentationTheory.AngularMomentumRepresentation.comm_z_p, QuantumRepresentationTheory.AngularMomentumRepresentation.comm_z_m, QuantumRepresentationTheory.AngularMomentumRepresentation.comm_p_m}
+  \leanok
   \uses{def:am-ladder}
   $[J_z, J_\pm] = \pm J_\pm$ and $[J_+, J_-] = 2J_z$.
 \end{theorem}
@@ -785,6 +792,7 @@ hidden $\sofour$ symmetry.
 \begin{theorem}[Angular momentum generates an $\sltwo$-triple]
   \label{thm:am-is-sl2-triple}
   \lean{QuantumRepresentationTheory.AngularMomentumRepresentation.isSl2Triple}
+  \leanok
   \uses{thm:am-commutators, def:sl2-triple, def:rep-bridge}
   If $J_z \neq 0$, then $(J_z, J_+, J_-)$ is an $\sltwo$-triple in the sense
   of Definition~\ref{def:sl2-triple}, via the bridge construction of
@@ -922,6 +930,7 @@ Physlib in the Overview).
 \begin{theorem}[The rescaling constant is nonzero]
   \label{thm:hyd-rescaling-nonzero}
   \lean{QuantumRepresentationTheory.BoundStateRepresentation.rescaling_pos, QuantumRepresentationTheory.BoundStateRepresentation.rescalingConst, QuantumRepresentationTheory.BoundStateRepresentation.rescalingConst_pos}
+  \leanok
   \uses{def:hyd-bound-state}
   On $V_E$ with $E < 0$, the scalar $-2E/m$ appearing in the normalization of
   $\vec M$ is strictly positive, so
@@ -985,6 +994,7 @@ Physlib in the Overview).
 \begin{theorem}[Classification of the bound-state representation]
   \label{thm:hyd-classification}
   \lean{QuantumRepresentationTheory.BoundStateRepresentation.classification_finrank}
+  \leanok
   \uses{thm:sl2-commuting-classification, thm:hyd-so4-decomposition}
   Each irreducible summand of $V_E$ under the commuting pair
   $(\vec I,\vec K)$ is isomorphic to $V(2i)\otimes V(2k)$, by
@@ -995,6 +1005,7 @@ Physlib in the Overview).
 \begin{theorem}[Equal Casimirs force equal highest weights]
   \label{thm:hyd-equal-hw}
   \lean{QuantumRepresentationTheory.BoundStateRepresentation.dimension_eq_sq}
+  \leanok
   \uses{thm:hyd-equal-casimirs, thm:hyd-classification}
   In the decomposition of Theorem~\ref{thm:hyd-classification}, the summand
   occurring in $V_E$ has $i = k$.
@@ -1003,6 +1014,7 @@ Physlib in the Overview).
 \begin{theorem}[Dimension of the bound-state eigenspace]
   \label{thm:hyd-dimension}
   \lean{QuantumRepresentationTheory.BoundStateRepresentation.dimension_eq_sq}
+  \leanok
   \uses{thm:hyd-equal-hw, thm:sl2-basis-theorem}
   With $i=k$, the summand $V(2i)\otimes V(2i)$ has dimension $(2i+1)^2$; the
   quantity $n := 2i+1$ is a positive integer.
@@ -1011,6 +1023,7 @@ Physlib in the Overview).
 \begin{theorem}[Quadratic energy equation]
   \label{thm:hyd-quadratic-energy}
   \lean{QuantumRepresentationTheory.BoundStateRepresentation.quadratic_energy}
+  \leanok
   \uses{thm:hyd-rescaling-nonzero, thm:hyd-dimension}
   Expressing the original Hamiltonian $H$ in terms of $\vec J^2 + \vec A^2$
   and the shared Casimir eigenvalue $i(i+1)$ from
@@ -1023,6 +1036,7 @@ Physlib in the Overview).
 \begin{theorem}[Hydrogen energy levels and degeneracy]
   \label{thm:hyd-energy-degeneracy}
   \lean{QuantumRepresentationTheory.BoundStateRepresentation.energy_degeneracy}
+  \leanok
   \uses{thm:hyd-quadratic-energy, thm:hyd-dimension}
   The bound-state energies of the hydrogen atom are
   $E_n = -me^4/(2\hbar^2 n^2)$ for $n \in \mathbb{Z}_{>0}$, and the
