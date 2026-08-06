@@ -1,6 +1,7 @@
 import Mathlib
 import QuantumRepresentationTheory.AngularMomentum.Basic
 import QuantumRepresentationTheory.Sl2.Basic
+import QuantumRepresentationTheory.Sl2.Classification
 
 /-!
 # AngularMomentum/Classification
@@ -100,7 +101,9 @@ theorem spin_classification [FiniteDimensional ℂ V] (ρ : AngularMomentumRepre
     (hz : ρ.Jz ≠ 0) (hirr : ρ.IsIrreducible) :
     ∃ n : ℕ, letI := standardSl2ModuleLieRingModule (K := ℂ) (n := n) (ρ.isSl2Triple hz)
       Nonempty (V ≃ₗ⁅ℂ, ↥((ρ.isSl2Triple hz).toLieSubalgebra ℂ)⁆ StandardSl2Module ℂ n) := by
-  sorry
+  haveI : LieModule.IsIrreducible ℂ ↥((ρ.isSl2Triple hz).toLieSubalgebra ℂ) V :=
+    (isIrreducible_iff ρ hz).mp hirr
+  exact classification (ρ.isSl2Triple hz)
 
 /-- **`J+J- = Jx²+Jy²+Jz`**: the standard ladder-operator identity, a purely algebraic
 consequence of the commutation relations (no representation theory needed). Used to
@@ -127,13 +130,164 @@ private theorem Jsq_eq_Jp_mul_Jm (ρ : AngularMomentumRepresentation V) :
       ρ.Jp * ρ.Jm + ρ.Jz * ρ.Jz - ρ.Jz := by
   rw [Jp_mul_Jm]; abel
 
+/-- Product Leibniz rule for the associative-ring bracket on `Module.End ℂ V`:
+`⁅a*x, z⁆ = a*⁅x,z⁆ + ⁅a,z⁆*x`. -/
+private theorem leibniz_end (a x z : Module.End ℂ V) :
+    (⁅a * x, z⁆ : Module.End ℂ V) = a * ⁅x, z⁆ + ⁅a, z⁆ * x := by
+  simp only [LieRing.of_associative_ring_bracket]
+  noncomm_ring
+
+/-- **`J²` commutes with `J+`**: a step towards showing `J²` is central, hence (on an
+irreducible module) acts as a scalar. -/
+private theorem Jsq_comm_p (ρ : AngularMomentumRepresentation V) :
+    (⁅ρ.Jx * ρ.Jx + ρ.Jy * ρ.Jy + ρ.Jz * ρ.Jz, ρ.Jp⁆ : Module.End ℂ V) = 0 := by
+  rw [Jsq_eq_Jp_mul_Jm, sub_lie, add_lie, leibniz_end, leibniz_end]
+  have hmp : (⁅ρ.Jm, ρ.Jp⁆ : Module.End ℂ V) = -((2 : ℂ) • ρ.Jz) := by
+    rw [← lie_skew, comm_p_m]
+  have hpp : (⁅ρ.Jp, ρ.Jp⁆ : Module.End ℂ V) = 0 := lie_self ρ.Jp
+  have hzp : (⁅ρ.Jz, ρ.Jp⁆ : Module.End ℂ V) = ρ.Jp := comm_z_p ρ
+  have hzpjp : ρ.Jz * ρ.Jp = ρ.Jp * ρ.Jz + ρ.Jp := by
+    have hthis : ρ.Jz * ρ.Jp - ρ.Jp * ρ.Jz = ρ.Jp := by
+      have := hzp
+      rwa [LieRing.of_associative_ring_bracket] at this
+    rw [sub_eq_iff_eq_add.mp hthis, add_comm]
+  rw [hmp, hpp, hzp, zero_mul, add_zero, mul_neg, mul_smul_comm, hzpjp]
+  module
+
+/-- **`J²` commutes with `J-`**: a step towards showing `J²` is central, hence (on an
+irreducible module) acts as a scalar. -/
+private theorem Jsq_comm_m (ρ : AngularMomentumRepresentation V) :
+    (⁅ρ.Jx * ρ.Jx + ρ.Jy * ρ.Jy + ρ.Jz * ρ.Jz, ρ.Jm⁆ : Module.End ℂ V) = 0 := by
+  rw [Jsq_eq_Jp_mul_Jm, sub_lie, add_lie, leibniz_end, leibniz_end]
+  have hmm : (⁅ρ.Jm, ρ.Jm⁆ : Module.End ℂ V) = 0 := lie_self ρ.Jm
+  have hpm : (⁅ρ.Jp, ρ.Jm⁆ : Module.End ℂ V) = (2 : ℂ) • ρ.Jz := comm_p_m ρ
+  have hzm : (⁅ρ.Jz, ρ.Jm⁆ : Module.End ℂ V) = -ρ.Jm := comm_z_m ρ
+  have hzmjm : ρ.Jz * ρ.Jm = ρ.Jm * ρ.Jz - ρ.Jm := by
+    have hthis : ρ.Jz * ρ.Jm - ρ.Jm * ρ.Jz = -ρ.Jm := by
+      have := hzm
+      rwa [LieRing.of_associative_ring_bracket] at this
+    rw [sub_eq_iff_eq_add.mp hthis]
+    abel
+  rw [hmm, hpm, hzm, mul_zero, zero_add, smul_mul_assoc, mul_neg, neg_mul, sub_neg_eq_add,
+    hzmjm]
+  module
+
+/-- **`J²` commutes with `Jz`**: derived from `Jsq_comm_p`/`Jsq_comm_m` via the Jacobi
+identity, since `2•Jz = ⁅Jp,Jm⁆`. -/
+private theorem Jsq_comm_z (ρ : AngularMomentumRepresentation V) :
+    (⁅ρ.Jx * ρ.Jx + ρ.Jy * ρ.Jy + ρ.Jz * ρ.Jz, ρ.Jz⁆ : Module.End ℂ V) = 0 := by
+  have h2z : (2 : ℂ) • (⁅ρ.Jx * ρ.Jx + ρ.Jy * ρ.Jy + ρ.Jz * ρ.Jz, ρ.Jz⁆ : Module.End ℂ V) = 0 := by
+    rw [← lie_smul, show ((2 : ℂ) • ρ.Jz : Module.End ℂ V) = ⁅ρ.Jp, ρ.Jm⁆ from (comm_p_m ρ).symm,
+      leibniz_lie, Jsq_comm_p, Jsq_comm_m, zero_lie, lie_zero, add_zero]
+  exact (smul_right_inj (two_ne_zero (α := ℂ))).mp (by simpa using h2z)
+
 /-- **`J² = Jx²+Jy²+Jz²` is (a rescaling of) the Casimir element** (`thm:am-j2-casimir`):
 on an irreducible summand of spin `j = n/2`, `J²` acts as the scalar `j(j+1)`. -/
 theorem Jsq_eq_smul [FiniteDimensional ℂ V] (ρ : AngularMomentumRepresentation V)
     (hirr : ρ.IsIrreducible) :
     ∃ n : ℕ, ρ.Jx * ρ.Jx + ρ.Jy * ρ.Jy + ρ.Jz * ρ.Jz =
       ((n : ℂ) / 2 * ((n : ℂ) / 2 + 1)) • (1 : Module.End ℂ V) := by
-  sorry
+  by_cases hz : ρ.Jz = 0
+  · have hJy : ρ.Jy = 0 := by
+      have h := ρ.comm_zx
+      rw [hz, zero_lie] at h
+      exact (smul_eq_zero.mp h.symm).resolve_left Complex.I_ne_zero
+    have hJx : ρ.Jx = 0 := by
+      have h := ρ.comm_yz
+      rw [hz, lie_zero] at h
+      exact (smul_eq_zero.mp h.symm).resolve_left Complex.I_ne_zero
+    exact ⟨0, by simp [hJx, hJy, hz]⟩
+  · have hV : Nontrivial V := by
+      rcases subsingleton_or_nontrivial V with hsub | hnt
+      · exact absurd (LinearMap.ext fun v => @Subsingleton.elim V hsub _ _ : ρ.Jz = 0) hz
+      · exact hnt
+    set t := ρ.isSl2Triple hz with ht_def
+    obtain ⟨μ, m₀, hm₀ne, P⟩ := t.exists_hasPrimitiveVectorWith (R := ℂ) (M := V)
+    obtain ⟨n, hn⟩ := P.exists_nat
+    subst hn
+    refine ⟨n, ?_⟩
+    -- `(Jp*Jm) m₀ = n • m₀`, since `f e m₀ = 0` (as `e m₀ = 0`) and `⁅e,f⁆ = h`.
+    have hpm0 : ρ.Jp m₀ = 0 := by
+      have := P.lie_e
+      simpa [Module.End.lie_apply] using this
+    have hhm0 : (2 : ℂ) • ρ.Jz m₀ = (n : ℂ) • m₀ := by
+      have hlh := P.lie_h
+      simpa [Module.End.lie_apply, ht_def, LinearMap.smul_apply] using hlh
+    have hef : ρ.Jp (ρ.Jm m₀) = (n : ℂ) • m₀ := by
+      have hcomm : (⁅ρ.Jp, ρ.Jm⁆ : Module.End ℂ V) = (2 : ℂ) • ρ.Jz := comm_p_m ρ
+      have hcomm' : ρ.Jp * ρ.Jm - ρ.Jm * ρ.Jp = (2 : ℂ) • ρ.Jz := by
+        rwa [LieRing.of_associative_ring_bracket] at hcomm
+      have happly := congrArg (fun T : Module.End ℂ V => T m₀) hcomm'
+      simp only [LinearMap.sub_apply, LinearMap.smul_apply, Module.End.mul_apply] at happly
+      rw [hpm0, map_zero, sub_zero] at happly
+      rw [happly, hhm0]
+    have hzm0 : ρ.Jz m₀ = ((n : ℂ) / 2) • m₀ := by
+      apply (smul_right_inj (two_ne_zero (α := ℂ))).mp
+      rw [hhm0, smul_smul]
+      rw [show (2 : ℂ) * ((n : ℂ) / 2) = (n : ℂ) from by ring]
+    have hCm0 : (ρ.Jx * ρ.Jx + ρ.Jy * ρ.Jy + ρ.Jz * ρ.Jz) m₀
+        = ((n : ℂ) / 2 * ((n : ℂ) / 2 + 1)) • m₀ := by
+      have heq := congrArg (fun T : Module.End ℂ V => T m₀) (Jsq_eq_Jp_mul_Jm ρ)
+      simp only [LinearMap.add_apply, LinearMap.sub_apply, Module.End.mul_apply] at heq
+      simp only [LinearMap.add_apply, Module.End.mul_apply]
+      rw [heq, hef, hzm0, map_smul, hzm0, smul_smul]
+      module
+    set C := ρ.Jx * ρ.Jx + ρ.Jy * ρ.Jy + ρ.Jz * ρ.Jz with hC_def
+    set c : ℂ := (n : ℂ) / 2 * ((n : ℂ) / 2 + 1) with hc_def
+    set W : Submodule ℂ V := LinearMap.ker (C - c • (1 : Module.End ℂ V)) with hW_def
+    have hmemW : ∀ w : V, w ∈ W ↔ C w = c • w := by
+      intro w
+      rw [hW_def, LinearMap.mem_ker, LinearMap.sub_apply, LinearMap.smul_apply,
+        Module.End.one_apply, sub_eq_zero]
+    have hWgen : ∀ A : Module.End ℂ V, (⁅C, A⁆ : Module.End ℂ V) = 0 →
+        ∀ w ∈ W, A w ∈ W := by
+      intro A hcommA w hw
+      rw [hmemW] at hw ⊢
+      have h0 : C * A = A * C := by
+        rwa [LieRing.of_associative_ring_bracket, sub_eq_zero] at hcommA
+      have := congrArg (fun T : Module.End ℂ V => T w) h0
+      simp only [Module.End.mul_apply] at this
+      rw [this, hw, map_smul]
+    have hWp : ∀ w ∈ W, ρ.Jp w ∈ W := hWgen ρ.Jp (Jsq_comm_p ρ)
+    have hWm : ∀ w ∈ W, ρ.Jm w ∈ W := hWgen ρ.Jm (Jsq_comm_m ρ)
+    have hWz : ∀ w ∈ W, ρ.Jz w ∈ W := hWgen ρ.Jz (Jsq_comm_z ρ)
+    have hpw : ∀ w : V, ρ.Jp w = ρ.Jx w + Complex.I • ρ.Jy w := fun w => by
+      show (ρ.Jx + Complex.I • ρ.Jy) w = _
+      rw [LinearMap.add_apply, LinearMap.smul_apply]
+    have hmw : ∀ w : V, ρ.Jm w = ρ.Jx w - Complex.I • ρ.Jy w := fun w => by
+      show (ρ.Jx - Complex.I • ρ.Jy) w = _
+      rw [LinearMap.sub_apply, LinearMap.smul_apply]
+    have hWx : ∀ w ∈ W, ρ.Jx w ∈ W := by
+      intro w hw
+      have hxw : ρ.Jx w = ((1 : ℂ) / 2) • (ρ.Jp w + ρ.Jm w) := by
+        rw [hpw, hmw]; module
+      rw [hxw]
+      exact W.smul_mem _ (W.add_mem (hWp w hw) (hWm w hw))
+    have hWy : ∀ w ∈ W, ρ.Jy w ∈ W := by
+      intro w hw
+      have hyw : ρ.Jy w = (-(Complex.I / 2)) • (ρ.Jp w - ρ.Jm w) := by
+        rw [hpw, hmw]
+        rw [show ρ.Jx w + Complex.I • ρ.Jy w - (ρ.Jx w - Complex.I • ρ.Jy w)
+              = (2 : ℂ) • (Complex.I • ρ.Jy w) from by module]
+        rw [smul_smul, smul_smul]
+        have hI : (-(Complex.I / 2) * 2 * Complex.I : ℂ) = 1 := by
+          have : (-(Complex.I / 2) * 2 * Complex.I : ℂ)
+              = -(Complex.I * Complex.I) := by ring
+          rw [this, Complex.I_mul_I]; ring
+        rw [hI, one_smul]
+      rw [hyw]
+      exact W.smul_mem _ (W.sub_mem (hWp w hw) (hWm w hw))
+    rcases hirr W hWx hWy hWz with hbot | htop
+    · exfalso
+      have hmem : m₀ ∈ W := (hmemW m₀).mpr hCm0
+      rw [hbot] at hmem
+      exact hm₀ne (Submodule.mem_bot ℂ |>.mp hmem)
+    · have hCeq : C - c • (1 : Module.End ℂ V) = 0 := by
+        ext w
+        have : w ∈ W := htop ▸ Submodule.mem_top
+        rw [LinearMap.zero_apply]
+        exact (LinearMap.mem_ker.mp this : (C - c • (1 : Module.End ℂ V)) w = 0)
+      rwa [sub_eq_zero, hC_def, hc_def] at hCeq
 
 /-- **Magnetic-weight basis** (`def:am-magnetic-basis`): given a primitive vector `v₀` of
 weight `n` for the triple `(2Jz, J+, J-)`, the vectors `(J-)ᵏ v₀` for `k = 0,…,n` form a
