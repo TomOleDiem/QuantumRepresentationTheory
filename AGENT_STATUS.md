@@ -91,24 +91,36 @@ for any Jz≠0, giving a genuine counterexample to I_comm_xy). Needs the
 so(4)-antisymmetric-tensor architectural fix the blueprint's Caveats section
 already proposes; not attempted.
 User confirmed: go ahead with the Sl2/Classification.lean architectural fix.
-Now claiming/working: Sl2/Classification.lean (all 6 remaining sorries:
-exists_stringLieSubmodule, stringSpan_eq_top, string_isBasis, finrank_eq_succ,
-classification, classification_n_eq_finrank_sub_one). Plan: change
-`LieSubmodule K L M` -> `LieSubmodule K ↥(t.toLieSubalgebra (R:=K)) M` and
-`LieModule.IsIrreducible K L M` -> `LieModule.IsIrreducible K
-↥(t.toLieSubalgebra (R:=K)) M` throughout (the automatic
-`LieSubalgebra.lieRingModule`/`lieModule` instances make M a module for the
-subalgebra for free, restricting the ambient L-action - no change needed to
-the file's M-side hypotheses). Grep confirms nothing else in the repo imports
-Sl2/Classification.lean yet, so this is self-contained. Mathlib's own
-`IsSl2Triple.HasPrimitiveVectorWith` API (lie_h_pow_toEnd_f,
-lie_e_pow_succ_toEnd_f, lie_f_pow_toEnd_f, pow_toEnd_f_eq_zero_of_eq_nat)
-already has everything needed for exists_stringLieSubmodule's h/e/f-invariance
-computation; pow_toEnd_f_eq_zero_of_eq_nat needs IsNoetherian/IsTorsionFree,
-so exists_stringLieSubmodule (and hence string_isBasis) will likely need
-[FiniteDimensional K M] added too, matching what finrank_eq_succ/
-classification already require.
-Status: in progress
+Done (committed ae2fe96, cfa3b57): Sl2/Classification.lean - all 6 remaining
+sorries proved (exists_stringLieSubmodule, stringSpan_eq_top, string_isBasis,
+finrank_eq_succ, classification, classification_n_eq_finrank_sub_one), via
+the planned rewrite: `LieSubmodule K L M` -> `LieSubmodule K
+↥(t.toLieSubalgebra (R:=K)) M` and `LieModule.IsIrreducible K L M` ->
+`LieModule.IsIrreducible K ↥(t.toLieSubalgebra (R:=K)) M` throughout, using
+the automatic `LieSubalgebra.lieRingModule`/`lieModule` instances. The hard
+part, `classification`, builds an explicit `LieModuleEquiv` from the
+primitive-vector string basis to `StandardSl2Module` via `Basis.equiv` +
+`Basis.ext` (checked equivariance generator-by-generator, combined via
+`IsSl2Triple.mem_toLieSubalgebra_iff`). Also added a `PublicApi` section to
+Sl2/Basic.lean (commit 70f6e4a) exposing the action formulas
+(standardSl2ModuleLieRingModule_{h,e,f}_apply_*) since Φ/ρE/ρF/ρH are
+private - needed by classification's proof.
+Done (committed c0c01fd): AngularMomentum/Classification.lean is now fully
+sorry-free. `spin_classification` is a direct corollary of the completed
+Sl2.Classification.classification + this file's own isIrreducible_iff (just
+needed the missing import). `Jsq_eq_smul` proved from scratch: J^2 is central
+for the sl2 action (commutes with Jp,Jm via explicit associative-ring
+algebra; commuting with Jz follows from Jacobi since 2*Jz=[Jp,Jm]), then
+case-split on Jz=0 (forces Jx=Jy=0 too, n=0) vs Jz!=0 (primitive vector m0 of
+weight n, compute J^2 m0 = (n/2)(n/2+1).m0 directly, then irreducibility on
+ker(J^2 - c.1) forces it to be everything). Both marked \leanok.
+Repo-wide remaining sorries: Hydrogen/Symmetry.lean's 7 (flagged
+false-as-stated, not attempting - see below) and Sl2/CommutingActions.lean's
+2 (commuting_classification, commuting_classification_finrank - untouched
+this session, not yet re-assessed now that Sl2/Classification.lean is done;
+worth another look but is a genuinely different theorem, classifying TWO
+commuting sl2-triples jointly).
+Status: idle (angular momentum classification task complete per user request)
 
 ### Claude (other session) - 2026-08-05
 Done (committed, 3d33b7c): Sl2/ClebschGordan.lean's clebsch_gordan_finrank
