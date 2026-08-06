@@ -182,20 +182,146 @@ theorem finrank_eq_succ [CharZero K] [FiniteDimensional K M] {t : IsSl2Triple h 
 /-- **Classification of irreducible $\sltwo$-modules** (`thm:sl2-classification`).
 Every finite-dimensional irreducible module for an `sl₂`-triple, over an algebraically
 closed field of characteristic zero, is isomorphic (as a module for the generated
-subalgebra) to the standard module `V(n)` for a unique `n`. -/
-theorem classification [IsAlgClosed K] [CharZero K] [FiniteDimensional K M]
-    [LieModule.IsIrreducible K L M] (t : IsSl2Triple h e f) :
+subalgebra) to the standard module `V(n)` for a unique `n`.
+
+Irreducibility is stated for the subalgebra, as in `stringSpan_eq_top`. -/
+theorem classification [IsAlgClosed K] [CharZero K] [FiniteDimensional K M] (t : IsSl2Triple h e f)
+    [LieModule.IsIrreducible K ↥(t.toLieSubalgebra (R := K)) M] :
     ∃ n : ℕ, letI := standardSl2ModuleLieRingModule (K := K) (n := n) t
       Nonempty (M ≃ₗ⁅K, ↥(t.toLieSubalgebra (R := K))⁆ StandardSl2Module K n) := by
-  sorry
+  haveI : Nontrivial M :=
+    (LieSubmodule.nontrivial_iff K ↥(t.toLieSubalgebra (R := K)) M).mp inferInstance
+  obtain ⟨μ, m₀, -, P⟩ := t.exists_hasPrimitiveVectorWith (R := K) (M := M)
+  obtain ⟨n, hn⟩ := P.exists_nat
+  subst hn
+  refine ⟨n, ?_⟩
+  letI := standardSl2ModuleLieRingModule (K := K) (n := n) t
+  letI := standardSl2ModuleLieModule (K := K) (n := n) t
+  refine ⟨?_⟩
+  -- The two bases match up index-for-index: `stringVecs k ↦ v k`.
+  obtain ⟨hli, hspan⟩ := string_isBasis P
+  set bM : Module.Basis (Fin (n + 1)) K M := Module.Basis.mk hli hspan.ge with hbM_def
+  set bV : Module.Basis (Fin (n + 1)) K (StandardSl2Module K n) := Pi.basisFun K (Fin (n + 1))
+    with hbV_def
+  set Ψ : M ≃ₗ[K] StandardSl2Module K n := bM.equiv bV (Equiv.refl _) with hΨ_def
+  have hΨ_bM : ∀ i, Ψ (bM i) = bV i := fun i => by rw [hΨ_def]; simp
+  have hbM_apply : ∀ i, bM i = stringVecs (K := K) f m₀ n i := fun i => Module.Basis.mk_apply _ _ i
+  have hbV_apply : ∀ i, bV i = StandardSl2Module.v i := fun i => by
+    rw [hbV_def]; simp [StandardSl2Module.v]
+  set L' := ↥(t.toLieSubalgebra (R := K)) with hL'_def
+  -- `Ψ` intertwines the `e`/`f`/`h` actions on the bases `bM`/`bV`.
+  have hE : ∀ w : M, Ψ ⁅eSub (K := K) t, w⁆ = ⁅eSub (K := K) t, Ψ w⁆ := by
+    have key : Ψ.toLinearMap ∘ₗ (LieModule.toEnd K L' M (eSub (K := K) t))
+        = (LieModule.toEnd K L' (StandardSl2Module K n) (eSub (K := K) t)) ∘ₗ Ψ.toLinearMap := by
+      apply bM.ext
+      intro i
+      simp only [LinearMap.coe_comp, Function.comp_apply, LinearEquiv.coe_toLinearMap,
+        LieModule.toEnd_apply_apply]
+      rw [hΨ_bM, hbM_apply, hbV_apply]
+      rcases eq_or_ne (i : ℕ) 0 with hi0 | hi0
+      · have hi_eq : i = (⟨0, Nat.succ_pos n⟩ : Fin (n + 1)) := Fin.ext hi0
+        rw [show stringVecs (K := K) f m₀ n i = m₀ from by
+          simp only [stringVecs, hi0, pow_zero, Module.End.one_apply]]
+        show Ψ ⁅e, m₀⁆ = ⁅eSub (K := K) t, StandardSl2Module.v i⁆
+        rw [P.lie_e, map_zero, hi_eq, standardSl2ModuleLieRingModule_e_apply_zero]
+      · obtain ⟨j, hj⟩ := Nat.exists_eq_succ_of_ne_zero hi0
+        have hjn : j < n := by omega
+        have hboundj1 : j + 1 < n + 1 := Nat.succ_lt_succ hjn
+        have hboundj : j < n + 1 := Nat.lt_succ_of_lt hjn
+        have hij : i = (⟨j + 1, hboundj1⟩ : Fin (n + 1)) := Fin.ext hj
+        subst hij
+        rw [show stringVecs (K := K) f m₀ n ⟨j + 1, hboundj1⟩
+            = (LieModule.toEnd K L M f ^ (j + 1)) m₀ from rfl]
+        show Ψ ⁅e, (LieModule.toEnd K L M f ^ (j + 1)) m₀⁆
+            = ⁅eSub (K := K) t, StandardSl2Module.v (⟨j + 1, hboundj1⟩ : Fin (n + 1))⁆
+        rw [P.lie_e_pow_succ_toEnd_f j, map_smul,
+          show (LieModule.toEnd K L M f ^ j) m₀ = bM ⟨j, hboundj⟩ from
+            (hbM_apply ⟨j, hboundj⟩).symm,
+          hΨ_bM, hbV_apply, standardSl2ModuleLieRingModule_e_apply_pos (K := K) (n := n) t
+            ⟨j + 1, hboundj1⟩ (Nat.succ_pos j)]
+        congr 2
+        simp only [Nat.cast_add, Nat.cast_one]
+        push_cast
+        ring
+    intro w
+    exact congrArg (fun T : M →ₗ[K] StandardSl2Module K n => T w) key
+  have hF : ∀ w : M, Ψ ⁅fSub (K := K) t, w⁆ = ⁅fSub (K := K) t, Ψ w⁆ := by
+    have key : Ψ.toLinearMap ∘ₗ (LieModule.toEnd K L' M (fSub (K := K) t))
+        = (LieModule.toEnd K L' (StandardSl2Module K n) (fSub (K := K) t)) ∘ₗ Ψ.toLinearMap := by
+      apply bM.ext
+      intro i
+      simp only [LinearMap.coe_comp, Function.comp_apply, LinearEquiv.coe_toLinearMap,
+        LieModule.toEnd_apply_apply]
+      rw [hΨ_bM, hbM_apply, hbV_apply]
+      rcases eq_or_ne (i : ℕ) n with hin | hin
+      · have hi_eq : i = Fin.last n := Fin.ext (by simp [hin])
+        rw [show stringVecs (K := K) f m₀ n i = (LieModule.toEnd K L M f ^ n) m₀ from by
+          rw [hi_eq]; rfl]
+        show Ψ ⁅f, (LieModule.toEnd K L M f ^ n) m₀⁆ = ⁅fSub (K := K) t, StandardSl2Module.v i⁆
+        rw [P.lie_f_pow_toEnd_f n, P.pow_toEnd_f_eq_zero_of_eq_nat rfl, map_zero, hi_eq,
+          standardSl2ModuleLieRingModule_f_apply_last]
+      · have hin' : (i : ℕ) < n := by omega
+        have hbound : (i : ℕ) + 1 < n + 1 := by omega
+        show Ψ ⁅f, stringVecs (K := K) f m₀ n i⁆ = ⁅fSub (K := K) t, StandardSl2Module.v i⁆
+        rw [show ⁅f, stringVecs (K := K) f m₀ n i⁆
+              = stringVecs (K := K) f m₀ n ⟨(i : ℕ) + 1, hbound⟩ from
+            P.lie_f_pow_toEnd_f (i : ℕ),
+          show stringVecs (K := K) f m₀ n ⟨(i : ℕ) + 1, hbound⟩ = bM ⟨(i : ℕ) + 1, hbound⟩ from
+            (hbM_apply ⟨(i : ℕ) + 1, hbound⟩).symm,
+          hΨ_bM, hbV_apply, standardSl2ModuleLieRingModule_f_apply_lt (K := K) (n := n) t i hin']
+    intro w
+    exact congrArg (fun T : M →ₗ[K] StandardSl2Module K n => T w) key
+  have hH : ∀ w : M, Ψ ⁅hSub (K := K) t, w⁆ = ⁅hSub (K := K) t, Ψ w⁆ := by
+    have key : Ψ.toLinearMap ∘ₗ (LieModule.toEnd K L' M (hSub (K := K) t))
+        = (LieModule.toEnd K L' (StandardSl2Module K n) (hSub (K := K) t)) ∘ₗ Ψ.toLinearMap := by
+      apply bM.ext
+      intro i
+      simp only [LinearMap.coe_comp, Function.comp_apply, LinearEquiv.coe_toLinearMap,
+        LieModule.toEnd_apply_apply]
+      rw [hΨ_bM, hbM_apply, hbV_apply]
+      show Ψ ⁅h, (LieModule.toEnd K L M f ^ (i : ℕ)) m₀⁆
+          = ⁅hSub (K := K) t, StandardSl2Module.v i⁆
+      rw [P.lie_h_pow_toEnd_f i, map_smul,
+        show (LieModule.toEnd K L M f ^ (i : ℕ)) m₀ = bM i from (hbM_apply i).symm,
+        hΨ_bM, hbV_apply, standardSl2ModuleLieRingModule_h_apply (K := K) (n := n) t i]
+    intro w
+    exact congrArg (fun T : M →ₗ[K] StandardSl2Module K n => T w) key
+  have hlie : ∀ (x : L') (w : M), Ψ ⁅x, w⁆ = ⁅x, Ψ w⁆ := by
+    intro x w
+    obtain ⟨c₁, c₂, c₃, hc⟩ := IsSl2Triple.mem_toLieSubalgebra_iff.mp x.property
+    have hxeq : x = c₁ • eSub (K := K) t + c₂ • fSub (K := K) t + c₃ • hSub (K := K) t := by
+      apply Subtype.ext
+      show (x : L) = c₁ • e + c₂ • f + c₃ • h
+      rw [hc, t.lie_e_f]
+    have hbracket : ⁅x, w⁆ = c₁ • ⁅eSub (K := K) t, w⁆ + c₂ • ⁅fSub (K := K) t, w⁆
+        + c₃ • ⁅hSub (K := K) t, w⁆ := by
+      rw [hxeq, add_lie, add_lie, smul_lie, smul_lie, smul_lie]
+    have hbracket' : ⁅x, Ψ w⁆ = c₁ • ⁅eSub (K := K) t, Ψ w⁆ + c₂ • ⁅fSub (K := K) t, Ψ w⁆
+        + c₃ • ⁅hSub (K := K) t, Ψ w⁆ := by
+      rw [hxeq, add_lie, add_lie, smul_lie, smul_lie, smul_lie]
+    rw [hbracket, hbracket', map_add, map_add, map_smul, map_smul, map_smul, hE, hF, hH]
+  exact { Ψ with map_lie' := fun {x w} => hlie x w }
 
+omit [LieModule K L M] in
 /-- **Uniqueness of the highest weight** (`thm:sl2-uniqueness-hw`): the `n` produced by
-`classification` is determined by `M` alone, namely `n = finrank K M - 1`. -/
-theorem classification_n_eq_finrank_sub_one [IsAlgClosed K] [CharZero K] [FiniteDimensional K M]
-    [LieModule.IsIrreducible K L M] (t : IsSl2Triple h e f) {n : ℕ}
+`classification` is determined by `M` alone, namely `n = finrank K M - 1`.
+
+Unlike `classification`, irreducibility is not actually needed here: only the bare existence of
+some `K`-linear equivalence `M ≃ₗ[K] V(n)` (forgetting the Lie-module structure `hn` provides) is
+used, via a dimension count. -/
+theorem classification_n_eq_finrank_sub_one [CharZero K] [FiniteDimensional K M]
+    {t : IsSl2Triple h e f} {n : ℕ}
     (hn : letI := standardSl2ModuleLieRingModule (K := K) (n := n) t
       Nonempty (M ≃ₗ⁅K, ↥(t.toLieSubalgebra (R := K))⁆ StandardSl2Module K n)) :
     n = Module.finrank K M - 1 := by
-  sorry
+  letI := standardSl2ModuleLieRingModule (K := K) (n := n) t
+  obtain ⟨Φ⟩ := hn
+  have hfin : Module.finrank K M = Module.finrank K (StandardSl2Module K n) :=
+    Φ.toLinearEquiv.finrank_eq
+  have hVfin : Module.finrank K (StandardSl2Module K n) = n + 1 := by
+    show Module.finrank K (Fin (n + 1) → K) = n + 1
+    rw [Module.finrank_pi, Fintype.card_fin]
+  rw [hfin, hVfin]
+  omega
 
 end QuantumRepresentationTheory
