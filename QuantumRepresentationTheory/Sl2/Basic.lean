@@ -622,4 +622,101 @@ theorem standardSl2ModuleLieModule
           Module.End K (StandardSl2Module K n))
         c v
 
+/-! ### Public action formulas
+
+`standardSl2ModuleLieRingModule`'s bracket is built from the private `Φ`/`ρE`/`ρF`/`ρH`
+machinery above, none of which is visible outside this file. The theorems below expose the
+action of `h`, `e`, `f` themselves on the standard basis `v`, matching the formulas already
+recorded in `standardSl2ModuleLieRingModule`'s own docstring, for downstream files (e.g.
+`Sl2/Classification.lean`) that need to match a module's own action against the standard one. -/
+
+section PublicApi
+
+variable [CharZero K]
+
+omit [CharZero K] in
+private theorem h_mem_subalgebra (t : IsSl2Triple h e f) : h ∈ t.toLieSubalgebra (R := K) :=
+  IsSl2Triple.mem_toLieSubalgebra_iff.mpr ⟨0, 0, 1, by rw [t.lie_e_f]; module⟩
+
+omit [CharZero K] in
+private theorem e_mem_subalgebra (t : IsSl2Triple h e f) : e ∈ t.toLieSubalgebra (R := K) :=
+  IsSl2Triple.mem_toLieSubalgebra_iff.mpr ⟨1, 0, 0, by module⟩
+
+omit [CharZero K] in
+private theorem f_mem_subalgebra (t : IsSl2Triple h e f) : f ∈ t.toLieSubalgebra (R := K) :=
+  IsSl2Triple.mem_toLieSubalgebra_iff.mpr ⟨0, 1, 0, by module⟩
+
+/-- The subalgebra element corresponding to `h`, as used by the theorems below. -/
+def hSub (t : IsSl2Triple h e f) : ↥(t.toLieSubalgebra (R := K)) := ⟨h, h_mem_subalgebra t⟩
+
+/-- The subalgebra element corresponding to `e`, as used by the theorems below. -/
+def eSub (t : IsSl2Triple h e f) : ↥(t.toLieSubalgebra (R := K)) := ⟨e, e_mem_subalgebra t⟩
+
+/-- The subalgebra element corresponding to `f`, as used by the theorems below. -/
+def fSub (t : IsSl2Triple h e f) : ↥(t.toLieSubalgebra (R := K)) := ⟨f, f_mem_subalgebra t⟩
+
+private theorem hSub_eq (t : IsSl2Triple h e f) :
+    hSub (K := K) t = subalgebraBasis (K := K) t 2 := by
+  apply Subtype.ext; simp [hSub, subalgebraBasis, Basis.mk_apply, efhSub]
+
+private theorem eSub_eq (t : IsSl2Triple h e f) :
+    eSub (K := K) t = subalgebraBasis (K := K) t 0 := by
+  apply Subtype.ext; simp [eSub, subalgebraBasis, Basis.mk_apply, efhSub]
+
+private theorem fSub_eq (t : IsSl2Triple h e f) :
+    fSub (K := K) t = subalgebraBasis (K := K) t 1 := by
+  apply Subtype.ext; simp [fSub, subalgebraBasis, Basis.mk_apply, efhSub]
+
+theorem standardSl2ModuleLieRingModule_h_apply (t : IsSl2Triple h e f) (k : Fin (n + 1)) :
+    letI := standardSl2ModuleLieRingModule (K := K) (n := n) t
+    ⁅hSub (K := K) t, StandardSl2Module.v (K := K) k⁆
+      = ((n : K) - 2 * (k : ℕ)) • StandardSl2Module.v k := by
+  letI := standardSl2ModuleLieRingModule (K := K) (n := n) t
+  show (Φ (K := K) (n := n) t (hSub (K := K) t) :
+    Module.End K (StandardSl2Module K n)) (StandardSl2Module.v k) = _
+  rw [hSub_eq, Φ_apply]
+  exact ρH_v k
+
+theorem standardSl2ModuleLieRingModule_e_apply_zero (t : IsSl2Triple h e f) :
+    letI := standardSl2ModuleLieRingModule (K := K) (n := n) t
+    ⁅eSub (K := K) t, StandardSl2Module.v (K := K) (⟨0, Nat.succ_pos n⟩ : Fin (n + 1))⁆
+      = (0 : StandardSl2Module K n) := by
+  letI := standardSl2ModuleLieRingModule (K := K) (n := n) t
+  show (Φ (K := K) (n := n) t (eSub (K := K) t) :
+    Module.End K (StandardSl2Module K n)) (StandardSl2Module.v ⟨0, Nat.succ_pos n⟩) = _
+  rw [eSub_eq, Φ_apply]
+  exact ρE_v_zero
+
+theorem standardSl2ModuleLieRingModule_e_apply_pos (t : IsSl2Triple h e f)
+    (k : Fin (n + 1)) (hk : 0 < (k : ℕ)) :
+    letI := standardSl2ModuleLieRingModule (K := K) (n := n) t
+    ⁅eSub (K := K) t, StandardSl2Module.v (K := K) k⁆
+      = ((k : ℕ) * (n - (k : ℕ) + 1) : K) • StandardSl2Module.v ⟨(k : ℕ) - 1, by omega⟩ := by
+  letI := standardSl2ModuleLieRingModule (K := K) (n := n) t
+  show (Φ (K := K) (n := n) t (eSub (K := K) t) :
+    Module.End K (StandardSl2Module K n)) (StandardSl2Module.v k) = _
+  rw [eSub_eq, Φ_apply]
+  exact ρE_v_pos k hk
+
+theorem standardSl2ModuleLieRingModule_f_apply_lt (t : IsSl2Triple h e f)
+    (k : Fin (n + 1)) (hk : (k : ℕ) < n) :
+    letI := standardSl2ModuleLieRingModule (K := K) (n := n) t
+    ⁅fSub (K := K) t, StandardSl2Module.v (K := K) k⁆ = StandardSl2Module.v ⟨(k : ℕ) + 1, by omega⟩ := by
+  letI := standardSl2ModuleLieRingModule (K := K) (n := n) t
+  show (Φ (K := K) (n := n) t (fSub (K := K) t) :
+    Module.End K (StandardSl2Module K n)) (StandardSl2Module.v k) = _
+  rw [fSub_eq, Φ_apply]
+  exact ρF_v_lt k hk
+
+theorem standardSl2ModuleLieRingModule_f_apply_last (t : IsSl2Triple h e f) :
+    letI := standardSl2ModuleLieRingModule (K := K) (n := n) t
+    ⁅fSub (K := K) t, StandardSl2Module.v (K := K) (Fin.last n)⁆ = (0 : StandardSl2Module K n) := by
+  letI := standardSl2ModuleLieRingModule (K := K) (n := n) t
+  show (Φ (K := K) (n := n) t (fSub (K := K) t) :
+    Module.End K (StandardSl2Module K n)) (StandardSl2Module.v (Fin.last n)) = _
+  rw [fSub_eq, Φ_apply]
+  exact ρF_v_last
+
+end PublicApi
+
 end QuantumRepresentationTheory
