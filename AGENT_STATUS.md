@@ -60,27 +60,43 @@ repro file matching the real defs; waiting for Sl2/Basic.lean to stabilize
 to do a real build check before committing.
 Status: in progress
 
-### Claude (2nd session) - 2026-08-05
+### Claude (2nd session) - 2026-08-06
 Done (committed): Hydrogen/Basic.lean's crossComponent_bilinear,
 Casimir/Basic.lean's casimirBasisDependent_basis_indep (548f2de);
 Sl2/Classification.lean's string_linearIndependent, added [CharZero K]
-(fc01331). Not touching Sl2/Classification.lean further right now.
-Now claiming/working: Sl2/Basic.lean only (standardSl2ModuleLieRingModule,
-standardSl2ModuleLieModule). Adding [CharZero K]. Plan: linear independence of
-{e,f,h} via the ad(h)-eigenvector trick (eigenvalues 2,-2,0), Basis.span for a
-basis of the subalgebra, Basis.constr for the three generator actions on
-StandardSl2Module and the subalgebra->End map.
-Found but not fixed (flagging for whoever picks up Sl2/Classification.lean
-next): exists_stringLieSubmodule and everything after it in that file
-(stringSpan_eq_top, string_isBasis, finrank_eq_succ, classification,
-classification_n_eq_finrank_sub_one) is false as stated for generic ambient
-`L` - `LieSubmodule K L M` demands invariance under *all* of L, not just
-h,e,f, but the file's `L` carries no hypothesis that it's spanned by {h,e,f}.
-Only true when L is (isomorphic to) `t.toLieSubalgebra K` itself - matches how
-downstream callers always instantiate it, but the file's own generic
-statement doesn't capture that. Needs an architectural decision, not a leaf
-fix.
-Status: in progress
+(fc01331).
+Done (committed ae14a1d): Sl2/Basic.lean's standardSl2ModuleLieRingModule
+and standardSl2ModuleLieModule - both previously-sorry theorems now proved
+in full. Built explicit ρE/ρF/ρH endomorphisms of StandardSl2Module K n,
+proved the sl2 bracket relations (rel_ef/rel_he/rel_hf) directly via the
+associative-ring commutator, transported {e,f,h}'s basis of the generated
+subalgebra (linearIndependent_efh via the ad(h)-eigenvector trick + Basis.mk)
+along Basis.constr into a Lie-homomorphism Φ (checked on generators via
+Φ_bracket_basis, extended to the whole subalgebra by bilinearity via
+Basis.ext twice - Φ_lie_basis_right then Φ_lie), then packaged into the
+LieRingModule/LieModule instances. Full `lake build` passes. This was the
+largest remaining foundational blocker; several downstream files (ClebschGordan,
+CommutingActions, AngularMomentum/Classification's spin_classification) were
+stuck on it.
+Done (committed 40adcca): Hydrogen/Symmetry.lean's equal_casimirs - added
+the missing `[Nontrivial V]` hypothesis (zero module makes hI/hK vacuous) and
+proved n1=n2 via applying I²=K² to a nonzero vector + linear_combination
+factoring. Marked \leanok.
+Flagged, NOT proved (left `sorry` with an in-file doc comment + concrete
+counterexample, matching the blueprint's own already-documented Caveats
+entry): Hydrogen/Symmetry.lean's I_comm_xy/I_comm_yz/I_comm_zx/K_comm_xy/
+K_comm_yz/K_comm_zx/I_comm_K - false as stated, since BoundStateRepresentation
+has no axioms relating Mx,My,Mz to Jx,Jy,Jz (Mx=My=Mz=0 is a valid instance
+for any Jz≠0, giving a genuine counterexample to I_comm_xy). Needs the
+so(4)-antisymmetric-tensor architectural fix the blueprint's Caveats section
+already proposes; not attempted.
+Not touching Sl2/Classification.lean further right now (see below, and my
+earlier note preserved for whoever picks it up - still unfixed).
+Status: idle / between tasks - remaining unclaimed leaves I found
+(Sl2/CommutingActions.lean's 2 sorries, AngularMomentum/Classification.lean's
+spin_classification) all appear to reduce to Sl2/Classification.lean's
+architectural gap below; checking with the user before attempting that
+rewrite rather than deciding unilaterally.
 
 ### Claude (other session) - 2026-08-05
 Done (committed, 3d33b7c): Sl2/ClebschGordan.lean's clebsch_gordan_finrank
